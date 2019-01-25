@@ -1,17 +1,24 @@
-
-import React ,{Component} from 'react';
+import React, {Component} from 'react';
 import {todo} from './todo.json';
+import Formulario from './Formulario'
 
-class Tarjeta extends Component{
-    constructor(){
+class Tarjeta extends Component {
+    constructor() {
         super();
         this.state = {
             todo
         }
     }
+
+    insertarForm = (todos) => {
+        this.setState({
+            todo: [...this.state.todo, todos]
+        })
+    }
+
     render() {
         const todo = this.state.todo.map((todo) => {
-            return(
+            return (
                 <div className={"col-md-4"}>
                     <div className={"card mt-4"}>
                         <div className={"bg-dark"}>
@@ -23,24 +30,31 @@ class Tarjeta extends Component{
                             <h5 className={"text-left text-primary ml-3 mt-2"}>{'Adress'}</h5>
                             <p className={"text-left ml-3"}>{todo.direccion}</p>
                             <p className={"text-left ml-3"}>{todo.description}</p>
-                            <p className={"text-left ml-3"}>{'Phone: ' +todo.tlf}</p>
+                            <p className={"text-left ml-3"}>{'Phone: ' + todo.tlf}</p>
                             <p className={"text-left ml-3"}>{todo.Demium}</p>
                             <p className={"text-left ml-3"}>{todo.ipman}</p>
                             <p className={"text-left ml-3"}>{todo.taman}</p>
                             <p className={"text-right mr-3"}>
                             <span className={"text-rigth badge badge-primary mr-10"}>
                       <h5 className={"text-light"}>{'VIEW'}</h5>
-                            </span> </p>
-
+                            </span></p>
                         </div>
                     </div>
                 </div>
 
             )
         })
-        return todo;
+        return (
+            <div className={"container"}>
+            <div className={"row mt-4"}>
+                {todo}
+            </div>
+            <div className={" mt-4"}>
+                <Formulario insertAll={this.insertarForm}/>
+            </div>
+            </div>)
 
-}
+    }
 }
 
 export default Tarjeta;
