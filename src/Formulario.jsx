@@ -37,8 +37,8 @@ class Formulario extends Component {
     render() {
         return (
 
-            <div className={"container"}>
-                <form className={"card-header text-left"} onSubmit={this.regDatos}>
+            <div className={""}>
+                <form className={"divder card-header text-left"} onSubmit={this.regDatos}>
                     <h2 className={"text-light"}> Add city</h2>
                     <div>
                         <h4 className={"text-light"}> Location</h4>
@@ -92,14 +92,25 @@ class Formulario extends Component {
                             name="tlf"
                             onChange={this.introDatos}
                             placeholder="Phone"/>
-                        <div className={"row justify-content-between"}>
-                            <div className=" ">
-                            <button type="submit" className=" btn btn-primary ml-4">
+                        <div className={"col"}>
+                            <button type="submit" className="btn btn-primary ml-4">
                                 <h4>Create</h4>
                             </button>
+                        </div>
+                        <div className={"dear "}>
+                            <h6 className={"text-light ml-3"}>Country </h6>
+                            <div className="form-group ml-4 ">
+                                <select                                         //PAIS
+                                    name="pais"
+                                    className="form-control "
+                                    value={this.state.pais}
+                                    onChange={this.introDatos}>
+                                    <option>España</option>
+                                    <option>Rusia</option>
+                                    <option>Italia</option>
+                                </select>
                             </div>
                         </div>
-
                     </div>
                 </form>
             </div>
