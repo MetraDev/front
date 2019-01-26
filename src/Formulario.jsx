@@ -7,6 +7,7 @@ class Formulario extends Component {
         this.state = {
             title: 'Madrid',
             pais: 'España',
+            Demium:'Demium team:',
             description: '',
             tlf: '',
             ipman:"Virginia Sanchez",
@@ -37,32 +38,20 @@ class Formulario extends Component {
     render() {
         return (
 
-            <div className={""}>
-                <form className={"divder card-header text-left"} onSubmit={this.regDatos}>
-                    <h2 className={"text-light"}> Add city</h2>
-                    <div>
-                        <h4 className={"text-light"}> Location</h4>
-                    </div>
-                    <div className={"form-group row "}>
-                        <h6 className={"text-light ml-3"}>Country </h6>
-                        <div className="form-group ml-4 ">
-                            <select                                         //PAIS
-                                name="pais"
-                                className="form-control "
-                                value={this.state.pais}
-                                onChange={this.introDatos}>
-                                <option>España</option>
-                                <option>Rusia</option>
-                                <option>Italia</option>
-                            </select>
+            <div><nav className={"navbar navbar-dark mt-5"}>
+                <h2 className={"text-white"}>Add city</h2>
+            </nav>
+                <form className={"card-header"} onSubmit={this.regDatos}>
+                    <div className={"divder"}>
+                        <div>
+                        <h3 className={"col text-left text-light mt-2"}> Location</h3>
+                        <div className={"row form-group"}>
                         </div>
-                    </div>
                     <div className={"form-group row"}>
-                        <h6 className={"text-light ml-3"}>City</h6>
-                        <div className=" ml-5 ">
-                            <select                                         //CIUDAD
+                        <h5 className={"col-sm-2 text-left text-light ml-3"}>City</h5>
+                        <select                                         //CIUDAD
                                 name="title"
-                                className="form-control "
+                                className="col-sm-3 form-control "
                                 value={this.state.title}
                                 onChange={this.introDatos}>
                                 <option>Madrid</option>
@@ -73,44 +62,67 @@ class Formulario extends Component {
                                 <option>Roma</option>
                                 <option>Moscu</option>
                             </select>
-                        </div>
                     </div>
-                    <div className="stilo">
-                        <h5 className={"text-light"}>Adress</h5>
-                        <input                                             //DIRECCION
-                            type="text" name={"description"}
-                            value={this.state.description}
-                            placeholder={"Full Adress"}
-                            onChange={this.introDatos}/>
-                    </div>
-                    <div className={"form-group row mt-3"}>
-                        <h5 className={"text-light mt-2 ml-3"}>Phone:</h5>
-                        <input                                             //TELEFONO
-                            type="text"
-                            className="ml-3"
-                            value={this.state.tlf}
-                            name="tlf"
-                            onChange={this.introDatos}
-                            placeholder="Phone"/>
-                        <div className={"col"}>
-                            <button type="submit" className="btn btn-primary ml-4">
-                                <h4>Create</h4>
-                            </button>
+                        <div className="form-group row">
+                            <h6 className={"col-sm-2 text-left text-light ml-3"}>Country </h6>
+                            <select                                         //PAIS
+                                name="pais"
+                                className="col-sm-3 form-control  "
+                                value={this.state.pais}
+                                onChange={this.introDatos}>
+                                <option>España</option>
+                                <option>Rusia</option>
+                                <option>Italia</option>
+                            </select>
                         </div>
-                        <div className={"dear "}>
-                            <h6 className={"text-light ml-3"}>Country </h6>
-                            <div className="form-group ml-4 ">
-                                <select                                         //PAIS
-                                    name="pais"
-                                    className="form-control "
-                                    value={this.state.pais}
-                                    onChange={this.introDatos}>
-                                    <option>España</option>
-                                    <option>Rusia</option>
-                                    <option>Italia</option>
-                                </select>
+                            <div className="form-group text-left">
+                                <h3 className={"col-sm-2 text-left text-light"}>Adress</h3>
+                                <input
+                                    className={"stilo ml-3 col-sm-5"}//DIRECCION
+                                    type="text" name={"description"}
+                                    value={this.state.description}
+                                    placeholder={"Full Adress"}
+                                    onChange={this.introDatos}/>
+                            </div>
+                            <div className={"row form-group text-left"}>
+                                <h5 className={"col-sm-1 text-light mt-2 ml-3"}>Phone:</h5>
+                                <input                                             //TELEFONO
+                                    type="text"
+                                    className="texl-left col-sm-3 ml-5"
+                                    value={this.state.tlf}
+                                    name="tlf"
+                                    onChange={this.introDatos}
+                                    placeholder="Phone"/>
                             </div>
                         </div>
+                        <div className={"divleft"}>
+                            <h3 className={"col text-left text-light mt-2"}> Demium team</h3>
+                            <div className={"row form-group"}>
+                            </div>
+                            <div className={"form-group row"}>
+                                <h5 className={"col-sm-2 text-left text-light ml-3"}>Team</h5>
+                                <select                                         //CIUDAD
+                                    name="title"
+                                    className="col-sm-4 form-control "
+                                    value={this.state.title}
+                                    onChange={this.introDatos}>
+                                    <option>Select members</option>
+                                    <option>IP Manager</option>
+                                    <option>Talent Manager</option>
+                                </select>
+                                <button  className="col-sm-2 ml-4 btn btn-primary">
+                                <h6>Add</h6>
+                            </button>
+                                <button className="col-sm-2 ml-4 btn btn-danger">
+                                    <h6>Remove</h6>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={"text-right col-dm-2"}>
+                        <button type="submit" className="col-sm-2 ml-4 btn btn-primary">
+                            <h5>Create</h5>
+                        </button>
                     </div>
                 </form>
             </div>
