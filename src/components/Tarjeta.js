@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {todo} from './todo.json';
+import {todo} from '../todo.json';
 import Formulario from './Formulario'
+import '../taridea.css';
 
 class Tarjeta extends Component {
     constructor() {
@@ -20,7 +21,7 @@ class Tarjeta extends Component {
         const todo = this.state.todo.map((todo) => {
             return (
                 <div className={"col-md-4"}>
-                    <div className={"card mt-4"}>
+                    <div className={"carder1 card mt-4"}>
                         <div className={"bg-dark"}>
                             <div className={"card-header text-left"}>
                                 <h5 className={"text-white"}>{todo.title}</h5>

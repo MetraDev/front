@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './forms.css';
+import '../forms.css';
 
 class Formulario extends Component {
     constructor() {
@@ -38,7 +38,8 @@ class Formulario extends Component {
     render() {
         return (
 
-            <div><nav className={"navbar navbar-dark mt-5"}>
+            <div className={"mb-3"}>
+                <nav className={"navbar navbar-dark mt-5"}>
                 <h2 className={"text-white"}>Add city</h2>
             </nav>
                 <form className={"card-header"} onSubmit={this.regDatos}>
