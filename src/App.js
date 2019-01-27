@@ -6,6 +6,8 @@ import Formulario from "./components/Formulario";
 import FormIdea from "./components/FormIdea";
 import TargetIdea from "./components/TargetIdea";
 import User from "./components/User";
+import FormUs from "./components/formUs";
+import Fila from "./components/Fila";
 
 
 class App extends Component {
@@ -55,9 +57,9 @@ class App extends Component {
                     </span>
                     </div>
                 </nav>
-                <div>
-                    {this.getPage()}
-                </div>
+
+                  <Fila/>
+
                 <div className="footer text-left">
                     <p className={"ml-5"}>(c) 2019 Demium, All rights reserved</p>
                 </div>
