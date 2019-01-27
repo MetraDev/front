@@ -7,7 +7,7 @@ class FormIdea extends Component {
         this.state = {
             title: 'Madrid',
             pais: 'España',
-            Demium:'Demium team:',
+            Demium: 'Demium team:',
             description: 'Tigre! ¡Tigre!, fuego que ardes' +
                 'En los bosques de la noche,' +
                 '¿Qué mano inmortal, qué ojo' +
@@ -21,8 +21,8 @@ class FormIdea extends Component {
                 'Y cuando tu corazón comenzó a latir' +
                 '¿Qué formidable mano, qué formidables pies?',
             tlf: '',
-            ipman:"Virginia Sanchez",
-            taman:"Javier Torregrosa"
+            ipman: "Virginia Sanchez",
+            taman: "Javier Torregrosa"
         };
 
     }
@@ -51,27 +51,27 @@ class FormIdea extends Component {
 
             <div className={"card-header"}>
                 <nav className={"navbar navbar-dark mt-5"}>
-                <h3 className={"text-white"}>Edit Idea</h3>
-            </nav>
-                <form className={"card-header"} onSubmit={this.regDatos}>
+                    <h3 className={"text-white"}>Edit Idea</h3>
+                </nav>
+                <form className={"card-header bg-dark"} onSubmit={this.regDatos}>
                     <div className={"divder"}>
                         <div>
-                        <div className="form-group text-left">
-                            <h4 className={"col-sm-2 text-left text-light mt-3"}>Nombre</h4>
-                            <input
-                                className={"stilo ml-3 col-sm-5"}//DIRECCION
-                                type="text"
+                            <div className="form-group text-left">
+                                <h4 className={"col-sm-2 text-left text-light mt-3"}>Nombre</h4>
+                                <input
+                                    className={"stilo ml-3 col-sm-5"}//DIRECCION
+                                    type="text"
 
-                                name={"Nombre"}
-                                placeholder={"Spuer App"}
-                                onChange={this.introDatos}/>
-                        </div>
+                                    name={"Nombre"}
+                                    placeholder={"Spuer App"}
+                                    onChange={this.introDatos}/>
+                            </div>
                             <h4 className={"col text-left text-light mt-4"}> Business Model</h4>
                             <div className={"row form-group"}>
                             </div>
                             <div className={"form-group row"}>
                                 <h6 className={"col-sm-2 text-left text-light ml-3"}>Type</h6>
-                                <select                                         //CIUDAD
+                                <select
                                     name="title"
                                     className="col-sm-3 form-control bg-danger "
 
@@ -83,7 +83,7 @@ class FormIdea extends Component {
                             <div className="form-group text-left">
                                 <h4 className={"col-sm-2 text-left text-light mt-4"}>Descripción</h4>
                                 <textarea
-                                    className={"stilos ml-3 col-xl"}//DIRECCION
+                                    className={"stilos ml-3 col-xl"}
                                     type="text"
                                     value={this.state.description}
                                     name={"description"}
@@ -91,7 +91,8 @@ class FormIdea extends Component {
                                     onChange={this.introDatos}/>
                             </div>
                             <div className={"text-left "}>
-                                <h5 className={"bg-danger badge-pill text-center text-light col-sm-3"}>Not Available</h5>
+                                <h5 className={"bg-danger badge-pill text-center text-light col-sm-3"}>Not
+                                    Available</h5>
                             </div>
                             <div className={"form-group row ml-1 mt-3"}>
                                 <h5 className={"text-left text-light col-sm-3"}>Headquarter</h5>
@@ -105,7 +106,6 @@ class FormIdea extends Component {
                                 <h5 className={"text-left text-light col-sm-3"}>Black date</h5>
                                 <label className={"text-left text-dark col-sm-2 "}><b>19/91/2019</b></label>
                             </div>
-
                         </div>
                     </div>
                     <div className={"text-right col-dm-2"}>
@@ -114,11 +114,9 @@ class FormIdea extends Component {
                         </button>
                     </div>
                 </form>
-
             </div>
         )
     }
-
 }
 
 export default FormIdea;

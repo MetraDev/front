@@ -7,22 +7,7 @@ class TargetIdea extends Component {
     constructor() {
         super();
         this.state = {
-            url:'',
             idea
-        }
-    }
-
-    insertarForm = (todos) => {
-        this.setState({
-            todo: [...this.state.todo, todos]
-        })
-    }
-    getPage=()=>{
-        switch(this.state.url) {
-            case '/formidea':
-
-            default:
-                return 'No esta bien'
         }
     }
 
@@ -56,9 +41,10 @@ class TargetIdea extends Component {
                                 <h6 className={" text-left ml-3"}>{idea.Team}</h6>
                             </div>
                             <p className={"text-right mr-3"}>
-                            <button className={"text-rigth btn btn-primary mr-10"} onClick={()=>this.setState({url:'/formidea'})}>
-                      <h5 className={"text-light"}>{'VIEW'}</h5>
-                            </button></p>
+                                <button className={"text-rigth btn btn-primary mr-10"}>
+                                    <h5 className={"text-light"}>{'VIEW'}</h5>
+                                </button>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -69,8 +55,8 @@ class TargetIdea extends Component {
                 <div className={"row mt-4"}>
                     {todo}
                 </div>
-            </div>)
-
+            </div>
+        )
     }
 }
 

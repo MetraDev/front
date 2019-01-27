@@ -42,19 +42,18 @@ class Tarjeta extends Component {
                         </div>
                     </div>
                 </div>
-
             )
         })
         return (
             <div className={"container"}>
-            <div className={"row mt-4"}>
-                {todo}
+                <div className={"row mt-4"}>
+                    {todo}
+                </div>
+                <div className={" mt-4"}>
+                    <Formulario insertAll={this.insertarForm}/>
+                </div>
             </div>
-            <div className={" mt-4"}>
-                <Formulario insertAll={this.insertarForm}/>
-            </div>
-            </div>)
-
+        )
     }
 }
 

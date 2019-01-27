@@ -2,16 +2,14 @@ import React, {Component} from 'react';
 import Fila from './Fila'
 
 
-
-
-class FormUs extends Component{
+class FormUs extends Component {
     constructor() {
         super();
         this.state = {
-            name : '',
-            surname : '',
-            role : 'IP Manager',
-            headquarter :'Madrid'
+            name: '',
+            surname: '',
+            role: 'IP Manager',
+            headquarter: 'Madrid'
         };
     }
 
@@ -20,10 +18,10 @@ class FormUs extends Component{
         e.preventDefault();
         this.props.insertAll(this.state);
         this.setState({
-            name : '',
-            surname : '',
-            role : 'IP Manager',
-            headquarter :'Madrid'
+            name: '',
+            surname: '',
+            role: 'IP Manager',
+            headquarter: 'Madrid'
         });
     }
 
@@ -37,16 +35,12 @@ class FormUs extends Component{
 
 
     render() {
-        return(
-
-
-
-
-            <div className={"card-header"}>
-                <nav className={"navbar navbar-dark mt-5"}>
-                    <h2 className={"text-white"}>Add city</h2>
+        return (
+            <div className={""}>
+                <nav className={"navbar navbar-dark mt-3"}>
+                    <h2 className={"text-white"}>Add user</h2>
                 </nav>
-                <form className={"card-header bg-dark"} onSubmit={this.regDatos} >
+                <form className={"card-header bg-dark"} onSubmit={this.regDatos}>
                     <div className={"divder"}>
                         <div>
                             <div className="form-group text-left">
@@ -59,14 +53,13 @@ class FormUs extends Component{
                                     placeholder={"name"}
                                     onChange={this.introDatos}/>
                             </div>
-
                             <div className="form-group text-left">
                                 <h4 className={"col-sm-2 text-left text-light"}>Surname</h4>
                                 <input
                                     className={"ml-3 col-sm-5"}//DIRECCION
                                     type="text"
                                     name={"surname"}
-                                    value={this.state.surname }
+                                    value={this.state.surname}
                                     placeholder={"surname"}
                                     onChange={this.introDatos}/>
                             </div>
@@ -80,8 +73,6 @@ class FormUs extends Component{
                                     onChange={this.introDatos}
                                     placeholder="email"/>
                             </div>
-
-
                             <div className={"row form-group text-left"}>
                                 <h4 className={"col-sm-1 text-light mt-2 ml-3"}>Phone:</h4>
                                 <input                                             //TELEFONO
@@ -126,7 +117,6 @@ class FormUs extends Component{
                                     <option>Talent Manager</option>
                                 </select>
                             </div>
-
                         </div>
                     </div>
                     <div className={"text-right col-dm-2"}>
@@ -137,9 +127,8 @@ class FormUs extends Component{
                 </form>
                 {console.log(this.state)}
             </div>
-
-
         )
     }
 }
+
 export default FormUs;
