@@ -6,9 +6,9 @@ import '../taridea.css';
 class Tarjeta extends Component {
     constructor() {
         super();
-        const lastState = localStorage.getItem('users');
 
-        this.state = lastState ? JSON.parse(lastState):{
+
+        this.state ={
             todo
         }
 
@@ -22,8 +22,7 @@ class Tarjeta extends Component {
     insertarForm = (todos) => {
         this.setState({
             todo: [...this.state.todo, todos]
-        }, () => { const userJson = JSON.stringify(this.state)
-            localStorage.setItem('users',userJson)})
+        })
     }
 
     render() {
