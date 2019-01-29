@@ -3,8 +3,8 @@ import Fila from './Fila'
 
 
 class FormUs extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             name: '',
             surname: '',
@@ -44,7 +44,7 @@ class FormUs extends Component {
                     <div className={"divder"}>
                         <div>
                             <div className="form-group text-left">
-                                <h4 className={"col-sm-2 text-left text-light"}>Name</h4>
+                                <h4 className={"col-sm-2 text-left text-light"}>Namegit</h4>
                                 <input
                                     className={"stilo ml-3 col-sm-5"}//DIRECCION
                                     type="text"

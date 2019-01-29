@@ -9,9 +9,9 @@ import {todo} from "../todo";
 class Fila extends Component {
     constructor() {
         super();
-        const pasEstado = localStorage.getItem('Usuario');
 
-        this.state = pasEstado ? JSON.parse(pasEstado):{
+
+        this.state ={
             user
         }
 
@@ -20,8 +20,7 @@ class Fila extends Component {
     insertarForm = (users) => {
         this.setState({
             user: [...this.state.user, users]
-        },() => { const usuarioJson = JSON.stringify(this.state)
-            localStorage.setItem('Usuario',usuarioJson)})
+        })
     }
 
     render() {
