@@ -8,6 +8,7 @@ import User from "./components/User";
 import Team from "./components/Team";
 
 
+
 class App extends Component {
     constructor() {
         super();
@@ -34,6 +35,7 @@ class App extends Component {
                 return <FormIdea/>
         }
     }
+
 
 
     render() {

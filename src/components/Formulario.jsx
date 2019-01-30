@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import '../forms.css';
+import validator from 'validator';
+import isMobilePhone from 'validator/lib/isMobilePhone';
+import storage from '../storage'
+
 
 class Formulario extends Component {
     constructor() {
@@ -14,25 +18,34 @@ class Formulario extends Component {
             taman: "Javier Torregrosa"
         };
 
+        var obj = {}
+        obj= this.state;
     }
+
+
 
     regDatos = (e) => {
+        var obj = {}
+        obj= this.state;
         e.preventDefault();
-        this.props.insertAll(this.state);
-        this.setState({
-            title: 'Madrid',
-            pais: 'España',
-            description: '',
-            tlf: ''
-        });
+        storage.dispatch({
+            type:"ADD_TO_TARGET",
+            obj
+
+        })
+
     }
 
-    introDatos = (event) => {
+    introDatos = (event) =>
+    {
         const {value, name} = event.target;
-        console.log(value, name);
+
+
         this.setState({
             [name]: value
         });
+
+
     }
 
     render() {
