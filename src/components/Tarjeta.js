@@ -2,29 +2,36 @@ import React, {Component} from 'react';
 import {todo} from '../todo.json';
 import Formulario from './Formulario'
 import '../taridea.css';
+import storage from '../storage'
 
 class Tarjeta extends Component {
     constructor() {
         super();
 
 
-        this.state = {
-            todo
-        }
 
+        this.state ={
+        todo
+        }
+        storage.subscribe(()=>{
+            console.log('holaaa' + storage.getState().cart)
+            this.setState({
+                //todo: [...this.state.todo, storage.getState().cart]
+                todo: storage.getState().cart
+            })
+        })
 
     }
 
 
 
 
-
+/*
     insertarForm = (todos) => {
         this.setState({
             todo: [...this.state.todo, todos]
-        }, () => { const userJson = JSON.stringify(this.state)
-            localStorage.setItem('users',userJson)})
-    }
+        })
+    }*/
 
     render() {
 

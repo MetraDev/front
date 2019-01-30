@@ -1,14 +1,17 @@
 import React from 'react';
 import {Component} from 'react';
 import Tarjeta from './components/Tarjeta';
-import Formulario from "./components/Formulario";
 import FormIdea from "./components/FormIdea";
 import TargetIdea from "./components/TargetIdea";
 import User from "./components/User";
+<<<<<<< HEAD
 import FormUs from "./components/formUs";
 import Fila from "./components/Fila";
 import Team from "./components/Team";
 import FormAll from "./components/FormAll";
+=======
+import Team from "./components/Team";
+>>>>>>> redux
 
 
 
@@ -24,19 +27,12 @@ class App extends Component {
 
     getPage=()=>{
         switch(this.state.url) {
-            case '/ideas':
-                return <TargetIdea />
-            case '/cities':
-                return <Tarjeta/>
-            case '/user':
-                return <User />
-            case '/team':
-                return <Team/>
-            default:
-                return <FormIdea/>
-        }
-    }
-
+    case '/ideas':
+    return <TargetIdea />
+    case '/cities':
+    return <Tarjeta/>
+    case '/user':
+}}
 
     render() {
 
@@ -59,8 +55,15 @@ class App extends Component {
                     </span>
                     </div>
                 </nav>
+<<<<<<< HEAD
                 <Tarjeta/>
                 <div className="footer text-left ">
+=======
+
+                {this.getPage()}
+
+                <div className="footer text-left">
+>>>>>>> redux
                     <p className={"ml-5"}>(c) 2019 Demium, All rights reserved</p>
                 </div>
             </div>)

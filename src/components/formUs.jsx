@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Fila from './Fila'
 
 
+
 class FormUs extends Component {
     constructor(props) {
         super(props);
@@ -26,6 +27,7 @@ class FormUs extends Component {
     }
 
     introDatos = (event) => {
+
         const {value, name} = event.target;
         console.log(value, name);
         this.setState({
