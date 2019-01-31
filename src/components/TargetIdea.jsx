@@ -14,16 +14,16 @@ class TargetIdea extends Component {
     render() {
         let todo = this.state.idea.map((idea) => {
             return (
-                <div className={"col-md-4 mb-3"}>
-                    <div className={"card mt-4"}>
-                        <div className={"fondo"}>
-                            <div className={"linea card-header bg-primary text-left"}>
+                <div className={" col-md-4 mb-3"}>
+                    <div className={"carder card  mt-4"}>
+                        <div className={""}>
+                            <div className={" card-header bg-primary text-left"}>
                                 <h5 className={"text-white"}>{idea.title}</h5>
                             </div>
                         </div>
                         <div className={"card-Body"}>
                             <div className={" form-group row"}>
-                                <h6 className={"typeeeb text-left mt-3 ml-4"}>Type</h6>
+                                <h6 className={"typeee text-left mt-3 ml-4"}>Type</h6>
                                 <h6 className={" text-left mt-3 ml-3"}>{idea.type}</h6>
                             </div>
                             <div className={"form-group row"}>

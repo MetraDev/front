@@ -19,7 +19,7 @@ class AppRouter extends Component{
         return(
 
 <BrowserRouter>
-    <div>
+    <div className={"linea"}>
         <header>
             <nav className={"navbar navbar-dark"}>
                 <h1 className={"text-white"}>Demium</h1>

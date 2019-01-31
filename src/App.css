@@ -17,4 +17,8 @@ team:hover {
     color: white;
     text-align: center;
 }
+.linea{
+
+    outline: 1px solid #CB3066;;
+}
 
