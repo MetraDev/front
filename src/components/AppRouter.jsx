@@ -5,6 +5,7 @@ import ideas from '../pages/ideas'
 import team from '../pages/team'
 import user from '../pages/user'
 import cities from '../pages/cities'
+import '../App.css'
 
 class AppRouter extends Component{
     constructor() {
