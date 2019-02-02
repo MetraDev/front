@@ -3,12 +3,14 @@ import '../forms.css';
 import validator from 'validator';
 import isMobilePhone from 'validator/lib/isMobilePhone';
 import storage from '../storage'
+import  uuid from 'uuid'
 
 
 class Formulario extends Component {
     constructor() {
         super();
         this.state = {
+
             title: 'Madrid',
             pais: 'España',
             Demium: 'Demium team:',

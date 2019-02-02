@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import Fila from './Fila'
 import storage from "../storage";
 import {connect} from "react-redux";
-import { tarea } from '../actions/actions';
+import { tareaSi } from '../actions/actions';
+import uuid from "uuid";
 
 
 
@@ -11,6 +12,7 @@ class FormUs extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id:uuid(),
             name: '',
             surname: '',
             role: 'IP Manager',
@@ -126,9 +128,8 @@ class FormUs extends Component {
                         </div>
                     </div>
                     <div className={"text-right col-dm-2"}>
-                        <button type="submit" onClick={()=> { this.props.dispatch({type:'ADD_TODO'
-                            , data: this.state
-                        })}}  className="col-sm-2 ml-4 btn btn-primary">
+                        <button type="submit" onClick={()=>  {
+                            this.props.dispatch(tareaSi(this.state))}}  className="col-sm-2 ml-4 btn btn-primary">
                             <h5>Create</h5>
                         </button>
                     </div>
@@ -140,4 +141,6 @@ class FormUs extends Component {
 }
 
 
-export default connect( )(FormUs);
+
+
+export default connect( null,)(FormUs);
