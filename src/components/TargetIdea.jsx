@@ -1,15 +1,21 @@
 import React, {Component} from 'react';
 import {idea} from '../idea.json';
 import '../taridea.css';
+import { viewIdeass} from "../actions/actions";
+import {connect} from "react-redux";
+import  {Link} from 'react-router-dom'
 
 
 class TargetIdea extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             idea
         }
     }
+
+
+
 
     render() {
         let todo = this.state.idea.map((idea) => {
@@ -41,8 +47,15 @@ class TargetIdea extends Component {
                                 <h6 className={" text-left ml-3"}>{idea.Team}</h6>
                             </div>
                             <p className={"text-right mr-3"}>
-                                <button className={"text-rigth btn btn-primary mr-10"}>
-                                    <h5 className={"text-light"}>{'VIEW'}</h5>
+                                <button className={"text-rigth btn btn-primary mr-10"} >
+                                    <Link to={"/ideaspag"}  onClick={()=>{this.props.view({
+                                        title:idea.title,
+                                        type:idea.type,
+                                        Nombre:idea.Nombre,
+                                        Description:idea.Description,
+                                        Headquarter:idea.Headquarter,
+                                        Team:idea.Team})}}> <h5 className={"text-light"}>{'VIEW'}</h5></Link>
+
                                 </button>
                             </p>
                         </div>
@@ -60,4 +73,11 @@ class TargetIdea extends Component {
     }
 }
 
-export default TargetIdea
+const dispastchToProps=(dispatch,props )=>{
+    return{
+        view:(stado)=>dispatch(viewIdeass(stado)),
+
+    }
+}
+
+export default connect( null,dispastchToProps)(TargetIdea);

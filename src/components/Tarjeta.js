@@ -3,10 +3,11 @@ import {todo} from '../todo.json';
 import Formulario from './Formulario'
 import '../taridea.css';
 import storage from '../storage'
+import {connect} from "react-redux";
 
 class Tarjeta extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
 
 
@@ -35,7 +36,7 @@ class Tarjeta extends Component {
 
     render() {
 
-        const todo = this.state.todo.map((todo) => {
+        const todo = this.props.obj.map((todo) => {
             return (
                 <div className={"col-md-4"}>
                     <div className={"carder card mt-4"}>
@@ -73,5 +74,9 @@ class Tarjeta extends Component {
         )
     }
 }
-
-export default Tarjeta;
+const mapStateToProps = (state) => {
+    return {
+        obj: state.city
+    }
+}
+export default connect(mapStateToProps)(Tarjeta);

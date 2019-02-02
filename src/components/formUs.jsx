@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import Fila from './Fila'
 import storage from "../storage";
 import {connect} from "react-redux";
-import { tareaSi } from '../actions/actions';
+import { tareaSi,deleteUser } from '../actions/actions';
 import uuid from "uuid";
+
 
 
 
@@ -24,7 +25,6 @@ class FormUs extends Component {
 
     regDatos = (e) => {
         e.preventDefault();
-
         this.setState({
             name: '',
             surname: '',
@@ -129,9 +129,10 @@ class FormUs extends Component {
                     </div>
                     <div className={"text-right col-dm-2"}>
                         <button type="submit" onClick={()=>  {
-                            this.props.dispatch(tareaSi(this.state))}}  className="col-sm-2 ml-4 btn btn-primary">
+                            this.props.tareaSino(this.state)}}  className="col-sm-2 ml-4 btn btn-primary">
                             <h5>Create</h5>
                         </button>
+
                     </div>
                 </form>
                 {console.log('ojooo' +this.state)}
@@ -140,7 +141,12 @@ class FormUs extends Component {
     }
 }
 
+const dispastchToProps=(dispatch,props )=>{
+    return{
+        tareaSino:(stado)=>dispatch(tareaSi(stado)),
+
+    }
+}
 
 
-
-export default connect( null,)(FormUs);
+export default connect( null,dispastchToProps)(FormUs);

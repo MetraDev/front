@@ -6,6 +6,7 @@ import team from '../pages/team'
 import user from '../pages/user'
 import cities from '../pages/cities'
 import '../App.css'
+import ideapag from "../pages/ideapag";
 
 class AppRouter extends Component{
     constructor() {
@@ -44,6 +45,7 @@ class AppRouter extends Component{
             <Route path={'/user'} component={user} exact={true}/>
             <Route path={'/cities'} component={cities} exact={true}/>
             <Route path={'/team'} component={team} exact={true}/>
+            <Route path={'/ideaspag'} component={ideapag} exact={true}/>
             <Redirect to={'/404'}/>
         </Switch>
         <div className="footer text-left">

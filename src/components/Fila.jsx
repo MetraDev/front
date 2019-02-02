@@ -4,6 +4,7 @@ import '../file.css'
 import FormUs from "./formUs";
 import { connect } from 'react-redux';
 import storage from "../storage";
+import {deleteUser, tareaSi} from "../actions/actions";
 
 
 class Fila extends Component {
@@ -22,10 +23,14 @@ class Fila extends Component {
         const user = this.props.obj.map((user) => {
                 return (
                     <tr>
-                        <td colSpan={"1"}>{user.name}</td>
+
+                        <td colSpan={"1"} >{user.name}</td>
                         <td colSpan={"1"}>{user.surname}</td>
                         <td colSpan={"1"}>{user.role}</td>
                         <td colSpan={"1"}>{user.headquarter}</td>
+                        <button  onClick={()=> {this.props.deleteUsers(user.id)}}  className="col-sm-2 ml-4 btn btn-primary">
+                            <h5>borrar</h5>
+                        </button>
                     </tr>
 
                 )
@@ -61,4 +66,10 @@ const mapStateToProps = (state) => {
         obj: state.todo
     }
 }
-export default connect(mapStateToProps)(Fila);
+const dispastchToProps=(dispatch,props )=>{
+    return{
+        deleteUsers:(id) => dispatch(deleteUser(id))
+    }
+}
+
+export default connect(mapStateToProps,dispastchToProps)(Fila);

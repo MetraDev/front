@@ -4,6 +4,8 @@ import validator from 'validator';
 import isMobilePhone from 'validator/lib/isMobilePhone';
 import storage from '../storage'
 import  uuid from 'uuid'
+import {connect} from "react-redux";
+import {addCity} from "../actions/actions";
 
 
 class Formulario extends Component {
@@ -20,28 +22,19 @@ class Formulario extends Component {
             taman: "Javier Torregrosa"
         };
 
-        var obj = {}
-        obj= this.state;
     }
 
 
 
     regDatos = (e) => {
-        var obj = {}
-        obj= this.state;
-        e.preventDefault();
-        storage.dispatch({
-            type:"ADD_TO_TARGET",
-            obj
 
-        })
+        e.preventDefault();
 
     }
 
     introDatos = (event) =>
     {
         const {value, name} = event.target;
-
 
         this.setState({
             [name]: value
@@ -136,10 +129,7 @@ class Formulario extends Component {
                         </div>
                     </div>
                     <div className={"text-right col-dm-2"}>
-                        <button type="submit"  onClick={() => {this.props.dispatch({type: 'ADD_TODO',
-                            data: {
-                                ...this.state}});
-                        }} className="col-sm-2 ml-4 btn btn-primary">
+                        <button type="submit"  onClick={()=>this.props.addCities(this.state)}className="col-sm-2 ml-4 btn btn-primary">
                             <h5>Create</h5>
                         </button>
                     </div>
@@ -149,5 +139,11 @@ class Formulario extends Component {
     }
 
 }
+const dispastchToProps=(dispatch,props )=>{
+    return{
+        addCities:(stado)=>dispatch(addCity(stado)),
 
-export default Formulario;
+    }
+}
+
+export default connect( null,dispastchToProps)(Formulario);

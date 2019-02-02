@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import '../forms.css';
+import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
 class FormIdea extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             title: 'Madrid',
             pais: 'España',
@@ -21,6 +23,7 @@ class FormIdea extends Component {
                 'Y cuando tu corazón comenzó a latir' +
                 '¿Qué formidable mano, qué formidables pies?',
             tlf: '',
+            Headquarter:'',
             ipman: "Virginia Sanchez",
             taman: "Javier Torregrosa"
         };
@@ -47,76 +50,87 @@ class FormIdea extends Component {
     }
 
     render() {
-        return (
 
-            <div className={"card-header"}>
-                <nav className={"navbar navbar-dark mt-5"}>
-                    <h3 className={"text-white"}>Edit Idea</h3>
-                </nav>
-                <form className={"card-header bg-dark"} onSubmit={this.regDatos}>
-                    <div className={"divder"}>
-                        <div>
-                            <div className="form-group text-left">
-                                <h4 className={"col-sm-2 text-left text-light mt-3"}>Nombre</h4>
-                                <input
-                                    className={"stilo ml-3 col-sm-5"}//DIRECCION
-                                    type="text"
 
-                                    name={"Nombre"}
-                                    placeholder={"Spuer App"}
-                                    onChange={this.introDatos}/>
-                            </div>
-                            <h4 className={"col text-left text-light mt-4"}> Business Model</h4>
-                            <div className={"row form-group"}>
-                            </div>
-                            <div className={"form-group row"}>
-                                <h6 className={"col-sm-2 text-left text-light ml-3"}>Type</h6>
-                                <select
-                                    name="title"
-                                    className="col-sm-3 form-control bg-danger "
+    const data = this.props.obj.map((item)=>{
+        return( <div className={"card-header"}>
+            <nav className={"navbar navbar-dark mt-5"}>
+                <h3 className={"text-white"}>Edit Idea</h3>
+            </nav>
+            <form className={"card-header bg-dark"} onSubmit={this.regDatos}>
+                <div className={"divder"}>
+                    <div>
+                        <div className="form-group text-left">
+                            <h4 className={"col-sm-2 text-left text-light mt-3"}>Nombre</h4>
+                            <input
+                                className={"stilo ml-3 col-sm-5"}//DIRECCION
+                                type="text"
 
-                                    onChange={this.introDatos}>
-                                    <option>App</option>
-                                    <option>Web</option>
-                                </select>
-                            </div>
-                            <div className="form-group text-left">
-                                <h4 className={"col-sm-2 text-left text-light mt-4"}>Descripción</h4>
-                                <textarea
-                                    className={"stilos ml-3 col-xl"}
-                                    type="text"
-                                    value={this.state.description}
-                                    name={"description"}
-                                    placeholder={"Spuer App"}
-                                    onChange={this.introDatos}/>
-                            </div>
-                            <div className={"text-left "}>
-                                <h5 className={"bg-danger badge-pill text-center text-light col-sm-3"}>Not
-                                    Available</h5>
-                            </div>
-                            <div className={"form-group row ml-1 mt-3"}>
-                                <h5 className={"text-left text-light col-sm-3"}>Headquarter</h5>
-                                <label className={"text-left text-dark col-sm-2 "}><b>Madrid</b></label>
-                            </div>
-                            <div className={"form-group row ml-1"}>
-                                <h5 className={"text-left text-light col-sm-3"}>Team name</h5>
-                                <label className={"text-left text-dark col-sm-3 "}><b>Real Unicorn</b></label>
-                            </div>
-                            <div className={"form-group row ml-1"}>
-                                <h5 className={"text-left text-light col-sm-3"}>Black date</h5>
-                                <label className={"text-left text-dark col-sm-2 "}><b>19/91/2019</b></label>
-                            </div>
+                                name={"Nombre"}
+                                placeholder={item.Nombre}
+                                onChange={this.introDatos}/>
+                        </div>
+                        <h4 className={"col text-left text-light mt-4"}> Business Model</h4>
+                        <div className={"row form-group"}>
+                        </div>
+                        <div className={"form-group row"}>
+                            <h6 className={"col-sm-2 text-left text-light ml-3"}>Type</h6>
+                            <select
+                                name="title"
+                                className="col-sm-3 form-control bg-danger "
+
+                                onChange={this.introDatos}>
+                                <option>{item.type}</option>
+                                <option>App</option>
+                                <option>Web</option>
+
+                            </select>
+                        </div>
+                        <div className="form-group text-left">
+                            <h4 className={"col-sm-2 text-left text-light mt-4"}>Descripción</h4>
+                            <textarea
+                                className={"stilos ml-3 col-xl"}
+                                type="text"
+
+                                name={"description"}
+                                placeholder={item.Description}
+                                onChange={this.introDatos}/>
+                        </div>
+                        <div className={"text-left "}>
+                            <h5 className={"bg-danger badge-pill text-center text-light col-sm-3"}>Not
+                                Available</h5>
+                        </div>
+                        <div className={"form-group row ml-1 mt-3"}>
+                            <h5 className={"text-left text-light col-sm-3"}>Headquarter</h5>
+                            <label className={"text-left text-light col-sm-2 "}><b>{item.Headquarter}</b></label>
+                        </div>
+                        <div className={"form-group row ml-1"}>
+                            <h5 className={"text-left text-light col-sm-3"}>Team name</h5>
+                            <label className={"text-left text-light col-sm-3 "}><b>{item.Team}</b></label>
+                        </div>
+                        <div className={"form-group row ml-1"}>
+                            <h5 className={"text-left text-light col-sm-3"}>Black date</h5>
+                            <label className={"text-left text-light col-sm-2 "}><b>19/91/2019</b></label>
                         </div>
                     </div>
-                    <div className={"text-right col-dm-2"}>
-                        <button type="submit" className="col-sm-2 ml-4 btn btn-primary">
-                            <h5>Close</h5>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        )
+                </div>
+                <div className={"text-right col-dm-2"}>
+                    <button type="submit" className="col-sm-2 ml-4 btn btn-primary ">
+                        <Link to={"/ideas"} > <h5 className={"text-light"}>Close</h5></Link>
+                    </button>
+                </div>
+            </form>
+        </div>)
+
+    })
+       return(<div>{data}</div>)
+
     }
 }
 
-export default FormIdea;
+const mapStateToProps = (state) => {
+    return {
+        obj: state.viewIdea
+    }
+}
+export default connect(mapStateToProps)(FormIdea);
