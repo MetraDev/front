@@ -1,5 +1,6 @@
 import React from 'react';
 import Tarjeta from "../components/Tarjeta";
+import { connect } from 'react-redux';
 
 const cities =()=>{
 
@@ -8,5 +9,5 @@ const cities =()=>{
     <Tarjeta/>
     </div>)
 }
-export default cities;
+export default connect()(cities);
 

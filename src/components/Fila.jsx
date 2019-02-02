@@ -1,30 +1,25 @@
 import React, {Component} from 'react';
 import {user} from '../user.json';
 import '../file.css'
-import User from "./User";
-import Formulario from "./Tarjeta";
 import FormUs from "./formUs";
-import {todo} from "../todo";
+import { connect } from 'react-redux';
+import storage from "../storage";
+
 
 class Fila extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
 
-        this.state ={
+        this.state = {
             user
         }
 
     }
 
-    insertarForm = (users) => {
-        this.setState({
-            user: [...this.state.user, users]
-        })
-    }
 
     render() {
-        const user = this.state.user.map((user) => {
+        const user = this.props.obj.map((user) => {
                 return (
                     <tr>
                         <td colSpan={"1"}>{user.name}</td>
@@ -36,6 +31,7 @@ class Fila extends Component {
                 )
             }
         )
+
         return (
             <div>
                 <table className={"table table-hover table-dark mt-3"}>
@@ -52,11 +48,17 @@ class Fila extends Component {
                     </tr>
                     {user}
                     </thead>
+
                 </table>
-                <FormUs insertAll={this.insertarForm} />
+                <FormUs  />
             </div>
         )
     }
 }
 
-export default Fila;
+const mapStateToProps = (state) => {
+    return {
+        obj: state.todo
+    }
+}
+export default connect(mapStateToProps)(Fila);

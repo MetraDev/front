@@ -134,7 +134,10 @@ class Formulario extends Component {
                         </div>
                     </div>
                     <div className={"text-right col-dm-2"}>
-                        <button type="submit" className="col-sm-2 ml-4 btn btn-primary">
+                        <button type="submit"  onClick={() => {this.props.dispatch({type: 'ADD_TODO',
+                            data: {
+                                ...this.state}});
+                        }} className="col-sm-2 ml-4 btn btn-primary">
                             <h5>Create</h5>
                         </button>
                     </div>

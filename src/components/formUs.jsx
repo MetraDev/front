@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import Fila from './Fila'
+import storage from "../storage";
+import {connect} from "react-redux";
+import { tarea } from '../actions/actions';
+
 
 
 
@@ -12,12 +16,13 @@ class FormUs extends Component {
             role: 'IP Manager',
             headquarter: 'Madrid'
         };
+
     }
 
 
     regDatos = (e) => {
         e.preventDefault();
-        this.props.insertAll(this.state);
+
         this.setState({
             name: '',
             surname: '',
@@ -29,7 +34,6 @@ class FormUs extends Component {
     introDatos = (event) => {
 
         const {value, name} = event.target;
-        console.log(value, name);
         this.setState({
             [name]: value
         });
@@ -122,15 +126,18 @@ class FormUs extends Component {
                         </div>
                     </div>
                     <div className={"text-right col-dm-2"}>
-                        <button type="submit" className="col-sm-2 ml-4 btn btn-primary">
+                        <button type="submit" onClick={()=> { this.props.dispatch({type:'ADD_TODO'
+                            , data: this.state
+                        })}}  className="col-sm-2 ml-4 btn btn-primary">
                             <h5>Create</h5>
                         </button>
                     </div>
                 </form>
-                {console.log(this.state)}
+                {console.log('ojooo' +this.state)}
             </div>
         )
     }
 }
 
-export default FormUs;
+
+export default connect( )(FormUs);
