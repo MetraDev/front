@@ -18,7 +18,7 @@ class TargetIdea extends Component {
 
 
     render() {
-        let todo = this.state.idea.map((idea) => {
+        let todo = this.props.obj.map((idea) => {
             return (
                 <div className={" col-md-4 mb-3"}>
                     <div className={"carder card  mt-4"}>
@@ -72,7 +72,11 @@ class TargetIdea extends Component {
         )
     }
 }
-
+const mapStateToProps = (state) => {
+    return {
+        obj: state.viewAdd
+    }
+}
 const dispastchToProps=(dispatch,props )=>{
     return{
         view:(stado)=>dispatch(viewIdeass(stado)),
@@ -80,4 +84,4 @@ const dispastchToProps=(dispatch,props )=>{
     }
 }
 
-export default connect( null,dispastchToProps)(TargetIdea);
+export default connect( mapStateToProps,dispastchToProps)(TargetIdea);

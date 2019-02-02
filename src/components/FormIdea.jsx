@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import '../forms.css';
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
+import {viewAdd} from "../actions/actions";
+
 
 class FormIdea extends Component {
     constructor(props) {
@@ -10,7 +12,7 @@ class FormIdea extends Component {
             title: 'Madrid',
             pais: 'España',
             Demium: 'Demium team:',
-            description: 'Tigre! ¡Tigre!, fuego que ardes' +
+            Description: 'Tigre! ¡Tigre!, fuego que ardes' +
                 'En los bosques de la noche,' +
                 '¿Qué mano inmortal, qué ojo' +
                 'Pudo idear tu terrible simetría?' +
@@ -32,20 +34,21 @@ class FormIdea extends Component {
 
     regDatos = (e) => {
         e.preventDefault();
-        this.props.insertAll(this.state);
         this.setState({
             title: 'Madrid',
             pais: 'España',
-            description: '',
-            tlf: ''
+            Description: 'Deeefault',
+            Headquarter: 'Mad',
+            Team: 'Bootcamp'
         });
     }
 
     introDatos = (event) => {
         const {value, name} = event.target;
-        console.log(value, name);
         this.setState({
-            [name]: value
+            [name]: value,
+            Headquarter: 'Mad',
+            Team: 'Bootcamp'
         });
     }
 
@@ -76,9 +79,9 @@ class FormIdea extends Component {
                         <div className={"form-group row"}>
                             <h6 className={"col-sm-2 text-left text-light ml-3"}>Type</h6>
                             <select
-                                name="title"
+                                name="type"
                                 className="col-sm-3 form-control bg-danger "
-
+                                value={this.state.type}
                                 onChange={this.introDatos}>
                                 <option>{item.type}</option>
                                 <option>App</option>
@@ -92,7 +95,7 @@ class FormIdea extends Component {
                                 className={"stilos ml-3 col-xl"}
                                 type="text"
 
-                                name={"description"}
+                                name={"Description"}
                                 placeholder={item.Description}
                                 onChange={this.introDatos}/>
                         </div>
@@ -118,6 +121,9 @@ class FormIdea extends Component {
                     <button type="submit" className="col-sm-2 ml-4 btn btn-primary ">
                         <Link to={"/ideas"} > <h5 className={"text-light"}>Close</h5></Link>
                     </button>
+                    <button type="submit" onClick={()=>{this.props.addView(this.state)}} className="col-sm-2 ml-4 btn btn-primary ">
+                        <Link to={"/ideas"} > <h5 className={"text-light"}>Guardar</h5></Link>
+                    </button>
                 </div>
             </form>
         </div>)
@@ -133,4 +139,10 @@ const mapStateToProps = (state) => {
         obj: state.viewIdea
     }
 }
-export default connect(mapStateToProps)(FormIdea);
+const dispastchToProps=(dispatch,props )=>{
+    return{
+        addView:(stado)=>dispatch(viewAdd(stado)),
+
+    }
+}
+export default connect(mapStateToProps,dispastchToProps)(FormIdea);
