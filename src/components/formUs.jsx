@@ -1,12 +1,7 @@
 import React, {Component} from 'react';
-import Fila from './Fila'
-import storage from "../storage";
 import {connect} from "react-redux";
-import { tareaSi,deleteUser } from '../actions/actions';
+import { tareaSi } from '../actions/actions';
 import uuid from "uuid";
-
-
-
 
 
 class FormUs extends Component {
@@ -26,6 +21,7 @@ class FormUs extends Component {
     regDatos = (e) => {
         e.preventDefault();
         this.setState({
+            id:uuid(),
             name: '',
             surname: '',
             role: 'IP Manager',

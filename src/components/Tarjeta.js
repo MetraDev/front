@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {todo} from '../todo.json';
 import Formulario from './Formulario'
 import '../taridea.css';
-import storage from '../storage'
 import {connect} from "react-redux";
 
 class Tarjeta extends Component {
@@ -14,13 +13,7 @@ class Tarjeta extends Component {
         this.state ={
         todo
         }
-        storage.subscribe(()=>{
-            console.log('holaaa' + storage.getState().cart)
-            this.setState({
-                //todo: [...this.state.todo, storage.getState().cart]
-                todo: storage.getState().cart
-            })
-        })
+
 
     }
 

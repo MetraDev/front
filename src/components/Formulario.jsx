@@ -1,9 +1,5 @@
 import React, {Component} from 'react';
 import '../forms.css';
-import validator from 'validator';
-import isMobilePhone from 'validator/lib/isMobilePhone';
-import storage from '../storage'
-import  uuid from 'uuid'
 import {connect} from "react-redux";
 import {addCity} from "../actions/actions";
 

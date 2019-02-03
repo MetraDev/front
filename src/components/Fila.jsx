@@ -3,8 +3,7 @@ import {user} from '../user.json';
 import '../file.css'
 import FormUs from "./formUs";
 import { connect } from 'react-redux';
-import storage from "../storage";
-import {deleteUser, tareaSi} from "../actions/actions";
+import {deleteUser} from "../actions/actions";
 
 
 class Fila extends Component {

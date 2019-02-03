@@ -4,12 +4,14 @@ import '../taridea.css';
 import { viewIdeass} from "../actions/actions";
 import {connect} from "react-redux";
 import  {Link} from 'react-router-dom'
+import uuid from "uuid";
 
 
 class TargetIdea extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id:uuid(),
             idea
         }
     }
@@ -49,6 +51,7 @@ class TargetIdea extends Component {
                             <p className={"text-right mr-3"}>
                                 <button className={"text-rigth btn btn-primary mr-10"} >
                                     <Link to={"/ideaspag"}  onClick={()=>{this.props.view({
+                                        id:uuid(),
                                         title:idea.title,
                                         type:idea.type,
                                         Nombre:idea.Nombre,

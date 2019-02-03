@@ -3,12 +3,14 @@ import '../forms.css';
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {viewAdd} from "../actions/actions";
+import uuid from "uuid";
 
 
 class FormIdea extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id:uuid(),
             title: 'Madrid',
             pais: 'España',
             Demium: 'Demium team:',
@@ -35,6 +37,7 @@ class FormIdea extends Component {
     regDatos = (e) => {
         e.preventDefault();
         this.setState({
+            id:uuid(),
             title: 'Madrid',
             pais: 'España',
             Description: 'Deeefault',

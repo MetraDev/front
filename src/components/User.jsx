@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Fila from './Fila'
 
-
 class User extends Component {
     constructor() {
         super();
