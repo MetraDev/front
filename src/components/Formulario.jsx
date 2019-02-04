@@ -7,6 +7,9 @@ import {addCity} from "../actions/actions";
 class Formulario extends Component {
     constructor() {
         super();
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJ1c2VySWQiOiI1YzU4MjYyMDgxOGYyYzI0M2FlYTNjY2UiLCJpYXQiOjE1NDkyODEyMTAsImV4cCI6MTU0OTM2NzYxMCwiYXVkIjoiaHR0cHM6Ly95b3VyZG9tYWluLmNvbSIsImlzcyI6ImZlYXRoZXJzIiwic3ViIjoiYW5vbnltb3VzIiwianRpIjoiZjU2MDVjMDctNGRhZi00ODc0LWJkMWEtYjE2OTEyNGI0ZDQ1In0.eY76aAi8KU7yzDbBaGLhx5bDcoiAOz0WO5BczFTD2JI";
+        const accessToken = JSON.stringify(token);
+        localStorage.setItem('token', accessToken);
         this.state = {
 
             title: 'Madrid',
@@ -142,4 +145,4 @@ const dispastchToProps=(dispatch,props )=>{
     }
 }
 
-export default connect( null,dispastchToProps)(Formulario);
+export default connect(null,dispastchToProps)(Formulario);
