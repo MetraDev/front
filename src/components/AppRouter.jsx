@@ -8,6 +8,7 @@ import cities from '../pages/cities'
 import '../App.css'
 import ideapag from "../pages/ideapag";
 import teamcard from "../pages/teamCards";
+import home from "../pages/home";
 
 class AppRouter extends Component{
     constructor() {
@@ -27,7 +28,7 @@ class AppRouter extends Component{
                 <h1 className={"text-white"}>Demium</h1>
                 <div className={"col-md-4"}>
                 <span className={"badge badge badge-light ml-0"}>
-                     <NavLink activeClassName={"is-active"} to={"/cities"}>cities</NavLink>
+                     <NavLink activeClassName={"is-active"} to={"/cities"}  >cities</NavLink>
                 </span>
                     <span className={"badge badge-light ml-5 "}>
                       <Link to={"/user"}>user</Link>
@@ -48,6 +49,7 @@ class AppRouter extends Component{
             <Route path={'/team'} component={team} exact={true}/>
             <Route path={'/ideaspag'} component={ideapag} exact={true}/>
             <Route path={'/teamcard'} component={teamcard} exact={true}/>
+            <Route path={'/'} component={home} />
             <Redirect to={'/404'}/>
         </Switch>
         <div className="footer text-left">
