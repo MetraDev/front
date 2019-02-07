@@ -11,6 +11,8 @@ team:hover {
     color:#100;
 }
 .footer {
+
+   border-bottom-width: medium;
     background-color: #CB3066;
     width: 100%;
     height: 100px;

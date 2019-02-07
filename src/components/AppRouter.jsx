@@ -8,7 +8,9 @@ import cities from '../pages/cities'
 import '../App.css'
 import ideapag from "../pages/ideapag";
 import teamcard from "../pages/teamCards";
+import login from "../pages/login";
 import home from "../pages/home";
+import axios from "axios";
 
 class AppRouter extends Component{
     constructor() {
@@ -18,6 +20,9 @@ class AppRouter extends Component{
         }
 
     }
+
+
+
     render(){
         return(
 
@@ -25,7 +30,7 @@ class AppRouter extends Component{
     <div className={"linea"}>
         <header>
             <nav className={"navbar navbar-dark"}>
-                <h1 className={"text-white"}>Demium</h1>
+             <Link to={"/"}>   <h1 className={"text-white"}>Demium</h1></Link>
                 <div className={"col-md-4"}>
                 <span className={"badge badge badge-light ml-0"}>
                      <NavLink activeClassName={"is-active"} to={"/cities"}  >cities</NavLink>
@@ -49,7 +54,7 @@ class AppRouter extends Component{
             <Route path={'/team'} component={team} exact={true}/>
             <Route path={'/ideaspag'} component={ideapag} exact={true}/>
             <Route path={'/teamcard'} component={teamcard} exact={true}/>
-            <Route path={'/'} component={home} />
+            <Route path={'/'} component={login}  exact={true} />
             <Redirect to={'/404'}/>
         </Switch>
         <div className="footer text-left">
@@ -59,4 +64,21 @@ class AppRouter extends Component{
 </BrowserRouter>)
 }
 }
+export const excute =(arry)=>{
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJ1c2VySWQiOiI1YzU4MjYyMDgxOGYyYzI0M2FlYTNjY2UiLCJpYXQiOjE1NDk0NjQ1NDcsImV4cCI6MTU0OTU1MDk0NywiYXVkIjoiaHR0cHM6Ly95b3VyZG9tYWluLmNvbSIsImlzcyI6ImZlYXRoZXJzIiwic3ViIjoiYW5vbnltb3VzIiwianRpIjoiYzliY2U4ZTUtYzE1Mi00ZmY2LWIwYWMtZWJhMWI5YzIwNjVlIn0.flTOmy-eaQC97_Wzw0SA6-aF-56DbNhoQSNb82kIuHg"
+
+    var config = {
+        headers: {'Authorization':  token}
+    };
+    axios.get('http://52.213.25.226:3030/city', config)
+        .then(res => {
+            let arr= res.data.data;
+            console.log ('los DATOSSSS'+ arr)
+            for (let index in arr){
+                arry.push(arr[index])
+            }
+        })
+        .catch(err => console.log('No ha funcionado', err));}
+
+
 export default AppRouter;

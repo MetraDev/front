@@ -12,7 +12,7 @@ class Fila extends Component {
 
 
         this.state = {
-            user
+
         }
 
     }
@@ -25,9 +25,9 @@ class Fila extends Component {
 
                         <td colSpan={"1"} >{user.name}</td>
                         <td colSpan={"1"}>{user.surname}</td>
-                        <td colSpan={"1"}>{user.role}</td>
-                        <td colSpan={"1"}>{user.headquarter}</td>
-                        <button  onClick={()=> {this.props.deleteUsers(user.id)}}  className="col-sm-2 ml-4 btn btn-primary">
+                        <td colSpan={"1"}>{user.email}</td>
+                        <td colSpan={"1"}>{user.telephone}</td>
+                        <button  onClick={()=> this.props.deleteUsers(user.id)}  className="col-sm-2 ml-4 btn btn-primary">
                             <h5>borrar</h5>
                         </button>
                     </tr>
@@ -62,7 +62,7 @@ class Fila extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        obj: state.todo
+        obj: state.user
     }
 }
 const dispastchToProps=(dispatch,props )=>{
