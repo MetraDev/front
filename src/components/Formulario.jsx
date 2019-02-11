@@ -2,36 +2,55 @@ import React, {Component} from 'react';
 import '../forms.css';
 import {connect} from "react-redux";
 import {addCity} from "../actions/actions";
-import uuid from "uuid";
+import createStore from '../Redux/create';
 import axios from "axios";
+import {token} from '../index'
+
+import Spinner from "./Spinner";
+import uuid from 'uuid'
+
 
 
 class Formulario extends Component {
-    constructor() {
-        super();
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJ1c2VySWQiOiI1YzU4MjYyMDgxOGYyYzI0M2FlYTNjY2UiLCJpYXQiOjE1NDkyODEyMTAsImV4cCI6MTU0OTM2NzYxMCwiYXVkIjoiaHR0cHM6Ly95b3VyZG9tYWluLmNvbSIsImlzcyI6ImZlYXRoZXJzIiwic3ViIjoiYW5vbnltb3VzIiwianRpIjoiZjU2MDVjMDctNGRhZi00ODc0LWJkMWEtYjE2OTEyNGI0ZDQ1In0.eY76aAi8KU7yzDbBaGLhx5bDcoiAOz0WO5BczFTD2JI";
-        const accessToken = JSON.stringify(token);
-        localStorage.setItem('token', accessToken);
-
+    constructor(props) {
+        super(props);
+        this.count =0;
         this.state = {
 
             name: 'Madrid',
             address: '',
             telephone: '',
-
+            users:[],
+            nom1:[],
+            nom2:[]
         };
 
+
+
+
     }
+
 
 
 
     regDatos = (e) => {
 
         e.preventDefault();
+        console.log('preubaaaa'+ this.state.users)
+
+        if(this.state.users == null){
+           alert('añade 2 usuarios')
+        }
+
         this.setState({
+
             name: 'Madrid',
             address: '',
             telephone: '',
+            users:[],
+            nom1:[],
+            nom2:[]
+
         });
     }
 
@@ -44,37 +63,89 @@ class Formulario extends Component {
         });
 
 
+
     }
+
+
+
+    add =(nombre)=>{
+
+
+        var select = document.getElementById('select');
+        select.addEventListener('change',
+            function(){
+                var selectedOption = this.options[select.selectedIndex];
+                //e.unshift(selectedOption.value)
+                nombre.unshift(selectedOption.text)
+                console.log(selectedOption.value + ': ' + selectedOption.text);
+            });
+
+    }
+    add1 =(nombre)=>{
+
+        var select = document.getElementById('select1');
+        select.addEventListener('change',
+            function(){
+                var selectedOption = this.options[select.selectedIndex];
+              // e.unshift(selectedOption.value)
+                nombre.unshift(selectedOption.text)
+                console.log(selectedOption.value + ': ' + selectedOption.text);
+            });
+
+    }
+
+    añadir=()=>{
+        this.state.users.unshift(this.state.nom1[0], this.state.nom2[0])
+        alert(`Has añadido a ${this.state.nom1[0] + ' y ' + this.state.nom2[0] } en tu equipo`)
+
+    }
+    eleiminar=()=>{
+        console.log('333333333'+ this.state.nom1[0])
+        console.log('444444444444'+ this.state.nom2[0])
+        alert(`Has eliminado a ${this.state.nom1[0] + ' y ' + this.state.nom2[0] } de tu equipo`)
+        this.state.users.shift()
+        this.state.users.shift()
+
+
+    }
+
+
     createCity = (state) => {
 
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJ1c2VySWQiOiI1YzU4MjYyMDgxOGYyYzI0M2FlYTNjY2UiLCJpYXQiOjE1NDkzNzgxMDIsImV4cCI6MTU0OTQ2NDUwMiwiYXVkIjoiaHR0cHM6Ly95b3VyZG9tYWluLmNvbSIsImlzcyI6ImZlYXRoZXJzIiwic3ViIjoiYW5vbnltb3VzIiwianRpIjoiNWRkOTU3ODItNTRiNS00MjE2LWJhYzMtZWZmODM0ZDA1ZjM4In0.jyy_HiLNC97Vzxqtw-la_TjQfW0NAmFRC3qxTeRqbNo"
+
         var config = {
             headers: {'Authorization':  token}
         };
         axios.post('http://52.213.25.226:3030/city', state, config)
             .then(res => {
-                var result=  console.log(res.data);
+                this.props.addCities(this.state)
+                var result=  console.log('res.data' +res.data);
             })
             .catch(err => console.log('No ha funcionado', err));
 
     }
 
     render() {
+
+        const users =  this.props.obj.map((usr) => {
+            return (
+                    <option name="users" value={usr._id}  >{usr.name}</option>)})
         return (
 
+
             <div className={"mb-3"}>
+                {console.log('siiii' + this.props.objs)}
                 <nav className={"navbar navbar-dark mt-5"}>
                     <h2 className={"text-white"}>Add city</h2>
                 </nav>
                 <form className={"card-header"} onSubmit={this.regDatos}>
-                    <div className={"divder"}>
-                        <div>
+                    <div className={"divder"}><div>
                             <h3 className={"col text-left text-light mt-2"}> Location</h3>
                             <div className={"row form-group"}>
                             </div>
                             <div className={"form-group row"}>
                                 <h5 className={"col-sm-2 text-left text-light ml-3"}>City</h5>
-                                <select                                         //CIUDAD
+                                <select  required                                       //CIUDAD
                                     name="name"
                                     className="col-sm-3 form-control "
                                     value={this.state.name}
@@ -94,7 +165,8 @@ class Formulario extends Component {
                                     name="pais"
                                     className="col-sm-3 form-control  "
                                     value={this.state.pais}
-                                    onChange={this.introDatos}>
+                                    onChange={this.introDatos}
+                                    required={true}>
                                     <option>España</option>
                                     <option>Rusia</option>
                                     <option>Italia</option>
@@ -108,7 +180,7 @@ class Formulario extends Component {
                                     name={"address"}
                                     value={this.state.address}
                                     placeholder={"Full Adress"}
-                                    onChange={this.introDatos}/>
+                                    onChange={this.introDatos} required={true}/>
                             </div>
                             <div className={"row form-group text-left"}>
                                 <h5 className={"col-sm-1 text-light mt-2 ml-3"}>Phone:</h5>
@@ -118,7 +190,7 @@ class Formulario extends Component {
                                     value={this.state.telephone}
                                     name="telephone"
                                     onChange={this.introDatos}
-                                    placeholder="Phone"/>
+                                    placeholder="Phone" required={true}/>
                             </div>
                         </div>
                         <div className={"divleft"}>
@@ -127,27 +199,25 @@ class Formulario extends Component {
                             </div>
                             <div className={"form-group row"}>
                                 <h5 className={"col-sm-2 text-left text-light ml-3"}>Team</h5>
-                                <select                                         //CIUDAD
-                                    name="title"
-                                    className="col-sm-4 form-control "
-                                    value={this.state.title}
-                                    onChange={this.introDatos}>
-                                    <option>Select members</option>
-                                    <option>IP Manager</option>
-                                    <option>Talent Manager</option>
+                                <select required className={'select'} id={'select'} onClick={()=>this.add(this.state.nom1)} >
+                                    {users}
                                 </select>
-                                <button className="col-sm-2 ml-4 btn btn-primary">
+                                <select required className={'select'} id={'select1'} onClick={()=>this.add1(this.state.nom2)} >
+                                    {users}
+                                </select>
+                                <button className="col-sm-2 ml-4 btn btn-primary"  onClick={()=>this.añadir()} >
                                     <h6>Add</h6>
                                 </button>
-                                <button className="col-sm-2 ml-4 btn btn-danger">
+                                {console.log('item'+ this.state.id)}
+                                {console.log('item'+ this.state.users)}
+                                <button className="col-sm-2 ml-4 btn btn-danger" onClick={()=>this.eleiminar()}>
                                     <h6>Remove</h6>
                                 </button>
                             </div>
                         </div>
                     </div>
                     <div className={"text-right col-dm-2"}>
-                        <button type="submit"  onClick={()=>{this.props.addCities(this.state)
-                            this.createCity(this.state)
+                        <button onSubmit={this.regDatos} type="submit"  onClick={()=>{this.createCity(this.state)
                         }}className="col-sm-2 ml-4 btn btn-primary">
                             <h5>Create</h5>
                         </button>
@@ -158,11 +228,21 @@ class Formulario extends Component {
     }
 
 }
+
+const mapStateToProps = (state ,props) => {
+    return {
+        obj: state.user,
+        objs: state.movNom
+    }
+
+}
+
 const dispastchToProps=(dispatch,props )=>{
     return{
         addCities:(stado)=>dispatch(addCity(stado)),
 
+
     }
 }
 
-export default connect(null,dispastchToProps)(Formulario);
+export default connect(mapStateToProps,dispastchToProps)(Formulario);

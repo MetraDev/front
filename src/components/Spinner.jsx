@@ -1,31 +1,82 @@
 import React, {Component} from 'react';
+import {connect} from "react-redux";
+import createStore from '../Redux/create';
 
 class Spinner extends Component{
 
     constructor(props){
         super(props)
         this.state={
-
+            id:'p',
+        users:[]
         }
     }
-    render() {
-        return (
-            <div className={""}>
-            <h4 className={"col text-left text-light mt-4"}> {this.props.titulo}</h4>
-        <div className={"form-group row"}>
-            <h6 className={"col-sm-2 text-left text-light ml-3"}>{this.props.referencia}</h6>
-            <select
-                name="title"
-                className="col-sm-3 form-control bg-danger "
 
-                onChange={this.introDatos}>
-                <option>{this.props.opcion1}</option>
-                <option>{this.props.opcion2}</option>
-            </select>
-        </div>
-            </div>)
+
+    introDatos (event)
+    {
+        const {value, name} = event.target;
+        const store = createStore();
+        store.dispatch({type:"@ENV-->NOM", id:value})
+
+
+    }
+    regDatos =()=>
+    {
+        const store = createStore();
+
+
+                var respo= store.getState().res
+            console.log('estooooooooo'+ this.props.user)
+
+
+
+
+
+    }
+
+    pus (){
+        this.state.users.push({id:this.state.id})
+    }
+    render() {
+        const todo = this.props.obj.map((name) => {
+            console.log('spinner'+ this.props.obj)
+            return (
+                <option name="id" value={this.state.id} onClick={this.introDatos}>{name.id}</option>
+            )})
+
+        return(
+
+
+    <div className={"form-group row"}>
+
+    <select  >{todo }{console.log('children' +this.children)}</select>
+
+    <button className="col-sm-2 ml-4 btn btn-primary" onClick={()=> this.pus()}>
+        {this.regDatos()}
+        <h6>Add</h6>
+    </button>
+    <button className="col-sm-2 ml-4 btn btn-danger">
+        <h6>Remove</h6>
+    </button>
+    </div>
+
+
+
+        )
+
+
+        }
+
+
+}
+const mapStateToProps = (state, props ) => {
+    return {
+        obj: state.movNom,
 
     }
 
 }
-export default Spinner;
+
+
+export default connect(mapStateToProps,null)(Spinner);

@@ -12,15 +12,14 @@ team:hover {
 }
 .footer {
 
-   border-bottom-width: medium;
+
     background-color: #CB3066;
     width: 100%;
     height: 100px;
+
     color: white;
     text-align: center;
-}
-.linea{
-
-    outline: 1px solid #CB3066;;
+    left: 0;
+    bottom: 0;
 }
 

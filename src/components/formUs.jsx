@@ -1,27 +1,22 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import { tareaSi } from '../actions/actions';
-import uuid from "uuid";
 
 
 class FormUs extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id:uuid(),
             name: '',
             surname: '',
             role: 'IP Manager',
             headquarter: 'Madrid'
         };
-
     }
-
 
     regDatos = (e) => {
         e.preventDefault();
         this.setState({
-            id:uuid(),
             name: '',
             surname: '',
             role: 'IP Manager',
@@ -30,12 +25,13 @@ class FormUs extends Component {
     }
 
     introDatos = (event) => {
-
         const {value, name} = event.target;
         this.setState({
             [name]: value
         });
     }
+
+
 
 
     render() {
@@ -128,7 +124,6 @@ class FormUs extends Component {
                             this.props.tareaSino(this.state)}  className="col-sm-2 ml-4 btn btn-primary">
                             <h5>Create</h5>
                         </button>
-
                     </div>
                 </form>
                 {console.log('ojooo' +this.state)}

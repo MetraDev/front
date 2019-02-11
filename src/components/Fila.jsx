@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {user} from '../user.json';
 import '../file.css'
 import FormUs from "./formUs";
 import { connect } from 'react-redux';
 import {deleteUser} from "../actions/actions";
+import {token} from "../index";
+import axios from "axios";
 
 
 class Fila extends Component {
@@ -12,9 +13,22 @@ class Fila extends Component {
 
 
         this.state = {
-
         }
 
+    }
+    deleteC = (id) => {
+        var config = {
+            headers: {'Authorization':  token}
+        };
+        axios.delete(`http://52.213.25.226:3030/user/${id}`, config)
+            .then(res => {
+                let arr= res.data.data;
+                for (let index in arr){
+                    this.props.obj.push(index)
+                }
+                this.props.deleteUsers(id)
+            })
+            .catch(err => console.log('No ha funcionado delete', err));
     }
 
 
@@ -22,12 +36,11 @@ class Fila extends Component {
         const user = this.props.obj.map((user) => {
                 return (
                     <tr>
-
                         <td colSpan={"1"} >{user.name}</td>
                         <td colSpan={"1"}>{user.surname}</td>
                         <td colSpan={"1"}>{user.email}</td>
                         <td colSpan={"1"}>{user.telephone}</td>
-                        <button  onClick={()=> this.props.deleteUsers(user.id)}  className="col-sm-2 ml-4 btn btn-primary">
+                        <button  onClick={()=> this.deleteC(user._id)}  className="col-sm-2 ml-4 btn btn-primary">
                             <h5>borrar</h5>
                         </button>
                     </tr>
@@ -52,7 +65,6 @@ class Fila extends Component {
                     </tr>
                     {user}
                     </thead>
-
                 </table>
                 <FormUs  />
             </div>
