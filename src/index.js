@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import axios from "axios";
 import {actionTypesUser} from "./Redux/Reducers/usersReducer";
 import {actionTypesTeam} from "./Redux/Reducers/teamReducer";
-import  {BrowserRouter,Route, Redirect,Link} from 'react-router-dom'
+import {BrowserRouter, Route, Redirect, Link, Switch} from 'react-router-dom'
 import Tarjeta from "./components/Tarjeta";
 
 const store = createStore();
@@ -22,11 +22,11 @@ var log={
 //----------------------------------------------------------------------------------------------------------------------
 axios.post('http://52.213.25.226:3030/authentication/', log)
     .then(res => {
+        if (token ===  res.data.accessToken){
+            alert('tu sesiónn ha caducado')
+        }
 
 
-
-        console.log('reeeees'+res.data.accessToken)
-        localStorage.setItem('accesToken', res.data.accessToken)
     })
     .catch(err=> console.log('No ha funcionado users', err))
 

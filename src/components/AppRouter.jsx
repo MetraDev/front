@@ -21,6 +21,10 @@ class AppRouter extends Component{
 
     }
 
+    clickEx=()=>{
+        localStorage.setItem('accesToken', 'null')
+
+    }
 
 
     render(){
@@ -30,19 +34,23 @@ class AppRouter extends Component{
     <div className={"linea"}>
         <header>
             <nav className={"navbar navbar-dark"}>
-             <Link to={"/LOGIN"}>   <h1 className={"text-white"}>Demium</h1></Link>
-                <div className={"col-md-4"}>
-                <span className={"badge badge badge-light "}>
+             <Link to={"/login"}>   <h1 className={"text-white"}>Demium</h1></Link>
+                <div className={"col-md-6 text-right"}>
+                <span className={"badge badge badge-light col-sm-1"}>
                      <NavLink activeClassName={"is-active "} to={"/cities"}  >cities</NavLink>
                 </span>
-                    <span className={"badge badge-light ml-5 "}>
+                    <span className={"badge badge-light ml-3 col-sm-1 "}>
                       <Link to={"/user"}>user</Link>
                     </span>
-                    <span className={"badge badge-light ml-5 "}>
+                    <span className={"badge badge-light ml-3 col-sm-1"}>
                       <Link to={"/team"}>team</Link>
                     </span>
-                    <span className={"badge badge-light ml-5"}>
+                    <span className={"badge badge-light ml-3 col-sm-1"}>
                        <Link to={"/ideas"}>ideas</Link>
+                    </span>
+                    <span className="text-right ">
+                        <a>
+                        <Link to={"/login"} onClick={()=>this.clickEx()} className={' col-sm-1 badge badge-light text-light ml-3 bg-primary'}>Exit</Link></a>
                     </span>
                 </div>
             </nav>

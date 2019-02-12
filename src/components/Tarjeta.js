@@ -72,7 +72,6 @@ class Tarjeta extends Component {
             return (
 
                 <div className={"col-md-4"}>
-                    {console.log('eltodooo' +todo)}
                     <div className={"carder card mt-4"}>
                         <div className={"bg-dark"}>
                             <div className={"card-header text-left"}>
@@ -83,12 +82,12 @@ class Tarjeta extends Component {
                             <h5 className={"text-left text-primary ml-3 mt-2"}>{'Adress'}</h5>
                             <p className={"text-left ml-3"}>{todo.address}</p>
                             <p className={"text-left ml-3"}>{
-                                this.envios < this.props.obj.length+1?   // ejecutamos un metodo para sacar el monbre de los usuarios
+                                this.envios < this.props.obj.length?   // ejecutamos un metodo para sacar el monbre de los usuarios
                                 this.encontrarUs(todo.users[1],todo._id,1)
                                 :console.log('no fun')}</p>
                             <p className={"text-left ml-3"}>{'Phone: ' + todo.telephone}</p>
                             <p className={"text-left ml-3"}>{
-                                this.envios < this.props.obj.length+1 ?     // ejecutamos un metodo para sacar el monbre de los usuarios
+                                this.envios < this.props.obj.length ?     // ejecutamos un metodo para sacar el monbre de los usuarios
                                     this.encontrarUs(todo.users[0],todo._id,0)
                                     :console.log('no fun')}</p>
                             <p className={"text-left ml-3"}>{ todo.users[0].id || todo.users[0]}</p>
@@ -106,6 +105,7 @@ class Tarjeta extends Component {
         return (
             <div className={"container"}>
                 <div className={"row mt-4"}>
+
 
                     {todo}
                 </div>
