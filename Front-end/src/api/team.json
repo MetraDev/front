@@ -1,0 +1,40 @@
+[
+    {
+        "id": 1,
+        "name": "Real Unicorn",
+        "cityId": 2,
+        "users" : [
+            {
+            "userId":28
+            },
+            {
+            "userId":56
+            },
+            {
+            "userId":89
+            },
+            {
+            "userId":99
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Real Unicorn",
+        "cityId": 2,
+        "users" : [
+            {
+            "userId":28
+            },
+            {
+            "userId":56
+            },
+            {
+            "userId":89
+            },
+            {
+            "userId":129
+            }
+        ]
+    }
+]
