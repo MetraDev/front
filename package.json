@@ -1,7 +1,6 @@
 {
   "name": "init-react",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,5 +11,10 @@
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/demiumstartups/sergio_repo#readme"
+  "homepage": "https://bitbucket.org/demiumstartups/sergio_repo#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3"
+  },
+  "devDependencies": {},
+  "description": ""
 }
