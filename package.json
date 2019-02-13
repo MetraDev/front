@@ -1,39 +1,16 @@
 {
   "name": "init-react",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "axios": "^0.18.0",
-    "node-sass": "^4.11.0",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "react-form-validator-cl": "^0.1.3",
-    "react-redux": "^6.0.0",
-    "react-router": "^4.3.1",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.3",
-    "redux": "^4.0.1",
-    "uuid": "^3.3.2",
-    "validator": "^10.11.0"
-  },
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "heroku-postbuild": "npm run start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "engine": {
-    "npm": "6.6.0",
-    "node": "10.13.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://SergioPerezMtr@bitbucket.org/demiumstartups/sergio_repo.git"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/demiumstartups/sergio_repo#readme"
 }
