@@ -30,24 +30,23 @@ class Formulario extends Component {
 
     }
 
-
+    prev =(e)=>{
+        e.preventDefault()
+    }
 
 
     regDatos = (e) => {
 
-        e.preventDefault();
+
         console.log('preubaaaa'+ this.state.users)
 
-        if(this.state.users == null){
+        if(this.state.users == ''){
            alert('añade 2 usuarios')
         }
 
         this.setState({
 
-            name: 'Madrid',
-            address: '',
-            telephone: '',
-            users:[],
+
             nom1:[],
             nom2:[]
 
@@ -76,7 +75,7 @@ class Formulario extends Component {
             function(){
                 var selectedOption = this.options[select.selectedIndex];
                 //e.unshift(selectedOption.value)
-                nombre.unshift(selectedOption.text)
+                nombre.unshift(selectedOption.value)
                 console.log(selectedOption.value + ': ' + selectedOption.text);
             });
 
@@ -88,15 +87,23 @@ class Formulario extends Component {
             function(){
                 var selectedOption = this.options[select.selectedIndex];
               // e.unshift(selectedOption.value)
-                nombre.unshift(selectedOption.text)
+                nombre.unshift(selectedOption.value)
                 console.log(selectedOption.value + ': ' + selectedOption.text);
             });
 
     }
 
     añadir=()=>{
-        this.state.users.unshift(this.state.nom1[0], this.state.nom2[0])
-        alert(`Has añadido a ${this.state.nom1[0] + ' y ' + this.state.nom2[0] } en tu equipo`)
+        if(this.state.nom1[0] === undefined || this.state.nom2[0] === undefined){
+
+            this.state.nom1[0] = 'No hay ningun usuario'
+            this.state.nom2[0] = 'No hay ningun usuario'
+            this.state.users.unshift({id:this.state.nom1[0]}, {id:this.state.nom2[0]})
+            alert(`no has añadido ningun usuario`)
+        }else{
+
+        this.state.users.unshift({id:this.state.nom1[0]}, {id:this.state.nom2[0]})
+        alert(`Has añadido a ${this.state.nom1[0] + ' y ' + this.state.nom2[0] } en tu equipo`)}
 
     }
     eleiminar=()=>{
@@ -116,6 +123,11 @@ class Formulario extends Component {
         var config = {
             headers: {'Authorization':  token}
         };
+
+        if (state.users=== null){
+
+           alert('pollitos')
+        }else
         axios.post('http://52.213.25.226:3030/city', state, config)
             .then(res => {
                 this.props.addCities(this.state)
@@ -128,7 +140,8 @@ class Formulario extends Component {
     render() {
 
         const users =  this.props.obj.map((usr) => {
-            return (
+
+                return (
                     <option name="users" value={usr._id}  >{usr.name}</option>)})
         return (
 
@@ -139,7 +152,8 @@ class Formulario extends Component {
                     <h2 className={"text-white"}>Add city</h2>
                 </nav>
                 <form className={"card-header"} onSubmit={this.regDatos}>
-                    <div className={"divder"}><div>
+                    <div className={"divder"}>
+                        <div>
                             <h3 className={"col text-left text-light mt-2"}> Location</h3>
                             <div className={"row form-group"}>
                             </div>
@@ -205,7 +219,8 @@ class Formulario extends Component {
                                 <select required className={'select'} id={'select1'} onClick={()=>this.add1(this.state.nom2)} >
                                     {users}
                                 </select>
-                                <button className="col-sm-2 ml-4 btn btn-primary"  onClick={()=>this.añadir()} >
+                                <button className="col-sm-2 ml-4 btn btn-primary"  onSubmit={ ()=>this.prev()}
+                                        onClick={()=> this.añadir()} >
                                     <h6>Add</h6>
                                 </button>
                                 {console.log('item'+ this.state.id)}

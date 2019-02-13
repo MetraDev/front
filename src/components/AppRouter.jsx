@@ -24,6 +24,8 @@ class AppRouter extends Component{
     clickEx=()=>{
         localStorage.setItem('accesToken', 'null')
 
+        this.setState({})
+
     }
 
 
@@ -31,7 +33,7 @@ class AppRouter extends Component{
         return(
 
 <BrowserRouter>
-    <div className={"linea"}>
+    <div className={"linea"} >
         <header>
             <nav className={"navbar navbar-dark"}>
              <Link to={"/login"}>   <h1 className={"text-white"}>Demium</h1></Link>
@@ -39,7 +41,7 @@ class AppRouter extends Component{
                 <span className={"badge badge badge-light col-sm-1"}>
                      <NavLink activeClassName={"is-active "} to={"/cities"}  >cities</NavLink>
                 </span>
-                    <span className={"badge badge-light ml-3 col-sm-1 "}>
+                    <span  className={"badge badge-light ml-3 col-sm-1 "}>
                       <Link to={"/user"}>user</Link>
                     </span>
                     <span className={"badge badge-light ml-3 col-sm-1"}>
@@ -49,7 +51,7 @@ class AppRouter extends Component{
                        <Link to={"/ideas"}>ideas</Link>
                     </span>
                     <span className="text-right ">
-                        <a>
+                        <a href="location">
                         <Link to={"/login"} onClick={()=>this.clickEx()} className={' col-sm-1 badge badge-light text-light ml-3 bg-primary'}>Exit</Link></a>
                     </span>
                 </div>
@@ -63,6 +65,7 @@ class AppRouter extends Component{
             <Route path={'/ideaspag'} component={ideapag} exact={true}/>
             <Route path={'/teamcard'} component={teamcard} exact={true}/>
             <Route path={'/login'} component={login}  exact={true} />
+            <Route path={'/teamedit'} component={team}  exact={true} />
             <Redirect to={'/login'}/>
         </Switch>
         <div className=" footer footer-copyright text-center py-3 mt-4">© 2018 Copyright:Demium, All rights reserved</div>
