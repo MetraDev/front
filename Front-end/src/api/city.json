@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "name": "Bilbao",
+        "address": "Gran Via 1",
+        "phone": "+34 444 555 666",
+        "users" : [
+            {
+            "id":28
+            },
+            {
+            "id":56
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Madrid",
+        "address": "Avenida 1",
+        "phone": "+34 444 555 666",
+        "users" : [
+            {
+            "id":1
+            },
+            {
+            "id":33
+            }
+        ]
+    }
+]

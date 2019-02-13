@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "name": "CTO",
+        "is_demium": false
+    },
+    {
+        "id": 2,
+        "name": "CMO",
+        "is_demium": false
+    },
+    {
+        "id": 3,
+        "name": "CFO",
+        "is_demium": false
+    },
+    {
+        "id": 4,
+        "name": "TM",
+        "is_demium": true
+    },
+    {
+        "id": 5,
+        "name": "DP",
+        "is_demium": true
+    }
+]
