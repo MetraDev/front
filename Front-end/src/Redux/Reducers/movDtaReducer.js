@@ -1,6 +1,3 @@
-
-
-
 export const actionTypesNom = {
 
     envNom:"@ENV-->NOM"

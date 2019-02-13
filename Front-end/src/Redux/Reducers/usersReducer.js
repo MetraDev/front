@@ -16,8 +16,6 @@ export const actionTypesUser = {
 const reducer = (state = [] , action) => {
 
 
-
-
     switch (action.type) {
         case actionTypesUser.addUser:
             return [ ...state , action.data.stado];

@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import { tareaSi } from '../actions/actions';
+import axios from "axios";
+import {actionTypesUser} from "../Redux/Reducers/usersReducer";
+import {token} from "../index";
 
 
 class FormUs extends Component {
@@ -30,6 +33,8 @@ class FormUs extends Component {
             [name]: value
         });
     }
+
+
 
 
 

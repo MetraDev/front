@@ -4,7 +4,9 @@ import FormUs from "./formUs";
 import { connect } from 'react-redux';
 import {deleteUser} from "../actions/actions";
 import {token} from "../index";
+import createStore from '../Redux/create';
 import axios from "axios";
+import {actionTypesUser} from "../Redux/Reducers/usersReducer";
 
 
 class Fila extends Component {
@@ -13,27 +15,49 @@ class Fila extends Component {
 
 
         this.state = {
+            variable:[]
         }
 
+
     }
+
+    componentDidMount() {
+        const store = createStore();
+        var config = {
+            headers: {'Authorization':  token}
+        };
+        axios.get('http://52.213.25.226:3030/user', config)
+            .then(res => {
+                this.setState({variable:res.data.data})
+                /*store.dispatch({type: actionTypesUser.createUser,
+                    data: res.data.data})*/
+            })
+            .catch(err => console.log('No ha funcionado users', err));
+
+
+    }
+
     deleteC = (id) => {
         var config = {
             headers: {'Authorization':  token}
         };
         axios.delete(`http://52.213.25.226:3030/user/${id}`, config)
             .then(res => {
-                let arr= res.data.data;
-                for (let index in arr){
-                    this.props.obj.push(index)
-                }
-                this.props.deleteUsers(id)
+               this.deleteTarjeta(id)
             })
             .catch(err => console.log('No ha funcionado delete', err));
     }
+    deleteTarjeta =(ids)=>{
+
+        let variab = this.state.variable.filter(id => {if(id._id !== ids){
+            return id
+        }})
+        console.log('varibaleees' + variab)
+        this.setState({variable:variab})}
 
 
     render() {
-        const user = this.props.obj.map((user) => {
+        const user = this.state.variable.map((user) => {
                 return (
                     <tr>
                         <td colSpan={"1"} >{user.name}</td>
@@ -48,9 +72,14 @@ class Fila extends Component {
                 )
             }
         )
+        this.componentDidMount()
+
 
         return (
+
+
             <div>
+                {console.log(this.props.obj)}
                 <table className={"table table-hover table-dark mt-3"}>
                     <thead className={"thead-dark  table-hover text-left"}>
                     <tr className={"stc"}>

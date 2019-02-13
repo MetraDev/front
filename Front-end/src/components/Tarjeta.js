@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import axios from "axios";
 import {token} from '../index'
 import {deleteCity, addCity, modCity} from "../actions/actions";
+import {actionTypes} from "../Redux/Reducers/cityReducer";
 
 class Tarjeta extends Component {
     constructor(props,envios,respu) {
@@ -12,12 +13,40 @@ class Tarjeta extends Component {
 
         this.envios = 0;
         this.state = {
-            nombre:''
+            variable:[],
+            datos:[]
         }
 
 
  console.log(this.props.obj)
     }
+
+    componentDidMount() {
+        var config = {
+            headers: {'Authorization':  token}
+        };
+
+        axios.get('http://52.213.25.226:3030/city', config)
+            .then(res => {
+                let arr= res.data.data
+                this.setState({variable:res.data.data})
+
+                /*
+                store.dispatch({type: actionTypes.createCity,
+                    data: res.data.data})*/
+            })
+            .catch(err=> console.log('No ha funcionado users', err))
+
+        axios.get('http://52.213.25.226:3030/user', config)
+            .then(res =>{})
+
+
+
+
+            .catch(err=> console.log('No ha funcionado users', err))
+
+    }
+
 
     deleteC = (id) => {
 
@@ -27,17 +56,25 @@ class Tarjeta extends Component {
       };
         axios.delete(`http://52.213.25.226:3030/city/${id}`, config)
           .then(res => {
-              let arr= res.data.data;
-              for (let index in arr){
-                  this.props.obj.push(index)
-              }
-              this.props.deleteCityy(id)
+
+              this.deleteTarjeta(id)
 
           })
           .catch(err => console.log('No ha funcionado delete', err));
     }
 
-  encontrarUs=(id,dos)=>{ // id del usuario, id de la tarjeta
+    deleteTarjeta =(ids)=>{
+
+        let variab = this.state.variable.filter(id => {if(id._id !== ids){
+            return id
+        }})
+        console.log('varibaleees' + variab)
+        this.setState({variable:variab})
+
+    }
+
+
+    encontrarUs=(id,dos)=>{ // id del usuario, id de la tarjeta
       var config = {
           headers: {'Authorization':  token}}
 
@@ -91,7 +128,7 @@ class Tarjeta extends Component {
 
     render() {
         this.envios++
-        const todo = this.props.obj.map((todo) => {
+        const todo = this.state.variable.map((todo) => {
             return (
 
                 <div className={"col-md-4"}>

@@ -3,7 +3,6 @@ import {actionTypesIdeas} from '../Redux/Reducers/ideasReducer'
 import {actionTypesUser} from "../Redux/Reducers/usersReducer";
 import {actionTypesIdeasPages} from "../Redux/Reducers/pagIdeaReducer";
 import {actionTypesTeam} from "../Redux/Reducers/teamReducer";
-import {actionTypesNom} from "../Redux/Reducers/movDtaReducer";
 import {actionTypesTeamShow} from "../Redux/Reducers/showTeamReducer";
 
 
@@ -91,15 +90,6 @@ export const modCity =(id,nom,indx) => {
     }
 }
 
-export const createCity =(data) => {
-    return {
-        type: actionTypes.createCity,
-        data
-
-
-
-    }
-}
 
 export const modTeam=(name,user1,user2,id) => {
     return {
