@@ -130,7 +130,6 @@ class Team extends Component {
                         <h4 className={"colores mt-3"}>Demium Team</h4>
                         <p className={"text-light "}>Plese select the team members and choose their roles </p>
                     </div>
-
                     <div className={"form-group row"}>
                         <p className={"col-sm-2 text-left"}></p>
                         <h5 className={"col-sm-2 text-primary text-left"}>{this.user1}</h5>
@@ -139,8 +138,6 @@ class Team extends Component {
                         <p className={"col-sm-2  text-left"}></p>
                         <h5 className={"col-sm-2 text-primary text-left "}>{this.user2}</h5>
                     </div>
-
-
                     <div className={"text-right"}>
                         <button className={"col-sm-2 ml-4 btn  btn-primary text-light"} onClick={()=>this.putpeti(this.props.obj._id)}>
                             <Link to={"/teamcard"}><h5 className={'text-light'}>Save</h5></Link>

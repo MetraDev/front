@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {todo} from '../todo.json';
 import Formulario from './Formulario'
 import '../taridea.css';
 import {connect} from "react-redux";
@@ -28,7 +27,6 @@ class Tarjeta extends Component {
       };
         axios.delete(`http://52.213.25.226:3030/city/${id}`, config)
           .then(res => {
-              //let obj =JSON.stringify(res.data.data)
               let arr= res.data.data;
               for (let index in arr){
                   this.props.obj.push(index)

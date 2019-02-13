@@ -1,4 +1,4 @@
-import {todo} from '../../todo.json';
+
 
 export const actionTypes = {
     addCity: '@ADD-->CITY',

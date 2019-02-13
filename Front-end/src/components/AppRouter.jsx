@@ -9,8 +9,6 @@ import '../App.css'
 import ideapag from "../pages/ideapag";
 import teamcard from "../pages/teamCards";
 import login from "../pages/login";
-import home from "../pages/home";
-import axios from "axios";
 
 class AppRouter extends Component{
     constructor(props) {

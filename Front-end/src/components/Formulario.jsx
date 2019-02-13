@@ -2,13 +2,8 @@ import React, {Component} from 'react';
 import '../forms.css';
 import {connect} from "react-redux";
 import {addCity} from "../actions/actions";
-import createStore from '../Redux/create';
 import axios from "axios";
 import {token} from '../index'
-
-import Spinner from "./Spinner";
-import uuid from 'uuid'
-
 
 
 class Formulario extends Component {

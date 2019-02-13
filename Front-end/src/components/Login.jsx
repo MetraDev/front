@@ -1,11 +1,6 @@
 import React, {Component} from 'react';
 import '../master.css';
 import axios from "axios";
-import {deleteCity, modCity} from "../actions/actions";
-import ReactDOM from 'react-dom';
-import {connect} from "react-redux";
-import  {BrowserRouter, Switch, Router, Redirect,Link, NavLink} from 'react-router-dom'
-import Tarjeta from "./Tarjeta";
 import { withRouter } from 'react-router-dom';
 
 

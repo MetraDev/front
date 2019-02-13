@@ -101,15 +101,6 @@ export const createCity =(data) => {
     }
 }
 
-export const movNom=(data) => {
-    return {
-        type: actionTypesNom.envNom,
-        data
-
-
-
-    }
-}
 export const modTeam=(name,user1,user2,id) => {
     return {
         type: actionTypesTeam.modTeam,
