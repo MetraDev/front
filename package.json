@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "frontend": "cd Front-end && npm start",
+    "backend": "cd Back-end && npm start",
+    "start": "concurrently \"npm run frontend\" \"npm run backend\"",
+    "mongo:start": "start mongodb",
+    "mongo:status": "status mongodb"
   },
   "repository": {
     "type": "git",
@@ -13,7 +18,8 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/demiumstartups/sergio_repo#readme",
   "dependencies": {
-    "body-parser": "^1.18.3"
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0"
   },
   "devDependencies": {},
   "description": ""

@@ -1,26 +1,43 @@
 import React, {Component} from 'react';
-import {idea} from '../idea.json';
 import '../taridea.css';
 import { viewIdeass} from "../actions/actions";
 import {connect} from "react-redux";
 import  {Link} from 'react-router-dom'
 import uuid from "uuid";
+import {token} from "../index";
+import axios from "axios";
 
 
 class TargetIdea extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            variable:[],
             id:uuid(),
-            idea
         }
+    }
+
+    componentDidMount() {
+
+        var config = {
+            headers: {'Authorization':  token}
+        };
+        axios.get('http://52.213.25.226:3030/idea', config)
+            .then(res => {
+                this.setState({variable:res.data.data})
+                /*store.dispatch({type: actionTypesUser.createUser,
+                    data: res.data.data})*/
+            })
+            .catch(err => console.log('No ha funcionado users', err));
+
+
     }
 
 
 
 
     render() {
-        let todo = this.props.obj.map((idea) => {
+        let todo = this.state.variable.map((idea) => {
             return (
                 <div className={" col-md-4 mb-3"}>
                     <div className={"carder card  mt-4"}>

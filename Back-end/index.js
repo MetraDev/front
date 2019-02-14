@@ -12,6 +12,7 @@ app.use(bodyParser.json())
 app.use('/teams', require ('./Routes/team.js'))
 app.use('/user', require ('./Routes/users.js'))
 app.use('/role', require ('./Routes/role.js'))
+app.use('/city', require ('./Routes/city.js'))
 
 
 

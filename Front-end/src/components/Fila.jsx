@@ -6,7 +6,6 @@ import {deleteUser} from "../actions/actions";
 import {token} from "../index";
 import createStore from '../Redux/create';
 import axios from "axios";
-import {actionTypesUser} from "../Redux/Reducers/usersReducer";
 
 
 class Fila extends Component {
@@ -28,7 +27,7 @@ class Fila extends Component {
         };
         axios.get('http://52.213.25.226:3030/user', config)
             .then(res => {
-                this.setState({variable:res.data.data})
+
                 /*store.dispatch({type: actionTypesUser.createUser,
                     data: res.data.data})*/
             })
@@ -43,17 +42,14 @@ class Fila extends Component {
         };
         axios.delete(`http://52.213.25.226:3030/user/${id}`, config)
             .then(res => {
-               this.deleteTarjeta(id)
+                let arr= res.data.data;
+                for (let index in arr){
+                    this.props.obj.push(index)
+                }
+                this.props.deleteUsers(id)
             })
             .catch(err => console.log('No ha funcionado delete', err));
     }
-    deleteTarjeta =(ids)=>{
-
-        let variab = this.state.variable.filter(id => {if(id._id !== ids){
-            return id
-        }})
-        console.log('varibaleees' + variab)
-        this.setState({variable:variab})}
 
 
     render() {
@@ -72,7 +68,7 @@ class Fila extends Component {
                 )
             }
         )
-        this.componentDidMount()
+
 
 
         return (

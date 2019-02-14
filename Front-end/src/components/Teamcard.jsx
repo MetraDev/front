@@ -5,12 +5,14 @@ import {connect} from "react-redux";
 import {token} from "../index";
 import axios from "axios";
 import  {BrowserRouter, Switch, Router, Redirect,Link, NavLink} from 'react-router-dom'
+import createStore from "redux";
 
 
 class Teamcard extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            variable:[],
             name:'',
             cityId:'',
             user:''
@@ -18,12 +20,21 @@ class Teamcard extends Component {
     }
 
 
-    editTeam = (id) => {
+    componentDidMount() {
 
-        
+        var config = {
+            headers: {'Authorization':  token}
+        };
+        axios.get('http://52.213.25.226:3030/team', config)
+            .then(res => {
+                this.setState({variable:res.data.data})
+                /*store.dispatch({type: actionTypesUser.createUser,
+                    data: res.data.data})*/
+            })
+            .catch(err => console.log('No ha funcionado users', err));
+
 
     }
-
 
     encontrarUs=(id,dos,indx)=>{
         var config = {
@@ -36,14 +47,14 @@ class Teamcard extends Component {
         axios.get(`http://52.213.25.226:3030/city/${id}`, config) // DESCARGAMOS DATOS DE LA CITY
             .then(res => {
                 // si los el ide del team coincide con el de la ciudad/user
-                            this.props.dis.filter(item =>{
+                           /* this.props.dis.filter(item =>{
                                 item._id === res.data.users[0].id ?
                                     res.data.users[0].id= item.name : console.log('no son iguales')
                                 // encontramos los nombres de los id en los usuarios
                                 item._id === res.data.users[1].id ?
                                     res.data.users[1].id= item.name : console.log('no son iguales')
-                            })
-                    this.props.modTeamm(res.data.name,res.data.users[0].id, res.data.users[1].id,dos)
+                            })*/
+                    //this.props.modTeamm(res.data.name,res.data.users[0].id, res.data.users[1].id,dos)
 
                 console.log('el objeto nom es'+  this.state.nombre)
             })
@@ -53,7 +64,7 @@ class Teamcard extends Component {
 
 
     render() {
-        const team = this.props.obj.map((idea) => {
+        const team = this.state.variable.map((idea) => {
             return (
                 <div className={" col-md-4 mb-3"}>
                     <div className={"carder card  mt-4"}>

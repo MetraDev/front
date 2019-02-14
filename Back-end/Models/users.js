@@ -37,7 +37,7 @@ const UserSchema = mongoose.Schema({
             unique:true,
             validate:{
                 isAsync:true,
-                validator:(name)=>!!name.match(/^[A-Za-z]+[ ]?[A-Za-z]+$/),
+                validator: (description) => Boolean(true),
                 message:'{VALUE}is not a avalid role , only character (A-Z, a-z)'
             }
         },

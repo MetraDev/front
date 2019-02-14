@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import '../forms.css';
 import {connect} from "react-redux";
-import {addCity} from "../actions/actions";
+import {addCities} from "../actions/actions";
 import axios from "axios";
 import {token} from '../index'
 
@@ -15,9 +15,9 @@ class Formulario extends Component {
             name: 'Madrid',
             address: '',
             telephone: '',
-            users:[],
+            users:[{id:'5c5b3f1c818f2c243aea3d73'},{id:'5c5b3f1c818f2c243aea3d73'}],
             nom1:[],
-            nom2:[]
+            nom2:''
         };
 
 
@@ -25,13 +25,30 @@ class Formulario extends Component {
 
     }
 
-    prev =(e)=>{
-        e.preventDefault()
+
+    componentDidMount() {
+        var config = {
+            headers: {'Authorization':  token}
+        };
+
+        axios.get('http://52.213.25.226:3030/user', config)
+            .then(res => {
+                let arr= res.data.data
+
+
+                /*
+                store.dispatch({type: actionTypes.createCity,
+                    data: res.data.data})*/
+            })
+            .catch(err=> console.log('No ha funcionado users', err))
+
+
     }
 
 
-    regDatos = (e) => {
 
+    regDatos = (e) => {
+        e.preventDefault()
 
         console.log('preubaaaa'+ this.state.users)
 
@@ -43,7 +60,7 @@ class Formulario extends Component {
 
 
             nom1:[],
-            nom2:[]
+
 
         });
     }
@@ -70,35 +87,23 @@ class Formulario extends Component {
             function(){
                 var selectedOption = this.options[select.selectedIndex];
                 //e.unshift(selectedOption.value)
-                nombre.unshift(selectedOption.value)
-                console.log(selectedOption.value + ': ' + selectedOption.text);
-            });
-
-    }
-    add1 =(nombre)=>{
-
-        var select = document.getElementById('select1');
-        select.addEventListener('change',
-            function(){
-                var selectedOption = this.options[select.selectedIndex];
-              // e.unshift(selectedOption.value)
-                nombre.unshift(selectedOption.value)
+                console.log('nombre'+ selectedOption.text )
+                nombre=selectedOption.value
                 console.log(selectedOption.value + ': ' + selectedOption.text);
             });
 
     }
 
     añadir=()=>{
-        if(this.state.nom1[0] === undefined || this.state.nom2[0] === undefined){
-
-            this.state.nom1[0] = 'No hay ningun usuario'
-            this.state.nom2[0] = 'No hay ningun usuario'
-            this.state.users.unshift({id:this.state.nom1[0]}, {id:this.state.nom2[0]})
-            alert(`no has añadido ningun usuario`)
-        }else{
-
-        this.state.users.unshift({id:this.state.nom1[0]}, {id:this.state.nom2[0]})
-        alert(`Has añadido a ${this.state.nom1[0] + ' y ' + this.state.nom2[0] } en tu equipo`)}
+        if(this.state.nom2 !== undefined){
+           if(this.state.users.length < 3){
+            let temP= this.state.users.push(this.state.nom2)
+               this.setState({users:temP})
+               console.log('dentro añadir' +this.state.users )
+           }
+            else
+                alert(`Solo puedes añadir 2 usuarios`)
+        }else{ alert('No hay usuarios')}
 
     }
     eleiminar=()=>{
@@ -125,8 +130,8 @@ class Formulario extends Component {
         }else
         axios.post('http://52.213.25.226:3030/city', state, config)
             .then(res => {
-                this.props.addCities(this.state)
-                var result=  console.log('res.data' +res.data);
+
+                this.props.addCities(state)
             })
             .catch(err => console.log('No ha funcionado', err));
 
@@ -134,15 +139,10 @@ class Formulario extends Component {
 
     render() {
 
-        const users =  this.props.obj.map((usr) => {
-
-                return (
-                    <option name="users" value={usr._id}  >{usr.name}</option>)})
         return (
 
 
             <div className={"mb-3"}>
-                {console.log('siiii' + this.props.objs)}
                 <nav className={"navbar navbar-dark mt-5"}>
                     <h2 className={"text-white"}>Add city</h2>
                 </nav>
@@ -208,14 +208,16 @@ class Formulario extends Component {
                             </div>
                             <div className={"form-group row"}>
                                 <h5 className={"col-sm-2 text-left text-light ml-3"}>Team</h5>
-                                <select required className={'select'} id={'select'} onClick={()=>this.add(this.state.nom1)} >
-                                    {users}
+                                <select className={'select'} id={'select'} name={'nom2'}
+                                        value={this.state.nom2}
+                                        onChange={this.introDatos} >
+                                    {this.state.nom1.map((usr) => {
+
+                                        return (
+                                            <option name="nom2" >{usr.name}</option>)})}
                                 </select>
-                                <select required className={'select'} id={'select1'} onClick={()=>this.add1(this.state.nom2)} >
-                                    {users}
-                                </select>
-                                <button className="col-sm-2 ml-4 btn btn-primary"  onSubmit={ ()=>this.prev()}
-                                        onClick={()=> this.añadir()} >
+                                <button className="col-sm-2 ml-4 btn btn-primary"
+                                        onClick={()=>this.añadir() }>
                                     <h6>Add</h6>
                                 </button>
                                 {console.log('item'+ this.state.id)}
@@ -249,7 +251,7 @@ const mapStateToProps = (state ,props) => {
 
 const dispastchToProps=(dispatch,props )=>{
     return{
-        addCities:(stado)=>dispatch(addCity(stado)),
+        addCities:(stado)=>dispatch(addCities(stado)),
 
 
     }

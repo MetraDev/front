@@ -9,6 +9,7 @@ import '../App.css'
 import ideapag from "../pages/ideapag";
 import teamcard from "../pages/teamCards";
 import login from "../pages/login";
+import cityId from "../pages/cityId";
 
 class AppRouter extends Component{
     constructor(props) {
@@ -64,6 +65,7 @@ class AppRouter extends Component{
             <Route path={'/teamcard'} component={teamcard} exact={true}/>
             <Route path={'/login'} component={login}  exact={true} />
             <Route path={'/teamedit'} component={team}  exact={true} />
+            <Route path={'/city/:id'} component={cityId}  exact={true} />
             <Redirect to={'/login'}/>
         </Switch>
         <div className=" footer footer-copyright text-center py-3 mt-4">© 2018 Copyright:Demium, All rights reserved</div>

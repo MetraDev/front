@@ -123,6 +123,28 @@ export const modTar=(stado,id) => {
 
     }
 }
+export const sendID =(id) => {
+    return {
+        type: actionTypes.sendID,
+        id
+
+
+    }
+}
+
+export const addCities =(data) => {
+    return {
+        type: actionTypes.addCities,
+        data
+
+
+    }
+}
+
+
+
+
+
 
 
 

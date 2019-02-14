@@ -26,6 +26,6 @@ const TeamSchema = mongoose.Schema({
 
 });
 
-const team = mongoose.model('role', TeamSchema);
+const team = mongoose.model('team', TeamSchema);
 
 module.exports = team;
