@@ -3,7 +3,7 @@ export const actionTypes = {
     deleteCity: '@DELETE-->CITY',
     modCity: '@MOD-->CITY',
     addCities: '@ADD_CITIES',
-    sendID: '@send-->ID',
+    formCity:'@form--CITY'
 }
 
 const reducer = (state = [], action) => {
@@ -12,18 +12,23 @@ const reducer = (state = [], action) => {
 
 
         case actionTypes.addCity:
-            console.log('llllll' + action.id + 'ssssssssssssss' + action.stado)
-            state = state.map(ind => {
-                if (ind._id === action.id) {
-                    ind = action.stado
-                }
-                return ind
-            })
+            console.log('llllll' + action.id + 'ssssssssssssss' + action.stado.address)
+
+            state = state.map(item => {
+               if(item._id === action.id.toString()){
+                   item = action.stado
+               }
+               return item
+            });
+
             return [...state];
+
 
         case actionTypes.addCities:
             console.log('el actioon' , action.data);
-            return [ ...action.data];
+            if(action.data !== action.data)
+                action.data += action.data
+            return [ ...state,...action.data];
 
         case actionTypes.deleteCity:
 
@@ -36,17 +41,16 @@ const reducer = (state = [], action) => {
             state = state.filter
             (item => {
                 item._id === action.data.id ?
-                    item.users[action.data.indx].id = action.data.nom :
-                    console.log('error')
+                    item.users[action.data.indx].id = action.data.nom : console.log()
 
                 return item._id
             })
             return [...state];
 
-        case actionTypes.sendID:
-            console.log('error redux' + action.id)
-            state = action.id
-            return [state]
+        case actionTypes.formCity:
+
+
+            return [...state, action.data.stado]
 
 
         default:

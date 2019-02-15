@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Team from "../components/Team";
+import Team from "../../components/Team/Team";
 
 const team =()=>{
 

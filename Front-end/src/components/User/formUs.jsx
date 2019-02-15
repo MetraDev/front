@@ -1,29 +1,27 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import { tareaSi } from '../actions/actions';
+import { tareaSi } from '../../actions/actions';
 import axios from "axios";
-import {actionTypesUser} from "../Redux/Reducers/usersReducer";
-import {token} from "../index";
+import {token} from "../..";
 
 
 class FormUs extends Component {
     constructor(props) {
         super(props);
         this.state = {
+
             name: '',
             surname: '',
-            role: 'IP Manager',
-            headquarter: 'Madrid'
+            email: '',
+            telephone: '',
+            nom1:[],
         };
     }
 
     regDatos = (e) => {
         e.preventDefault();
         this.setState({
-            name: '',
-            surname: '',
-            role: 'IP Manager',
-            headquarter: 'Madrid'
+           nom1:[]
         });
     }
 
@@ -34,9 +32,50 @@ class FormUs extends Component {
         });
     }
 
+    componentDidMount() {
 
 
+        var config = {
+            headers: {'Authorization': token}
+        };
 
+        axios.get('http://52.213.25.226:3030/role', config)
+            .then(res => {
+                let arr = res.data.data
+                this.setState({nom1: res.data.data})
+
+                /*
+                store.dispatch({type: actionTypes.createCity,
+                    data: res.data.data})*/
+            })
+            .catch(err => console.log('No ha funcionado users', err))
+    }
+
+    createUser = (state) => {
+
+        const cuerpo = {
+            name: "Luis",
+            surname: "Juarros",
+            email: "luis.juarros@demiumstartups.com",
+            telephone: "+34 663 632 688"
+        }
+
+        console.log('create', state)
+
+        var config = {
+            headers: {'Authorization':  token}
+        };
+
+
+            axios.post('http://52.213.25.226:3030/user', state, config)
+                .then(res => {
+                    console.log('' , res)
+
+                    this.props.tareaSino(state)
+                })
+                .catch(err => console.log('No ha funcionado', err));
+
+    }
 
 
     render() {
@@ -73,18 +112,18 @@ class FormUs extends Component {
                                 <input                                             //TELEFONO
                                     type="text"
                                     className="texl-left col-sm-3 ml-5"
-
-                                    name="tlf"
+                                    value={this.state.email}
+                                    name="email"
                                     onChange={this.introDatos}
                                     placeholder="email"/>
                             </div>
                             <div className={"row form-group text-left"}>
                                 <h4 className={"col-sm-1 text-light mt-2 ml-3"}>Phone:</h4>
                                 <input                                             //TELEFONO
-                                    type="text"
+                                    type="telephone"
                                     className="texl-left col-sm-3 ml-5"
-
-                                    name="tlf"
+                                    value={this.state.telephone}
+                                    name="telephone"
                                     onChange={this.introDatos}
                                     placeholder="Phone"/>
                             </div>
@@ -112,26 +151,29 @@ class FormUs extends Component {
                             <h4 className={"col text-left text-light mt-2"}>Role</h4>
                             <div className="form-group row">
                                 <h6 className={"col-sm-2 text-left text-light mt-3 ml-3"}>Type </h6>
+
                                 <select                                         //PAIS
                                     name="role"
                                     className="col-sm-3 mt-2 form-control  "
                                     value={this.state.role}
                                     onChange={this.introDatos}>
-                                    <option>IP Manager</option>
-                                    <option>Founder</option>
-                                    <option>Talent Manager</option>
+                                    {this.state.nom1.map((usr) => {
+
+                                        return (
+                                            <option name="nom2" >{usr.name}</option>)})}
+
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div className={"text-right col-dm-2"}>
                         <button type="submit" onClick={()=>
-                            this.props.tareaSino(this.state)}  className="col-sm-2 ml-4 btn btn-primary">
+                            this.createUser(this.state)}  className="col-sm-2 ml-4 btn btn-primary">
                             <h5>Create</h5>
                         </button>
                     </div>
                 </form>
-                {console.log('ojooo' +this.state)}
+                {console.log('ojooo' +this.state.name)}
             </div>
         )
     }

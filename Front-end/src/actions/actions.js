@@ -1,9 +1,12 @@
-import {actionTypes} from '../Redux/Reducers/cityReducer'
-import {actionTypesIdeas} from '../Redux/Reducers/ideasReducer'
-import {actionTypesUser} from "../Redux/Reducers/usersReducer";
-import {actionTypesIdeasPages} from "../Redux/Reducers/pagIdeaReducer";
-import {actionTypesTeam} from "../Redux/Reducers/teamReducer";
-import {actionTypesTeamShow} from "../Redux/Reducers/showTeamReducer";
+import {actionTypes} from '../Redux/Reducers/cities/cityReducer'
+import {actionTypesIdeas} from '../Redux/Reducers/ideas/ideasReducer'
+import {actionTypesUser} from "../Redux/Reducers/user/usersReducer";
+import {actionTypesIdeasPages} from "../Redux/Reducers/ideas/pagIdeaReducer";
+import {actionTypesTeam} from "../Redux/Reducers/team/teamReducer";
+import {actionTypesTeamShow} from "../Redux/Reducers/team/showTeamReducer";
+import {actionTypesNom} from "../Redux/Reducers/cities/movDtaReducer";
+import {actionTypesUserEdit} from "../Redux/Reducers/user/editUserReducer";
+
 
 
 export const tareaSi = (stado) => {
@@ -27,12 +30,21 @@ export const deleteUser= (id) => {
 
     }
 }
-export const addCity = (stado) => {
+export const addUser= (state,id) => {
+    return {
+        type: actionTypesUser.addUser,
+        state,id
+
+
+
+    }
+}
+export const addCity = (stado,id) => {
     return {
         type: actionTypes.addCity,
-        data:{
-            stado
-        }
+
+            stado,id
+
 
 
 
@@ -53,7 +65,7 @@ export const viewIdeass = (stado) => {
 export const viewAdd = (stado) => {
     return {
         type: actionTypesIdeas.viewAdd,
-        data: stado
+         stado
 
 
 
@@ -123,9 +135,9 @@ export const modTar=(stado,id) => {
 
     }
 }
-export const sendID =(id) => {
+export const movNom =(id) => {
     return {
-        type: actionTypes.sendID,
+        type: actionTypesNom.envNom,
         id
 
 
@@ -140,6 +152,37 @@ export const addCities =(data) => {
 
     }
 }
+
+export const formCity = (stado) => {
+    return {
+        type: actionTypes.formCity,
+        data:{
+            stado
+        }
+
+
+
+    }
+}
+
+export const editUser =(id) => {
+    return {
+        type: actionTypesUserEdit.editUser,
+        id
+
+
+    }
+}
+export const delTeam =(id) => {
+    return {
+        type: actionTypesTeam.deleteCity,
+        id
+
+
+
+    }
+}
+
 
 
 

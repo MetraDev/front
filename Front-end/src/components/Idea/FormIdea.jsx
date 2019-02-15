@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import '../forms.css';
+import '../../forms.css';
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import {viewAdd} from "../actions/actions";
+import {viewAdd} from "../../actions/actions";
 import uuid from "uuid";
 
 
@@ -10,11 +10,10 @@ class FormIdea extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id:uuid(),
-            title: 'Madrid',
-            pais: 'España',
-            Demium: 'Demium team:',
-            Description: 'Tigre! ¡Tigre!, fuego que ardes' +
+
+            name: 'Madrid',
+            businessModelId: 'España',
+            description: 'Tigre! ¡Tigre!, fuego que ardes' +
                 'En los bosques de la noche,' +
                 '¿Qué mano inmortal, qué ojo' +
                 'Pudo idear tu terrible simetría?' +
@@ -26,24 +25,14 @@ class FormIdea extends Component {
                 'podrían retorcer la nervadura de tu corazón' +
                 'Y cuando tu corazón comenzó a latir' +
                 '¿Qué formidable mano, qué formidables pies?',
-            tlf: '',
-            Headquarter:'',
-            ipman: "Virginia Sanchez",
-            taman: "Javier Torregrosa"
+            teamId: '',
         };
 
     }
 
     regDatos = (e) => {
         e.preventDefault();
-        this.setState({
-            id:uuid(),
-            title: 'Madrid',
-            pais: 'España',
-            Description: 'Deeefault',
-            Headquarter: 'Mad',
-            Team: 'Bootcamp'
-        });
+
     }
 
     introDatos = (event) => {
@@ -72,8 +61,8 @@ class FormIdea extends Component {
                                 className={"stilo ml-3 col-sm-5"}//DIRECCION
                                 type="text"
 
-                                name={"Nombre"}
-                                placeholder={item.Nombre}
+                                name={"name"}
+                                placeholder={item.name}
                                 onChange={this.introDatos}/>
                         </div>
                         <h4 className={"col text-left text-light mt-4"}> Business Model</h4>
@@ -84,7 +73,7 @@ class FormIdea extends Component {
                             <select
                                 name="type"
                                 className="col-sm-3 form-control bg-danger "
-                                value={this.state.type}
+                                value={this.state.businessModelId}
                                 onChange={this.introDatos}>
                                 <option>{item.type}</option>
                                 <option>App</option>
@@ -98,8 +87,8 @@ class FormIdea extends Component {
                                 className={"stilos ml-3 col-xl"}
                                 type="text"
 
-                                name={"Description"}
-                                placeholder={item.Description}
+                                name={"businessModelId"}
+                                placeholder={item.description}
                                 onChange={this.introDatos}/>
                         </div>
                         <div className={"text-left "}>
@@ -112,7 +101,7 @@ class FormIdea extends Component {
                         </div>
                         <div className={"form-group row ml-1"}>
                             <h5 className={"text-left text-light col-sm-3"}>Team name</h5>
-                            <label className={"text-left text-light col-sm-3 "}><b>{item.Team}</b></label>
+                            <label className={"text-left text-light col-sm-3 "}><b>{item.teamId}</b></label>
                         </div>
                         <div className={"form-group row ml-1"}>
                             <h5 className={"text-left text-light col-sm-3"}>Black date</h5>

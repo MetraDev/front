@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import FormIdea from "../components/FormIdea";
+import FormIdea from "../../components/Idea/FormIdea";
 
 const ideapag =()=>{
 

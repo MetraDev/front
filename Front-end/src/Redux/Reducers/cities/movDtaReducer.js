@@ -11,7 +11,7 @@ const reducer = (state =[] ,action) => {
     switch (action.type) {
 
         case actionTypesNom.envNom:
-            console.log('reducer'+ action.id.id)
+            console.log('reducer'+ action.id)
 
 
             return [ action.id]

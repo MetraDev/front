@@ -1,5 +1,5 @@
 import React from 'react';
-import Tarjeta from "../components/Tarjeta";
+import Tarjeta from "../../components/Cities/Tarjeta";
 import { connect } from 'react-redux';
 
 const cities =()=>{

@@ -1,7 +1,5 @@
 import React from 'react';
-import TargetIdea from "../components/TargetIdea";
-import AppRouter from "../components/AppRouter";
-import Formulario from "../components/Formulario";
+import Formulario from "../components/Cities/Formulario";
 
 const home =()=>{
 

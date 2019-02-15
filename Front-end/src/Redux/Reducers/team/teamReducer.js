@@ -1,3 +1,4 @@
+import {actionTypesUser} from "../user/usersReducer";
 
 const defaultState = []
 
@@ -6,6 +7,7 @@ export const actionTypesTeam = {
     addTeam: '@ADD-->TEAM',
     modTeam: '@MOD-->TEAM',
     modTar: '@MOD-->TAR',
+    delTeam: 'DEL-->TEAM',
 }
 
 
@@ -33,12 +35,24 @@ const reducer = (state =defaultState, action) => {
 
         case actionTypesTeam.modTar:
 
-            console.log('llllll' + action.id + 'ssssssssssssss' + action.stado)
-            state = state.map(ind =>{if(ind._id === action.id){
-                ind = action.stado
+            console.log('llllll' + action.id + 'ssssssssssssss' + action.state)
 
-            } return ind})
-            return [state]
+            state = state.map(item => {
+                if(item._id === action.id){
+                    item = action.state
+                }
+                return item
+            });
+
+            return [...state];
+
+        case actionTypesTeam.delTeam:
+            console.log('ihoinobobnobojn'+action.id);
+
+            state = state.filter( item =>  {
+                return item._id !== action.id});
+            return [...state];
+
 
 
 

@@ -1,13 +1,14 @@
 import { createStore, combineReducers} from 'redux';
-import userReducer from './Reducers/usersReducer';
-import ideaReducer from './Reducers/ideasReducer';
-import cityReducer from './Reducers/cityReducer';
-import pagReducer from './Reducers/pagIdeaReducer';
-import teamReducer from './Reducers/teamReducer';
-import movDtaReducer from './Reducers/movDtaReducer';
-import  showTeamReducer from './Reducers/showTeamReducer';
+import userReducer from './Reducers/user/usersReducer';
+import ideaReducer from './Reducers/ideas/ideasReducer';
+import cityReducer from './Reducers/cities/cityReducer';
+import pagReducer from './Reducers/ideas/pagIdeaReducer';
+import teamReducer from './Reducers/team/teamReducer';
+import movDtaReducer from './Reducers/cities/movDtaReducer';
+import  showTeamReducer from './Reducers/team/showTeamReducer';
+import  editUserReducer from './Reducers/user/editUserReducer';
 
-const store = () => {
+export const store = () => {
     const tempStore = createStore(
         combineReducers({
             user: userReducer,
@@ -16,7 +17,8 @@ const store = () => {
             city: cityReducer,
             team:teamReducer,
             teamShow:showTeamReducer,
-            movNom:movDtaReducer
+            movNom:movDtaReducer,
+            editUser:editUserReducer
         }),
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     )

@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
-import '../team.css'
-import {addTeam, modTar} from "../actions/actions";
+import '../../team.css'
+import {addTeam, modTar} from "../../actions/actions";
 import {connect} from "react-redux";
 import  {Link} from 'react-router-dom'
-import {token} from '../index'
+import {token} from '../../index'
 import axios from "axios";
 
 class Team extends Component {
     constructor(props) {
         super(props);
 
-        this.user1= this.props.obj.users[0].id
-        this.user2= this.props.obj.users[1].id
+        this.user1= this.props.obj.users[0].id ||''
+        this.user2= this.props.obj.users[1].id ||''
         this.state={
 
             name:this.props.obj.name,
@@ -37,7 +37,7 @@ class Team extends Component {
         });
     }
 
-    putpeti=(id)=>{
+    put=(id)=>{
         var config = {
 
             headers: {'Authorization':  token}}
@@ -59,6 +59,8 @@ class Team extends Component {
         return (
             <div className={"card-header text-light"}>
                 <nav className={"navbar navbar-dark mt-3"}>
+
+
                     <h2 className={"text-white"}>Edit team</h2>
                 </nav>
                 <form className={"card-header bg-dark"} onSubmit={this.regDatos}>
@@ -139,7 +141,7 @@ class Team extends Component {
                         <h5 className={"col-sm-2 text-primary text-left "}>{this.user2}</h5>
                     </div>
                     <div className={"text-right"}>
-                        <button className={"col-sm-2 ml-4 btn  btn-primary text-light"} onClick={()=>this.putpeti(this.props.obj._id)}>
+                        <button className={"col-sm-2 ml-4 btn  btn-primary text-light"} onClick={()=>this.put(this.props.obj._id)}>
                             <Link to={"/teamcard"}><h5 className={'text-light'}>Save</h5></Link>
                         </button>
                         <button className={"col-sm-2 ml-4 btn  btn-danger text-light"}><Link to={"/teamcard"}><h5 className={'text-light'}>Cancel</h5></Link></button>

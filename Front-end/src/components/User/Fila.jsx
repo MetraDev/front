@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import '../file.css'
+import '../../file.css'
 import FormUs from "./formUs";
-import { connect } from 'react-redux';
-import {deleteUser} from "../actions/actions";
-import {token} from "../index";
-import createStore from '../Redux/create';
+import {connect} from 'react-redux';
+import {deleteUser, editUser} from "../../actions/actions";
+import {token} from "../../index";
+import {Link} from 'react-router-dom'
 import axios from "axios";
 
 
@@ -14,36 +14,21 @@ class Fila extends Component {
 
 
         this.state = {
-            variable:[]
+            variable: []
         }
 
 
     }
 
-    componentDidMount() {
-        const store = createStore();
-        var config = {
-            headers: {'Authorization':  token}
-        };
-        axios.get('http://52.213.25.226:3030/user', config)
-            .then(res => {
-
-                /*store.dispatch({type: actionTypesUser.createUser,
-                    data: res.data.data})*/
-            })
-            .catch(err => console.log('No ha funcionado users', err));
-
-
-    }
 
     deleteC = (id) => {
         var config = {
-            headers: {'Authorization':  token}
+            headers: {'Authorization': token}
         };
         axios.delete(`http://52.213.25.226:3030/user/${id}`, config)
             .then(res => {
-                let arr= res.data.data;
-                for (let index in arr){
+                let arr = res.data.data;
+                for (let index in arr) {
                     this.props.obj.push(index)
                 }
                 this.props.deleteUsers(id)
@@ -51,24 +36,29 @@ class Fila extends Component {
             .catch(err => console.log('No ha funcionado delete', err));
     }
 
+    click = () => {
+        return (<Link to={'/cities'}/>)
+    }
+
 
     render() {
-        const user = this.state.variable.map((user) => {
+        const user = this.props.obj.map((user) => {
                 return (
                     <tr>
-                        <td colSpan={"1"} >{user.name}</td>
+                        <td colSpan={"1"}><Link to={'/user/:id'}
+                                                onClick={() => this.props.editUser(user._id)}>{user.name}</Link></td>
                         <td colSpan={"1"}>{user.surname}</td>
                         <td colSpan={"1"}>{user.email}</td>
                         <td colSpan={"1"}>{user.telephone}</td>
-                        <button  onClick={()=> this.deleteC(user._id)}  className="col-sm-2 ml-4 btn btn-primary">
-                            <h5>borrar</h5>
-                        </button>
+                        <td width="1" height="50" >
+                        <button  onClick={() => this.deleteC(user._id)} className="col-sm-5 text-center btn btn-dark">
+                            <h5 className={'text-center'}>X</h5>
+                        </button></td>
                     </tr>
 
                 )
             }
         )
-
 
 
         return (
@@ -82,7 +72,7 @@ class Fila extends Component {
                         <td className={"ml-4"}><h4>Users</h4></td>
                         <td colSpan={"4"} className={""}></td>
                     </tr>
-                    <tr>
+                    <tr onClick={() => this.click}>
                         <th width="250" height="39"> Name</th>
                         <th width="250" height="39"> Surname</th>
                         <th width="250" height="39"> Role</th>
@@ -91,7 +81,7 @@ class Fila extends Component {
                     {user}
                     </thead>
                 </table>
-                <FormUs  />
+                <FormUs/>
             </div>
         )
     }
@@ -99,13 +89,14 @@ class Fila extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        obj: state.user
+        obj: state.user,
+
     }
 }
-const dispastchToProps=(dispatch,props )=>{
-    return{
-        deleteUsers:(id) => dispatch(deleteUser(id))
+const dispastchToProps = (dispatch, props) => {
+    return {
+        editUser: (id) => dispatch(editUser(id))
     }
 }
 
-export default connect(mapStateToProps,dispastchToProps)(Fila);
+export default connect(mapStateToProps, dispastchToProps)(Fila);

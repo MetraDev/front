@@ -1,5 +1,5 @@
 import React from 'react';
-import TargetIdea from "../components/TargetIdea";
+import TargetIdea from "../../components/Idea/TargetIdea";
 
 const ideas =()=>{
 

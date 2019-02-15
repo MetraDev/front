@@ -1,4 +1,4 @@
-import {idea} from '../../idea.json';
+import {idea} from '../../../idea.json';
 const defaultState = []
 
 

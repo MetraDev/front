@@ -1,6 +1,5 @@
 import React from 'react';
-import  Team from "../components/Team";
-import Teamcard from "../components/Teamcard";
+import Teamcard from "../../components/Team/Teamcard";
 
 
 

@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import '../forms.css';
+import '../../forms.css';
 import {connect} from "react-redux";
-import {addCities} from "../actions/actions";
+import {addCities,formCity} from "../../actions/actions";
 import axios from "axios";
-import {token} from '../index'
+import {token} from '../../index'
+
 
 
 class Formulario extends Component {
@@ -15,7 +16,7 @@ class Formulario extends Component {
             name: 'Madrid',
             address: '',
             telephone: '',
-            users:[{id:'5c5b3f1c818f2c243aea3d73'},{id:'5c5b3f1c818f2c243aea3d73'}],
+            users:[],
             nom1:[],
             nom2:''
         };
@@ -34,7 +35,7 @@ class Formulario extends Component {
         axios.get('http://52.213.25.226:3030/user', config)
             .then(res => {
                 let arr= res.data.data
-
+                this.setState({nom1:res.data.data})
 
                 /*
                 store.dispatch({type: actionTypes.createCity,
@@ -44,7 +45,22 @@ class Formulario extends Component {
 
 
     }
+    componentWillUpdate(nextProps, nextState, nextContext) {
+        var config = {
+            headers: {'Authorization':  token}
+        };
+        if(this.state !== this.state ){
+        axios.get('http://52.213.25.226:3030/user', config)
+            .then(res => {
+                let arr= res.data.data
+                this.setState({nom1:res.data.data})
 
+                /*
+                store.dispatch({type: actionTypes.createCity,
+                    data: res.data.data})*/
+            })
+            .catch(err=> console.log('No ha funcionado users', err))}
+    }
 
 
     regDatos = (e) => {
@@ -56,13 +72,7 @@ class Formulario extends Component {
            alert('añade 2 usuarios')
         }
 
-        this.setState({
 
-
-            nom1:[],
-
-
-        });
     }
 
     introDatos = (event) =>
@@ -94,11 +104,10 @@ class Formulario extends Component {
 
     }
 
-    añadir=()=>{
+    añadir=(nom)=>{
         if(this.state.nom2 !== undefined){
-           if(this.state.users.length < 3){
-            let temP= this.state.users.push(this.state.nom2)
-               this.setState({users:temP})
+           if(this.state.users){
+               this.setState({users:[ {id:nom}]})
                console.log('dentro añadir' +this.state.users )
            }
             else
@@ -132,6 +141,7 @@ class Formulario extends Component {
             .then(res => {
 
                 this.props.addCities(state)
+
             })
             .catch(err => console.log('No ha funcionado', err));
 
@@ -214,11 +224,12 @@ class Formulario extends Component {
                                     {this.state.nom1.map((usr) => {
 
                                         return (
-                                            <option name="nom2" >{usr.name}</option>)})}
+                                            <option >{usr.name}</option>)})}
                                 </select>
                                 <button className="col-sm-2 ml-4 btn btn-primary"
-                                        onClick={()=>this.añadir() }>
+                                        onClick={()=>this.añadir(this.state.nom2) }>
                                     <h6>Add</h6>
+                                    {console.log('nom2' +this.state.nom2)}
                                 </button>
                                 {console.log('item'+ this.state.id)}
                                 {console.log('item'+ this.state.users)}
@@ -251,7 +262,7 @@ const mapStateToProps = (state ,props) => {
 
 const dispastchToProps=(dispatch,props )=>{
     return{
-        addCities:(stado)=>dispatch(addCities(stado)),
+        addCities:(stado)=>dispatch(formCity(stado)),
 
 
     }

@@ -1,5 +1,5 @@
-import {idea} from '../../idea.json';
-const defaultState = idea
+
+
 
 
 
@@ -10,14 +10,18 @@ export const actionTypesIdeas = {
 }
 
 
-const reducer = (state = idea , action) => {
+const reducer = (state = [], action) => {
 
 
     switch (action.type) {
 
 
         case actionTypesIdeas.viewAdd:
-            return [...state,action.data]
+            console.log('las ideas'+ action.data)
+            state = action.data.map(ind =>{
+                return ind;
+            })
+            return [...state]
 
 
         default:
