@@ -1,3 +1,6 @@
+import {addCities, deleteCity, modCity, movNom} from "../../actions/actions";
+import {connect} from "react-redux";
+
 export const getTodoById = (todos, id) => {
     const item = todos.find(item => item.id === id);
 
@@ -9,3 +12,6 @@ export const getTodoIndexById = (todos, id) => {
 
     return index;
 }
+
+
+

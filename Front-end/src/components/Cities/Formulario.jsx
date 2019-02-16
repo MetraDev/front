@@ -16,7 +16,7 @@ class Formulario extends Component {
             name: 'Madrid',
             address: '',
             telephone: '',
-            users:[{id:'5c5b3f1c818f2c243aea3d73'},{id:'5c5b3f1c818f2c243aea3d73'}],
+            users:[{id:'5c6876bc818f2c243aea4073'},{id:'5c6876bc818f2c243aea4073'}],
             nom1:[],
             nom2:''
         };
@@ -90,17 +90,18 @@ class Formulario extends Component {
 
     }
 
-    añadir=(nom)=>{
+   /* añadir=(nom)=>{
         if(this.state.nom2 !== undefined){
            if(this.state.users){
-               this.setState({users:[...this.state.users ,{id:nom}]})
+               this.setState({users:[...this.state.users ,{name:nom}]})
                console.log('dentro añadir' +this.state.users )
            }
             else
                 alert(`Solo puedes añadir 2 usuarios`)
         }else{ alert('No hay usuarios')}
 
-    }
+    }*/
+
     eleiminar=()=>{
         console.log('333333333'+ this.state.nom1[0])
         console.log('444444444444'+ this.state.nom2[0])
@@ -212,7 +213,7 @@ class Formulario extends Component {
                                     <option >{usr.name}</option>)})}
                                 </select>
                                 <button className="col-sm-2 ml-4 btn btn-primary"
-                                        onClick={()=>this.añadir(this.state.nom2) }>
+                                        >
                                     <h6>Add</h6>
                                     {console.log('nom2' +this.state.nom2)}
                                 </button>
