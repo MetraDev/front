@@ -10,8 +10,7 @@ class Team extends Component {
     constructor(props) {
         super(props);
 
-        this.user1= this.props.obj.users[0].id ||''
-        this.user2= this.props.obj.users[1].id ||''
+
         this.state={
 
             name:this.props.obj.name,
@@ -75,7 +74,7 @@ class Team extends Component {
                     </div>
                     <div className={"form-gruop row text-left"}>
                         <h6 className={"col-sm-2 text-left "}>Change idea</h6>
-                        <select className={"col-sm-2 form-control text-left "}
+                        <select required className={"col-sm-2 form-control text-left "}
                                 name={"name"}
                                 value={this.state.name}
                                 onChange={this.introDatos}>
@@ -95,7 +94,7 @@ class Team extends Component {
                     </div>
                     <div className={"form-gruop row text-left"}>
                         <h6 className={" col-sm-2 text-left"}>Change city</h6>
-                        <select className={"col-sm-2 form-control text-left "}
+                        <select required className={"col-sm-2 form-control text-left "}
                                 name={"cityId"}
                                 value={this.state.cityId}
                                 onChange={this.introDatos}>
@@ -113,20 +112,20 @@ class Team extends Component {
                     <div className={"form-group row"}>
                         <p  className={"col-sm-2  text-left"}>{this.state.ceo}</p>
                         <h5 className={"col-sm-2 text-primary text-left "}>{this.state.titleceo}</h5>
-                        <button className={"col-sm-1 ml-4 btn  btn-primary text-light"} onClick={()=>this.edit(1)}>Edit</button>
-                        <button id={1} className={"col-sm-1 ml-4 btn  btn-danger text-light"} onClick={()=>this.remove(1)}>Remove</button>
+                        <button className={"col-sm-1 ml-4 btn  btn-primary text-light"} >Edit</button>
+
                     </div>
                     <div className={"form-group row"}>
                         <p className={"col-sm-2 text-left"}>{this.state.cto}</p>
                         <h5 className={"col-sm-2 text-primary text-left"}>{this.state.titlecto}</h5>
-                        <button className={"col-sm-1 ml-4 btn  btn-primary text-light"} onClick={()=>this.edit(2)}>Edit</button>
-                        <button className={"col-sm-1 ml-4 btn  btn-danger text-light"} onClick={()=>this.remove(2)}>Remove</button>
+                        <button className={"col-sm-1 ml-4 btn  btn-primary text-light"} >Edit</button>
+
                     </div>
                     <div className={"form-group row"}>
                         <p className={"col-sm-2  text-left"}>{this.state.cmo}</p>
                         <h5 className={"col-sm-2 text-primary text-left "}>{this.state.titlecmo}</h5>
-                        <button className={"col-sm-1 ml-4 btn  btn-primary text-light"} onClick={()=>this.edit(3)}>Edit</button>
-                        <button  className={"col-sm-1 ml-4 btn  btn-danger text-light"} onClick={()=>this.remove(3)}>Remove</button>
+                        <button className={"col-sm-1 ml-4 btn  btn-primary text-light"} onClick={(e)=>e.preventDefault()}>Edit</button>
+
                     </div>
                     <div className={"text-left"}>
                         <h4 className={"colores mt-3"}>Demium Team</h4>

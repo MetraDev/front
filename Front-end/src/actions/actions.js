@@ -11,11 +11,10 @@ import {actionTypesUserEdit} from "../Redux/Reducers/user/editUserReducer";
 
 export const tareaSi = (stado) => {
     return {
-        type: actionTypesUser.addUser,
-        data:{
+        type: actionTypesUser.addUsuarios,
 
             stado
-        }
+
 
 
 
@@ -129,7 +128,7 @@ export const showTeam=(data) => {
 
 export const modTar=(stado,id) => {
     return {
-        type: actionTypesTeam.addTeam,
+        type: actionTypesTeam.modTar,
         stado,id
 
 
@@ -175,13 +174,21 @@ export const editUser =(id) => {
 }
 export const delTeam =(id) => {
     return {
-        type: actionTypesTeam.deleteCity,
+        type: actionTypesTeam.delTeam,
         id
 
 
 
     }
 }
+export const fromTeam =(state) => {
+    return {
+        type: actionTypesTeam.fromTeam,
+        state
+    }
+}
+
+
 
 
 

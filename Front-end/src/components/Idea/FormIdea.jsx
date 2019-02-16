@@ -57,7 +57,7 @@ class FormIdea extends Component {
                     <div>
                         <div className="form-group text-left">
                             <h4 className={"col-sm-2 text-left text-light mt-3"}>Nombre</h4>
-                            <input
+                            <input required
                                 className={"stilo ml-3 col-sm-5"}//DIRECCION
                                 type="text"
 
@@ -70,7 +70,7 @@ class FormIdea extends Component {
                         </div>
                         <div className={"form-group row"}>
                             <h6 className={"col-sm-2 text-left text-light ml-3"}>Type</h6>
-                            <select
+                            <select required
                                 name="type"
                                 className="col-sm-3 form-control bg-danger "
                                 value={this.state.businessModelId}

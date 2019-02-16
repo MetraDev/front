@@ -25,13 +25,6 @@ class Tarjeta extends Component {
     }
 
 
-    insertarForm = (stado) => {
-        let newVar = this.state.variable.map(item => {
-            return [...item, stado]
-
-        })
-        this.setState({variable: newVar})
-    }
 
 
     deleteC = (id) => {

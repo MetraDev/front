@@ -19,8 +19,6 @@ const reducer = (state = idea , action) => {
         case actionTypesIdeasPages.viewIdea:
             console.log('ideaaas' +action.data)
             return [action.data]
-
-
         default:
             return state;
     }

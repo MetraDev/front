@@ -50,7 +50,7 @@ var config = {
 
 axios.get('http://52.213.25.226:3030/city', config)
     .then(res => {
-        let arr= res.data.data;
+
         store.dispatch({type: '@ADD_CITIES',
             data: res.data.data})
     })
@@ -63,7 +63,7 @@ axios.get('http://52.213.25.226:3030/city', config)
 
 axios.get('http://52.213.25.226:3030/user', config)
     .then(res => {
-        let arr= res.data.data;
+
         store.dispatch({type: actionTypesUser.createUser,
             data: res.data.data})
     })
@@ -74,7 +74,6 @@ axios.get('http://52.213.25.226:3030/user', config)
 
 axios.get('http://52.213.25.226:3030/team', config)
     .then(res => {
-        let arr= res.data.data;
         store.dispatch({type: actionTypesTeam.addTeam,
             data: res.data.data})
     })
@@ -85,7 +84,7 @@ axios.get('http://52.213.25.226:3030/team', config)
 
 axios.get('http://52.213.25.226:3030/idea', config)
     .then(res => {
-        let arr= res.data.data;
+
         store.dispatch({type: '@ADD-->VIEW',
             data: res.data.data})
     })
@@ -95,9 +94,38 @@ axios.get('http://52.213.25.226:3030/idea', config)
 
 
 //----------------------------------------------------------------------------------------------------------------------
-                                            //RENDER
+                                            //ROLE
 //----------------------------------------------------------------------------------------------------------------------
 
+
+axios.get('http://52.213.25.226:3030/role', config)
+    .then(res => {
+        store.dispatch({type: '@LOAD-->rOle',
+            data: res.data.data})
+    })
+    .catch(err => console.log('No ha funcionado users', err));
+
+
+
+
+//----------------------------------------------------------------------------------------------------------------------
+                                                //businessmodel
+//----------------------------------------------------------------------------------------------------------------------
+
+axios.get('http://52.213.25.226:3030/businessmodel', config)
+    .then(res => {
+
+        store.dispatch({type: '@LOAD-->business',
+            data: res.data.data})
+    })
+    .catch(err => console.log('No ha funcionado users', err));
+
+
+
+
+//----------------------------------------------------------------------------------------------------------------------
+//RENDER
+//----------------------------------------------------------------------------------------------------------------------
 
 ReactDOM.render(
     <Provider store={store}>

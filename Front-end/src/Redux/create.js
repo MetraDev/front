@@ -7,6 +7,8 @@ import teamReducer from './Reducers/team/teamReducer';
 import movDtaReducer from './Reducers/cities/movDtaReducer';
 import  showTeamReducer from './Reducers/team/showTeamReducer';
 import  editUserReducer from './Reducers/user/editUserReducer';
+import  roleReducer from './Reducers/role/roleReducer';
+import  businessmodelReducer from './Reducers/businessmodel/businessmodelReducer';
 
 export const store = () => {
     const tempStore = createStore(
@@ -18,7 +20,9 @@ export const store = () => {
             team:teamReducer,
             teamShow:showTeamReducer,
             movNom:movDtaReducer,
-            editUser:editUserReducer
+            editUser:editUserReducer,
+            role:roleReducer,
+            business:businessmodelReducer
         }),
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     )

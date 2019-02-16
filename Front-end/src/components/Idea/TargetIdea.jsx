@@ -39,9 +39,11 @@ class TargetIdea extends Component {
         };
         axios.get('http://52.213.25.226:3030/businessModel', config)
             .then(res => {
+                console.log(''+res.data.data)
+                 this.props.obj = this.props.obj.map(idea =>
 
-                /*store.dispatch({type: actionTypesUser.createUser,
-                    data: res.data.data})*/
+                 res.data.data.find(bus =>bus._id === idea.businessModelId? idea.businessModelId = bus.name:''))
+
             })
             .catch(err => console.log('No ha funcionado users', err));
 

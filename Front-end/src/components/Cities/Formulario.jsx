@@ -16,7 +16,7 @@ class Formulario extends Component {
             name: 'Madrid',
             address: '',
             telephone: '',
-            users:[],
+            users:[{id:'5c5b3f1c818f2c243aea3d73'},{id:'5c5b3f1c818f2c243aea3d73'}],
             nom1:[],
             nom2:''
         };
@@ -45,22 +45,8 @@ class Formulario extends Component {
 
 
     }
-    componentWillUpdate(nextProps, nextState, nextContext) {
-        var config = {
-            headers: {'Authorization':  token}
-        };
-        if(this.state !== this.state ){
-        axios.get('http://52.213.25.226:3030/user', config)
-            .then(res => {
-                let arr= res.data.data
-                this.setState({nom1:res.data.data})
 
-                /*
-                store.dispatch({type: actionTypes.createCity,
-                    data: res.data.data})*/
-            })
-            .catch(err=> console.log('No ha funcionado users', err))}
-    }
+
 
 
     regDatos = (e) => {
@@ -107,7 +93,7 @@ class Formulario extends Component {
     añadir=(nom)=>{
         if(this.state.nom2 !== undefined){
            if(this.state.users){
-               this.setState({users:[ {id:nom}]})
+               this.setState({users:[...this.state.users ,{id:nom}]})
                console.log('dentro añadir' +this.state.users )
            }
             else
@@ -180,19 +166,19 @@ class Formulario extends Component {
                             </div>
                             <div className="form-group row">
                                 <h6 className={"col-sm-2 text-left text-light ml-3"}>Country </h6>
-                                <select                                         //PAIS
+                                <select required                                        //PAIS
                                     name="pais"
                                     className="col-sm-3 form-control  "
                                     value={this.state.pais}
                                     onChange={this.introDatos}
-                                    required={true}>
+                                    >
                                     <option>España</option>
                                     <option>Rusia</option>
                                     <option>Italia</option>
                                 </select>
                             </div>
                             <div className="form-group text-left">
-                                <h3 className={"col-sm-2 text-left text-light"}>Adress</h3>
+                                <h3 className={"col-sm-2 text-left text-light"}>Address</h3>
                                 <input
                                     className={"stilo ml-3 col-sm-5"}//DIRECCION
                                     type="text"
@@ -222,20 +208,15 @@ class Formulario extends Component {
                                         value={this.state.nom2}
                                         onChange={this.introDatos} >
                                     {this.state.nom1.map((usr) => {
-
-                                        return (
-                                            <option >{usr.name}</option>)})}
+                                    return (
+                                    <option >{usr.name}</option>)})}
                                 </select>
                                 <button className="col-sm-2 ml-4 btn btn-primary"
                                         onClick={()=>this.añadir(this.state.nom2) }>
                                     <h6>Add</h6>
                                     {console.log('nom2' +this.state.nom2)}
                                 </button>
-                                {console.log('item'+ this.state.id)}
-                                {console.log('item'+ this.state.users)}
-                                <button className="col-sm-2 ml-4 btn btn-danger" onClick={()=>this.eleiminar()}>
-                                    <h6>Remove</h6>
-                                </button>
+
                             </div>
                         </div>
                     </div>

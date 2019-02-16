@@ -31,14 +31,11 @@ class Fila extends Component {
                 for (let index in arr) {
                     this.props.obj.push(index)
                 }
-                this.props.deleteUsers(id)
+                this.props.deleteUserS(id)
             })
             .catch(err => console.log('No ha funcionado delete', err));
     }
 
-    click = () => {
-        return (<Link to={'/cities'}/>)
-    }
 
 
     render() {
@@ -46,9 +43,9 @@ class Fila extends Component {
                 return (
                     <tr>
                         <td colSpan={"1"}><Link to={'/user/:id'}
-                                                onClick={() => this.props.editUser(user._id)}>{user.name}</Link></td>
-                        <td colSpan={"1"}>{user.surname}</td>
+                                                onClick={() => this.props.editUser(user._id)}>{user.name + ' ' + user.surname}</Link></td>
                         <td colSpan={"1"}>{user.email}</td>
+                        <td colSpan={"1"}>{user.roleId}</td>
                         <td colSpan={"1"}>{user.telephone}</td>
                         <td width="1" height="50" >
                         <button  onClick={() => this.deleteC(user._id)} className="col-sm-5 text-center btn btn-dark">
@@ -72,9 +69,9 @@ class Fila extends Component {
                         <td className={"ml-4"}><h4>Users</h4></td>
                         <td colSpan={"4"} className={""}></td>
                     </tr>
-                    <tr onClick={() => this.click}>
-                        <th width="250" height="39"> Name</th>
-                        <th width="250" height="39"> Surname</th>
+                    <tr >
+                        <th width="250" height="39"> Name && Surname</th>
+                        <th width="250" height="39"> Email</th>
                         <th width="250" height="39"> Role</th>
                         <th width="250" height="39"> Headquarter</th>
                     </tr>
@@ -95,7 +92,8 @@ const mapStateToProps = (state) => {
 }
 const dispastchToProps = (dispatch, props) => {
     return {
-        editUser: (id) => dispatch(editUser(id))
+        editUser: (id) => dispatch(editUser(id)),
+        deleteUserS: (id) => dispatch(deleteUser(id)),
     }
 }
 

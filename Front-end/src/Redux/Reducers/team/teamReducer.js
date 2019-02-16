@@ -8,6 +8,7 @@ export const actionTypesTeam = {
     modTeam: '@MOD-->TEAM',
     modTar: '@MOD-->TAR',
     delTeam: 'DEL-->TEAM',
+    fromTeam:'form-->TEAM'
 }
 
 
@@ -35,11 +36,11 @@ const reducer = (state =defaultState, action) => {
 
         case actionTypesTeam.modTar:
 
-            console.log('llllll' + action.id + 'ssssssssssssss' + action.state)
+            console.log('llllll' + action.id + 'ssssssssssssss' + action.stado)
 
             state = state.map(item => {
-                if(item._id === action.id){
-                    item = action.state
+                if(item._id === action.id.toString()){
+                    item = action.stado
                 }
                 return item
             });
@@ -48,9 +49,12 @@ const reducer = (state =defaultState, action) => {
 
         case actionTypesTeam.delTeam:
             console.log('ihoinobobnobojn'+action.id);
-
             state = state.filter( item =>  {
-                return item._id !== action.id});
+                return item._id !== action.id.toString()});
+
+            return [...state];
+        case actionTypesTeam.fromTeam:
+                state.push(action.state)
             return [...state];
 
 
