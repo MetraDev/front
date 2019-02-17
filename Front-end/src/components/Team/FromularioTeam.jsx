@@ -14,9 +14,11 @@ class FormTeam extends Component {
         this.state={
 
             name:'',
-            cityId:'',
-            usersN:[],
-            users:[{id:'5c582ffc818f2c243aea3ce4'},{id:'5c5b3e76818f2c243aea3d70'}],
+            cityId:{},
+            usersDemium:[],
+            users:[],
+            nom1:'',
+            nom2:''
 
         }
 
@@ -26,7 +28,34 @@ class FormTeam extends Component {
 
         e.preventDefault();
 
+
     }
+    añadirCity= (nom) =>{
+        this.state.nom2 = JSON.parse(nom)
+console.log('el porque de las ocasas' , this.state.nom2)
+
+        this.setState({cityId:this.state.nom2, usersDemium :this.state.nom2.users})
+        console.log('el porque de las ocasas' , this.state.cityId)
+
+    }
+
+    añadirUser = (nom) =>{
+        this.state.nom1 = JSON.parse(nom)
+
+
+        if (this.state.users.some(item => this.state.nom1.name === item.name ))
+        {alert('ya hay un role ')
+        } else {
+
+            this.setState({users:[...this.state.users ,this.state.nom1]})
+
+        }}
+
+
+
+    remove = name => {
+        this.setState({users:this.state.users.filter(item => item.name !== name)});
+    };
 
     introDatos = (event) =>
     {
@@ -49,7 +78,7 @@ class FormTeam extends Component {
                     // si los el ide del usuario coincide con el de la ciudad/user
 
                     console.log('puuuut' + res.data)
-                    this.props.fromTeams(this.state)
+                    this.props.fromTeams(res.data)
                 }
             )
             .catch(err => console.log('No ha funcionado el put', err));
@@ -86,47 +115,60 @@ class FormTeam extends Component {
                     </div>
                     <div className={"form-gruop row text-left"}>
                         <h6 className={" col-sm-2 text-left"}>Selected city</h6>
-                        <select required className={"col-sm-2 form-control text-left "}
-                                name={"cityId"}
-                                value={this.state.cityId}
-                                onChange={this.introDatos}>
-                            <option>Madrid</option>
-                            <option>Bilbao</option>
-                            <option>Valencia</option>
+                        <select className={'select'} id={'select'}
+                                name={'nom2'}
+                                onChange={this.introDatos} >
+                            {this.props.city.map((city) => {
+                                return (
+                                    <option name={'nom2'} value={JSON.stringify(city)}>{city.name}</option>)})}
                         </select>
-                        <button className={"col-sm-2 ml-4 btn  btn-primary text-light"}>SELECT</button>
+                        <button className={"col-sm-2 ml-4 btn  btn-primary text-light"}
+                                onClick={(e)=>{e.preventDefault()
+                                    this.añadirCity(this.state.nom2)}}>
+                            <h6>SELECT</h6>
+                            {console.log('nom2' +this.state.nom2)}
+                            {console.log('nom2' +this.state.cityId)}
+                            {console.log('stado' +this.state.usersDemium)}
+                        </button>
                     </div>
                     <div className={"text-left"}>
                         <h4 className={"colores mt-3"}>Team members </h4>
                         <p className={"text-light "}>Plese select the team members and choose their roles </p>
+
                     </div>
                     <h5 className={"colores text-left"}>Selceted members </h5>
-                    <div className={"form-group row"}>
-                        <p  className={"col-sm-2  text-left"}>{this.state.ceo}</p>
-                        <h5 className={"col-sm-2 text-primary text-left "}>{this.state.titleceo}</h5>
-                        <button className={"col-sm-1 ml-4 btn  btn-primary text-light"} onClick={()=>this.edit(1)}>Edit</button>
-                    </div>
-                    <div className={"form-group row"}>
-                        <p className={"col-sm-2 text-left"}>{this.state.cto}</p>
-                        <h5 className={"col-sm-2 text-primary text-left"}>{this.state.titlecto}</h5>
-                        <button className={"col-sm-1 ml-4 btn  btn-primary text-light"} onClick={()=>this.edit(2)}>Edit</button>
-                    </div>
-                    <div className={"form-group row"}>
-                        <p className={"col-sm-2  text-left"}>{this.state.cmo}</p>
-                        <h5 className={"col-sm-2 text-primary text-left "}>{this.state.titlecmo}</h5>
-                        <button className={"col-sm-1 ml-4 btn  btn-primary text-light"} onClick={()=>this.edit(3)}>Edit</button>
+                    <select className={'select'} id={'select'}
+                            name={'nom1'}
+                            onChange={this.introDatos} >
+                        {this.props.user.map((usr) => {
+                            return (
+                                <option name={'nom1'} value={JSON.stringify(usr)}>{usr.name}</option>)})}
+                    </select>
+                    <button className="col-sm-2 ml-4 btn btn-primary"
+                            onClick={(e)=>{e.preventDefault()
+                                this.añadirUser(this.state.nom1)}}>
+                        <h6>Add</h6>
+                        {console.log('nom1' +this.state.nom1)}
+                        {console.log('stado' +this.state.users )}
+                        {console.log('el porque de las ocasas rendeeer' , this.state.cityId)}
+                    </button>
+                    <div>
+                        {this.state.users.map(added =>{return(
+                            <div>
+                                {added.name}{added.roleId}
+
+                                <button className={"col-sm-1 ml-4 btn  btn-primary text-light"} onClick={()=>this.remove(added.name)}>Remove</button>
+                            </div>)})}
                     </div>
                     <div className={"text-left"}>
                         <h4 className={"colores mt-3"}>Demium Team</h4>
                         <p className={"text-light "}>Plese select the team members and choose their roles </p>
                     </div>
                     <div className={"form-group row"}>
-                        <p className={"col-sm-2 text-left"}></p>
-                        <h5 className={"col-sm-2 text-primary text-left"}>{this.user1}</h5>
-                    </div>
-                    <div className={"form-group row"}>
-                        <p className={"col-sm-2  text-left"}></p>
-                        <h5 className={"col-sm-2 text-primary text-left "}>{this.user2}</h5>
+                        <p > {this.state.usersDemium.map(usuario =>{return(
+                            <p className={"text-left ml-3 "}>
+                                {usuario.name} {usuario.roleId}
+                            </p>)})}</p>
                     </div>
                     <div className={"text-right"}>
                         <button className={"col-sm-2 ml-4 btn  btn-primary text-light"} onClick={()=>this.createTEAMS(this.state)}>
@@ -143,6 +185,9 @@ class FormTeam extends Component {
 const mapStateToProps = (state) => {
     return {
         obj: state.teamShow,
+        city: state.city,
+        user: state.user
+
 
     }
 }

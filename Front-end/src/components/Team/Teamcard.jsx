@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../../taridea.css';
-import {delTeam, modTeam, showTeam} from "../../actions/actions";
+import {addTeam, delTeam, modTeam, showTeam} from "../../actions/actions";
 import {connect} from "react-redux";
 import {token} from "../../index";
 import axios from "axios";
@@ -20,40 +20,26 @@ class Teamcard extends Component {
     }
 
 
-    componentDidMount() {
+   /* componentWillMount() {
+        console.log('this.props.team' , this.props.team)
+        console.log('this.props.team' , this.props.user)
 
-        var config = {
-            headers: {'Authorization':  token}
-        };
+        const teams = this.props.team;
+        const users = this.props.user;
+
+        const citiesWithUsers = teams.map(teams => {
+            teams.users = teams.users.map(user => users.find(el => user.userId  === el._id ) );
+            return teams
+        })
+        console.log('cities index'+citiesWithUsers)
+        this.props.addteams(citiesWithUsers)
 
 
 
-    }
 
-   /* encontrarUs=(id,dos,indx)=>{
-        var config = {
-            headers: {'Authorization':  token}}
-
-            if(id === undefined){
-            console.log('el ide es undefined')
-        }else
-
-        axios.get(`http://52.213.25.226:3030/city/${id}`, config) // DESCARGAMOS DATOS DE LA CITY
-            .then(res => {
-                //si los el ide del team coincide con el de la ciudad/user
-                           this.props.dis.filter(item =>{
-                                item._id === res.data.users[0].id ?
-                                    res.data.users[0].id= item.name : console.log('no son iguales')
-                                // encontramos los nombres de los id en los usuarios
-                                item._id === res.data.users[1].id ?
-                                    res.data.users[1].id= item.name : console.log('no son iguales')
-                            })
-                    this.props.modTeamm(res.data.name,res.data.users[0].id, res.data.users[1].id,dos)
-
-                console.log('el objeto nom es'+  this.state.nombre)
-            })
-            .catch(err => console.log('No ha funcionado traer', err));
     }*/
+
+
     deleteC = (id) => {
 
         var config = {
@@ -70,7 +56,7 @@ class Teamcard extends Component {
 
 
     render() {
-        const team = this.props.obj.map((team) => {
+        const team = this.props.team.map((team) => {
             return (
                 <div className={" col-md-4 mb-3"}>
                     <div className={"carder card  mt-4"}>
@@ -90,13 +76,16 @@ class Teamcard extends Component {
 
                             </div>
                             <h5 className={"typeeeb text-left ml-2"}>Team members</h5>
-                            <h6 className={" text-left ml-3"}>{ ''}</h6>
-                            <h6 className={" text-left ml-3"}>{ ''}</h6>
-
+                            <p > {team.users.map(usuario =>{return(
+                                <p className={"text-left ml-3 "}>
+                                    {usuario.name} {usuario.roleId}
+                                </p>)})}</p>
                             <div className={"form-group"}>
                                 <h5 className={"typeeeb text-left ml-2"}>Demium team</h5>
-                                <h6 className={" text-left ml-3"}>{ ''}</h6>
-                                <h6 className={" text-left ml-3"}>{''}</h6>
+                                <p > {team.cityId.users.map(usuario =>{return(
+                                    <p className={"text-left ml-3 "}>
+                                        {usuario.name} {usuario.roleId}
+                                    </p>)})}</p>
                             </div>
                             <p className={" row-right text-right mr-3"}>
                                 <Link  to={'/teamedit'}><button onClick={()=> this.props.showTeamm(team)}> Edit</button></Link>
@@ -121,8 +110,8 @@ class Teamcard extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        obj: state.team,
-        dis:state.user
+        team: state.team,
+        user: state.user
     }
 }
 
@@ -131,6 +120,7 @@ const dispastchToProps=(dispatch,props )=>{
         modTeamm:(name,user1,user2,id)=>dispatch(modTeam(name,user1,user2,id)),
         showTeamm:(data) =>dispatch(showTeam(data)),
         delTeams:(id) =>dispatch(delTeam(id)),
+        addteams:(stado) =>dispatch(addTeam(stado)),
 
 
     }

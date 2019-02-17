@@ -62,6 +62,7 @@ axios.get('http://52.213.25.226:3030/city', config)
             city.users = city.users.map(user => users.find(el =>user.id||user._id === el._id ) );
             return city
         })
+
         console.log('cities index'+citiesWithUsers)
         store.dispatch({
             type: '@ADD_CITIES',
@@ -111,9 +112,24 @@ axios.get('http://52.213.25.226:3030/team', config)
                     return team
                 })
 
-                store.dispatch({
-                    type: actionTypesTeam.addTeam,
-                    data :citiesWithUsers})
+                axios.get('http://52.213.25.226:3030/user',config)
+                    .then(resuser => {
+                        const users = resuser.data.data
+
+                        const resultado = citiesWithUsers.map(teams => {
+                            teams.users = teams.users.map(user => users.find(el => user.userId|| user._id === el._id ) );
+                            return teams
+                        })
+                        console.log('holaaaaa' ,resultado)
+
+
+                        store.dispatch({
+                            type: actionTypesTeam.addTeam,
+                            data :resultado})
+
+
+                    })
+                    .catch(err=> console.log('No ha funcionado users', err))
 
 
             })

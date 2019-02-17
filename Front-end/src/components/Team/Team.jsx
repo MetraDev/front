@@ -16,7 +16,7 @@ class Team extends Component {
             name:this.props.obj.name,
             cityId:this.props.obj.cityId,
             usersN:[],
-            users:[{id:this.user1},{id:this.user2}],
+            users:[],
 
         }
 
@@ -90,7 +90,7 @@ class Team extends Component {
                     </div>
                     <div className={"form-group row text-left"}>
                         <h6 className={"col-sm-2"}>Selected city</h6>
-                        <p className={"col-sm-2 text-light"}>{this.props.obj.cityId}</p>
+                        <p className={"col-sm-2 text-light"}>{this.props.obj.cityId.name}</p>
                     </div>
                     <div className={"form-gruop row text-left"}>
                         <h6 className={" col-sm-2 text-left"}>Change city</h6>
@@ -112,20 +112,20 @@ class Team extends Component {
                     <div className={"form-group row"}>
                         <p  className={"col-sm-2  text-left"}>{this.state.ceo}</p>
                         <h5 className={"col-sm-2 text-primary text-left "}>{this.state.titleceo}</h5>
-                        <button className={"col-sm-1 ml-4 btn  btn-primary text-light"} >Edit</button>
-
+                        <button className={"col-sm-1 ml-4 btn  btn-primary text-light"} onClick={()=>this.edit(1)}>Edit</button>
+                        <button id={1} className={"col-sm-1 ml-4 btn  btn-danger text-light"} onClick={()=>this.remove(1)}>Remove</button>
                     </div>
                     <div className={"form-group row"}>
                         <p className={"col-sm-2 text-left"}>{this.state.cto}</p>
                         <h5 className={"col-sm-2 text-primary text-left"}>{this.state.titlecto}</h5>
-                        <button className={"col-sm-1 ml-4 btn  btn-primary text-light"} >Edit</button>
-
+                        <button className={"col-sm-1 ml-4 btn  btn-primary text-light"} onClick={()=>this.edit(2)}>Edit</button>
+                        <button className={"col-sm-1 ml-4 btn  btn-danger text-light"} onClick={()=>this.remove(2)}>Remove</button>
                     </div>
                     <div className={"form-group row"}>
                         <p className={"col-sm-2  text-left"}>{this.state.cmo}</p>
                         <h5 className={"col-sm-2 text-primary text-left "}>{this.state.titlecmo}</h5>
-                        <button className={"col-sm-1 ml-4 btn  btn-primary text-light"} onClick={(e)=>e.preventDefault()}>Edit</button>
-
+                        <button className={"col-sm-1 ml-4 btn  btn-primary text-light"} onClick={()=>this.edit(3)}>Edit</button>
+                        <button  className={"col-sm-1 ml-4 btn  btn-danger text-light"} onClick={()=>this.remove(3)}>Remove</button>
                     </div>
                     <div className={"text-left"}>
                         <h4 className={"colores mt-3"}>Demium Team</h4>

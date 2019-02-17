@@ -72,10 +72,10 @@ export const viewAdd = (stado) => {
     }
 }
 
-export const addTeam = (stado, id) => {
+export const addTeam = (stado) => {                 // igual la lio
     return {
         type: actionTypesTeam.addTeam,
-        stado,id
+        data: stado
 
 
 
