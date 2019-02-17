@@ -62,7 +62,7 @@ class FormUs extends Component {
                 .then(res => {
                     console.log('' , state)
 
-                    this.props.tareaSino(state)
+                    this.props.tareaSino(res.data)
                 })
                 .catch(err => console.log('No ha funcionado', err));
 
