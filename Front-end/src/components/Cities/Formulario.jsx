@@ -72,13 +72,16 @@ class Formulario extends Component {
     }
 
     añadirUser = (nom) =>{
+        this.state.nom2 = JSON.parse(nom)
 
-        if (this.state.users.some(item => this.state.nom2.toString() == item.name ))
+
+        if (this.state.users.some(item => this.state.nom2.name === item.name ))
               {alert('ya hay un role ')
                 } else {
+                    console.log('role ', this.state.nom2.name );
                     console.log('ya hay un role ', this.state.nom2 );
-                    this.setState({users:[...this.state.users ,{name:nom}]})
-                  console.log('ya hay un role ', this.state.users);
+                    this.setState({users:[...this.state.users ,this.state.nom2]})
+                  console.log('el estado en añadir ', this.state.users);
             }}
 
 
@@ -181,12 +184,12 @@ class Formulario extends Component {
                             </div>
                             <div className={"form-group row"}>
                                 <h5 className={"col-sm-2 text-left text-light ml-3"}>Team</h5>
-                                <select className={'select'} id={'select'} name={'nom2'}
-                                        value={this.state.nom2}
+                                <select className={'select'} id={'select'}
+                                        name={'nom2'}
                                         onChange={this.introDatos} >
                                     {this.props.user.map((usr) => {
                                     return (
-                                    <option >{usr.name}</option>)})}
+                                    <option name={'nom2'} value={JSON.stringify(usr)}>{usr.name}</option>)})}
                                 </select>
                                 <button className="col-sm-2 ml-4 btn btn-primary"
                                         onClick={(e)=>{e.preventDefault()
