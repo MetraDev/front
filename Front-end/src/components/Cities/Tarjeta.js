@@ -106,8 +106,10 @@ class Tarjeta extends Component {
                             <p className={"text-left ml-3"}></p>
                             <p className={"text-left ml-3"}>{'Phone: ' + todo.telephone}</p>
                             <h6 className={"text-left ml-3 text-primary"}>Demium Team</h6>
-                            <p className={"text-left ml-3 "}>{todo.users[0].name || ''}</p>
-                            <p className={"text-left ml-3"}>{todo.users[1].name || ''}</p>
+                            <p > {todo.users.map(usuario =>{return(
+                                <p className={"text-left ml-3 "}>
+                                    {usuario.name} {usuario.roleId}
+                                </p>)})}</p>
                             <p className={"text-right mr-3"}>
                                 <button className={"text-rigth badge badge-primary mr-10"}
                                         onClick={() => {this.deleteC(todo._id)}}>

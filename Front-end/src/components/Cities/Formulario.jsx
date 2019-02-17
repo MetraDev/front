@@ -26,18 +26,23 @@ class Formulario extends Component {
 
     }
 
-
-
-
-
     regDatos = (e) => {
         e.preventDefault()
 
         console.log('preubaaaa'+ this.state.users)
 
-        if(this.state.users == ''){
+        if(this.state.users === []){
            alert('añade 2 usuarios')
         }
+
+        this.setState({
+            name: 'Madrid',
+            address: '',
+            telephone: '',
+            users:[],
+            nom1:[],
+            nom2:''
+        });
 
 
     }
@@ -56,20 +61,6 @@ class Formulario extends Component {
 
 
 
-    add =(nombre)=>{
-
-
-        var select = document.getElementById('select');
-        select.addEventListener('change',
-            function(){
-                var selectedOption = this.options[select.selectedIndex];
-                //e.unshift(selectedOption.value)
-                console.log('nombre'+ selectedOption.text )
-                nombre=selectedOption.value
-                console.log(selectedOption.value + ': ' + selectedOption.text);
-            });
-
-    }
 
     añadirUser = (nom) =>{
         this.state.nom2 = JSON.parse(nom)
@@ -78,10 +69,9 @@ class Formulario extends Component {
         if (this.state.users.some(item => this.state.nom2.name === item.name ))
               {alert('ya hay un role ')
                 } else {
-                    console.log('role ', this.state.nom2.name );
-                    console.log('ya hay un role ', this.state.nom2 );
+
                     this.setState({users:[...this.state.users ,this.state.nom2]})
-                  console.log('el estado en añadir ', this.state.users);
+
             }}
 
 
