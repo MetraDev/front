@@ -17,8 +17,6 @@ class FormTeam extends Component {
             cityId:{},
             usersDemium:[],
             users:[],
-            nom1:'',
-            nom2:''
 
         }
 
@@ -78,7 +76,7 @@ console.log('el porque de las ocasas' , this.state.nom2)
                     // si los el ide del usuario coincide con el de la ciudad/user
 
                     console.log('puuuut' + res.data)
-                    this.props.fromTeams(res.data)
+                    this.props.fromTeams(this.state)
                 }
             )
             .catch(err => console.log('No ha funcionado el put', err));
