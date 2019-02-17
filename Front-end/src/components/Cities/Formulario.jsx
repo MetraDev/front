@@ -95,8 +95,8 @@ class Formulario extends Component {
         }else
         axios.post('http://52.213.25.226:3030/city', state, config)
             .then(res => {
-
-                this.props.addCities(state)
+                    console.log('resss' , res.data)
+                this.props.addCities(res.data)
 
             })
             .catch(err => console.log('No ha funcionado', err));
