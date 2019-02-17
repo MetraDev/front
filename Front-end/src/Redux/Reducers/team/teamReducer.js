@@ -17,12 +17,9 @@ const reducer = (state =defaultState, action) => {
     switch (action.type) {
 
         case actionTypesTeam.addTeam:
+console.log('en el reducer team', action.data)
 
-            state = action.data.map(ind =>{
-                return ind;
-            })
-
-            return [...state]
+            return [ ...state,...action.data];
 
         case actionTypesTeam.modTeam:
 

@@ -30,7 +30,7 @@ class Teamcard extends Component {
 
     }
 
-    encontrarUs=(id,dos,indx)=>{
+   /* encontrarUs=(id,dos,indx)=>{
         var config = {
             headers: {'Authorization':  token}}
 
@@ -53,7 +53,7 @@ class Teamcard extends Component {
                 console.log('el objeto nom es'+  this.state.nombre)
             })
             .catch(err => console.log('No ha funcionado traer', err));
-    }
+    }*/
     deleteC = (id) => {
 
         var config = {
@@ -86,17 +86,17 @@ class Teamcard extends Component {
                             </div>
                             <div className={"form-group row"}>
                                 <h6 className={"typeeeb name text-left ml-4"}>City</h6>
-                                <h6 className={" text-left ml-3"}>{team.cityId}</h6>
-                                {this.encontrarUs(team.cityId,team._id,1)}
+                                <h6 className={" text-left ml-3"}>{team.cityId.name}</h6>
+
                             </div>
                             <h5 className={"typeeeb text-left ml-2"}>Team members</h5>
-                            <h6 className={" text-left ml-3"}>{team.users[1].id || ''}</h6>
-                            <h6 className={" text-left ml-3"}>{team.users[0].id || ''}</h6>
+                            <h6 className={" text-left ml-3"}>{ ''}</h6>
+                            <h6 className={" text-left ml-3"}>{ ''}</h6>
 
                             <div className={"form-group"}>
                                 <h5 className={"typeeeb text-left ml-2"}>Demium team</h5>
-                                <h6 className={" text-left ml-3"}>{team.users[1].id || ''}</h6>
-                                <h6 className={" text-left ml-3"}>{team.users[0].id || ''}</h6>
+                                <h6 className={" text-left ml-3"}>{ ''}</h6>
+                                <h6 className={" text-left ml-3"}>{''}</h6>
                             </div>
                             <p className={" row-right text-right mr-3"}>
                                 <Link  to={'/teamedit'}><button onClick={()=> this.props.showTeamm(team)}> Edit</button></Link>

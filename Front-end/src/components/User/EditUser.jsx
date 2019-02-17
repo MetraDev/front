@@ -32,7 +32,7 @@ class EditUser extends Component {
             [name]: value
         });
     }
-    stateCancel = (event) => {   // MAS ADELANTE SERA PARA CANCALAR LA OPERACION
+    stateCancel = (event) => {   // MAS ADELANTE SERA PARA CANCELAR LA OPERACION
         this.setState({
             name: '',
             surname: '',

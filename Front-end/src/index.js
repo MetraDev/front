@@ -57,12 +57,12 @@ axios.get('http://52.213.25.226:3030/city', config)
     .then(resuser => {
         const cities = rescity.data.data;
         const users = resuser.data.data;
-        console.log('usersRaw.data.data'+cities+'users'+users)
+
         const citiesWithUsers = cities.map(city => {
             city.users = city.users.map(user => users.find(el =>user.id||user._id === el._id ) );
             return city
         })
-        console.log('usersRaw.data.data'+citiesWithUsers)
+        console.log('cities index'+citiesWithUsers)
         store.dispatch({
             type: '@ADD_CITIES',
             data:citiesWithUsers
@@ -100,11 +100,37 @@ axios.get('http://52.213.25.226:3030/user', config)
 //----------------------------------------------------------------------------------------------------------------------
 
 axios.get('http://52.213.25.226:3030/team', config)
+    .then(resteam => {
+        axios.get('http://52.213.25.226:3030/city',config)
+            .then(rescity => {
+                const cities = rescity.data.data;
+                const team = resteam.data.data;
+                console.log('usersRaw.data.data'+cities+'users'+team)
+                const citiesWithUsers = team.map(team => {
+                    team.cityId = cities.find(el =>team.cityId === el._id )
+                    return team
+                })
+
+                store.dispatch({
+                    type: actionTypesTeam.addTeam,
+                    data :citiesWithUsers})
+
+
+            })
+            .catch(err=> console.log('No ha funcionado users', err))
+    })
+    .catch(err=> console.log('No ha funcionado users', err))
+
+
+
+
+
+/*axios.get('http://52.213.25.226:3030/team', config)
     .then(res => {
         store.dispatch({type: actionTypesTeam.addTeam,
             data: res.data.data})
     })
-    .catch(err => console.log('No ha funcionado users', err));
+    .catch(err => console.log('No ha funcionado users', err));*/
 //----------------------------------------------------------------------------------------------------------------------
 //IDEAS
 //----------------------------------------------------------------------------------------------------------------------
