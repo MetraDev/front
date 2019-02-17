@@ -16,7 +16,7 @@ class Formulario extends Component {
             name: 'Madrid',
             address: '',
             telephone: '',
-            users:[{id:'5c6876bc818f2c243aea4073'},{id:'5c6876bc818f2c243aea4073'}],
+            users:[],
             nom1:[],
             nom2:''
         };
@@ -26,25 +26,6 @@ class Formulario extends Component {
 
     }
 
-
-    componentDidMount() {
-        var config = {
-            headers: {'Authorization':  token}
-        };
-
-        axios.get('http://52.213.25.226:3030/user', config)
-            .then(res => {
-                let arr= res.data.data
-                this.setState({nom1:res.data.data})
-
-                /*
-                store.dispatch({type: actionTypes.createCity,
-                    data: res.data.data})*/
-            })
-            .catch(err=> console.log('No ha funcionado users', err))
-
-
-    }
 
 
 
@@ -90,27 +71,22 @@ class Formulario extends Component {
 
     }
 
-   /* añadir=(nom)=>{
-        if(this.state.nom2 !== undefined){
-           if(this.state.users){
-               this.setState({users:[...this.state.users ,{name:nom}]})
-               console.log('dentro añadir' +this.state.users )
-           }
-            else
-                alert(`Solo puedes añadir 2 usuarios`)
-        }else{ alert('No hay usuarios')}
+    añadirUser = (nom) =>{
 
-    }*/
-
-    eleiminar=()=>{
-        console.log('333333333'+ this.state.nom1[0])
-        console.log('444444444444'+ this.state.nom2[0])
-        alert(`Has eliminado a ${this.state.nom1[0] + ' y ' + this.state.nom2[0] } de tu equipo`)
-        this.state.users.shift()
-        this.state.users.shift()
+        if (this.state.users.some(item => this.state.nom2.toString() == item.name ))
+              {alert('ya hay un role ')
+                } else {
+                    console.log('ya hay un role ', this.state.nom2 );
+                    this.setState({users:[...this.state.users ,{name:nom}]})
+                  console.log('ya hay un role ', this.state.users);
+            }}
 
 
-    }
+
+    remove = name => {
+        this.setState({users:this.state.users.filter(item => item.name !== name)});
+    };
+
 
 
     createCity = (state) => {
@@ -208,15 +184,25 @@ class Formulario extends Component {
                                 <select className={'select'} id={'select'} name={'nom2'}
                                         value={this.state.nom2}
                                         onChange={this.introDatos} >
-                                    {this.state.nom1.map((usr) => {
+                                    {this.props.user.map((usr) => {
                                     return (
                                     <option >{usr.name}</option>)})}
                                 </select>
                                 <button className="col-sm-2 ml-4 btn btn-primary"
-                                        >
+                                        onClick={(e)=>{e.preventDefault()
+                                            this.añadirUser(this.state.nom2)}}>
                                     <h6>Add</h6>
                                     {console.log('nom2' +this.state.nom2)}
+                                    {console.log('stado' +this.state.users)}
                                 </button>
+                                <div>
+                                    {this.state.users.map(added =>{return(
+                                        <div>
+                                            {added.name}
+                                            <span onClick={() => this.remove(added.name)}>x</span>
+
+                                        </div>)})}
+                                </div>
 
                             </div>
                         </div>
@@ -236,8 +222,9 @@ class Formulario extends Component {
 
 const mapStateToProps = (state ,props) => {
     return {
-        obj: state.user,
-        objs: state.movNom
+        user: state.user,
+        objs: state.movNom,
+        role: state.role
     }
 
 }
