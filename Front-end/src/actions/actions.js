@@ -50,10 +50,10 @@ export const addCity = (stado,id) => {
     }
 }
 
-export const viewIdeass = (stado) => {
+export const viewIdeass = (idea) => {
     return {
         type: actionTypesIdeasPages.viewIdea,
-        data: stado
+        data: idea
 
 
 

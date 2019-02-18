@@ -63,18 +63,11 @@ class TargetIdea extends Component {
                             </div>
                             <div className={"form-group row"}>
                                 <h6 className={"typeeeb text-left ml-4"}>Team</h6>
-                                <h6 className={" text-left ml-3"}>{idea.teamId}</h6>
+                                <h6 className={" text-left ml-3"}>{idea.teamId.name}</h6>
                             </div>
                             <p className={"text-right mr-3"}>
                                 <button className={"text-rigth btn btn-primary mr-10"} >
-                                    <Link to={"/ideaspag"}  onClick={()=>{this.props.view({
-                                        id:uuid(),
-                                        title:idea.title,
-                                        type:idea.type,
-                                        name:idea.name,
-                                        Description:idea.Description,
-                                        Headquarter:idea.Headquarter,
-                                        Team:idea.Team})}}> <h5 className={"text-light"}>{'VIEW'}</h5></Link>
+                                    <Link to={"/ideaspag"}  onClick={()=>{this.props.view( idea)}}> <h5 className={"text-light"}>{'VIEW'}</h5></Link>
 
                                 </button>
                             </p>
@@ -99,7 +92,7 @@ const mapStateToProps = (state) => {
 }
 const dispastchToProps=(dispatch,props )=>{
     return{
-        view:(stado)=>dispatch(viewIdeass(stado)),
+        view:(idea)=>dispatch(viewIdeass(idea)),
 
     }
 }

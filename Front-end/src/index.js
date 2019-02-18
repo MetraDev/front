@@ -168,10 +168,33 @@ axios.get('http://52.213.25.226:3030/idea', config)
                     return idea
                 })
 
-                console.log('Ideas index'+ideasWithUsers)
+
+
+                axios.get('http://52.213.25.226:3030/team',config)
+                    .then(resteam => {
+                        const teams = resteam.data.data
+
+                        const result = ideasWithUsers.map(idea => {
+                            idea.teamId = teams.find(el => idea.teamId === el._id || 'No existe el usuario' ) ;
+                            return idea
+                        })
+                        console.log('holaaaaa' ,result)
+
+
+                        store.dispatch({
+                            type: actionTypesIdeas.viewAdd,
+                            data: result})
+
+
+                    })
+                    .catch(err=> console.log('No ha funcionado users', err))
+
+
+
+               /* console.log('Ideas index'+ideasWithUsers)
                 store.dispatch({
                     type: actionTypesIdeas.viewAdd,
-                    data: ideasWithUsers})
+                    data: ideasWithUsers})*/
 
 
             })

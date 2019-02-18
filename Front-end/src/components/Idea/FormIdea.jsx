@@ -11,7 +11,7 @@ class FormIdea extends Component {
         super(props);
         this.state = {
 
-            name: 'Madrid',
+            name: this.props.obj[0].name,
             businessModelId: 'España',
             description: 'Tigre! ¡Tigre!, fuego que ardes' +
                 'En los bosques de la noche,' +
@@ -29,6 +29,8 @@ class FormIdea extends Component {
         };
 
     }
+
+
 
     regDatos = (e) => {
         e.preventDefault();
@@ -50,6 +52,7 @@ class FormIdea extends Component {
     const data = this.props.obj.map((item)=>{
         return( <div className={"card-header"}>
             <nav className={"navbar navbar-dark mt-5"}>
+                {console.log('edit idea' , this.props.obj[0].name)}
                 <h3 className={"text-white"}>Edit Idea</h3>
             </nav>
             <form className={"card-header bg-dark"} onSubmit={this.regDatos}>
@@ -75,7 +78,7 @@ class FormIdea extends Component {
                                 className="col-sm-3 form-control bg-danger "
                                 value={this.state.businessModelId}
                                 onChange={this.introDatos}>
-                                <option>{item.type}</option>
+                                <option>{item.businessModelId.name}</option>
                                 <option>App</option>
                                 <option>Web</option>
 
@@ -97,11 +100,11 @@ class FormIdea extends Component {
                         </div>
                         <div className={"form-group row ml-1 mt-3"}>
                             <h5 className={"text-left text-light col-sm-3"}>Headquarter</h5>
-                            <label className={"text-left text-light col-sm-2 "}><b>{item.Headquarter}</b></label>
+                            <label className={"text-left text-light col-sm-2 "}><b>{item.teamId.cityId.name}</b></label>
                         </div>
                         <div className={"form-group row ml-1"}>
                             <h5 className={"text-left text-light col-sm-3"}>Team name</h5>
-                            <label className={"text-left text-light col-sm-3 "}><b>{item.teamId}</b></label>
+                            <label className={"text-left text-light col-sm-3 "}><b>{item.teamId.name}</b></label>
                         </div>
                         <div className={"form-group row ml-1"}>
                             <h5 className={"text-left text-light col-sm-3"}>Black date</h5>
