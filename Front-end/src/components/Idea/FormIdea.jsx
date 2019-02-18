@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import '../../forms.css';
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import {viewAdd} from "../../actions/actions";
+import {modIdea, viewAdd} from "../../actions/actions";
 import uuid from "uuid";
+import {token} from "../../index";
+import axios from "axios";
 
 
 class FormIdea extends Component {
@@ -12,21 +14,32 @@ class FormIdea extends Component {
         this.state = {
 
             name: this.props.obj[0].name,
-            businessModelId: 'España',
-            description: 'Tigre! ¡Tigre!, fuego que ardes' +
-                'En los bosques de la noche,' +
-                '¿Qué mano inmortal, qué ojo' +
-                'Pudo idear tu terrible simetría?' +
-                '¿En qué distantes abismos, en qué cielos,' +
-                'Ardió el fuego de tus ojos?' +
-                '¿Con qué alas osó elevarse?' +
-                '¿Y que mano osó tomar ese fuego?' +
-                '¿Y que hombro y qué arte,' +
-                'podrían retorcer la nervadura de tu corazón' +
-                'Y cuando tu corazón comenzó a latir' +
-                '¿Qué formidable mano, qué formidables pies?',
-            teamId: '',
+            businessModelId: this.props.obj[0].businessModelId,
+            description:this.props.obj[0].description,
+            teamId: this.props.obj[0].businessModelId,
         };
+
+    }
+
+    createIdea = (state,id) => {
+
+        var config = {
+            headers: {'Authorization':  token}
+        };
+        console.log('el estado', state , 'el id' , id)
+
+        axios.put(`http://52.213.25.226:3030/idea/${id}`, state, config)
+            .then(res => {
+
+                res.data.businessModelId = this.state.businessModelId
+                res.data.teamId = this.state.teamId
+
+                console.log('el estado', res.data)
+                this.props.modIdeas(res.data,id)
+
+
+            })
+            .catch(err => console.log('No ha funcionado', err));
 
     }
 
@@ -39,10 +52,18 @@ class FormIdea extends Component {
 
     introDatos = (event) => {
         const {value, name} = event.target;
+        if(name == 'businessModelId'){
+            console.log('target value' ,event.target.value)
+
+            let bussines = JSON.parse(event.target.value)
+            console.log('target value' ,bussines)
+            this.setState({
+                businessModelId: bussines,
+            });
+
+        }else
         this.setState({
             [name]: value,
-            Headquarter: 'Mad',
-            Team: 'Bootcamp'
         });
     }
 
@@ -73,15 +94,12 @@ class FormIdea extends Component {
                         </div>
                         <div className={"form-group row"}>
                             <h6 className={"col-sm-2 text-left text-light ml-3"}>Type</h6>
-                            <select required
-                                name="type"
-                                className="col-sm-3 form-control bg-danger "
-                                value={this.state.businessModelId}
-                                onChange={this.introDatos}>
-                                <option>{item.businessModelId.name}</option>
-                                <option>App</option>
-                                <option>Web</option>
-
+                            <select className={'select'} id={'select'}
+                                    name={'businessModelId'}
+                                    onChange={this.introDatos} >
+                                {this.props.businessModel.map((business) => {
+                                    return (
+                                        <option name={'nom2'} value={JSON.stringify(business)}>{business.name}</option>)})}
                             </select>
                         </div>
                         <div className="form-group text-left">
@@ -90,7 +108,7 @@ class FormIdea extends Component {
                                 className={"stilos ml-3 col-xl"}
                                 type="text"
 
-                                name={"businessModelId"}
+                                name={"description"}
                                 placeholder={item.description}
                                 onChange={this.introDatos}/>
                         </div>
@@ -116,7 +134,7 @@ class FormIdea extends Component {
                     <button type="submit" className="col-sm-2 ml-4 btn btn-primary ">
                         <Link to={"/ideas"} > <h5 className={"text-light"}>Close</h5></Link>
                     </button>
-                    <button type="submit" onClick={()=>{this.props.addView(this.state)}} className="col-sm-2 ml-4 btn btn-primary ">
+                    <button type="submit" onClick={()=>{this.createIdea(this.state,item._id)}} className="col-sm-2 ml-4 btn btn-primary ">
                         <Link to={"/ideas"} > <h5 className={"text-light"}>Guardar</h5></Link>
                     </button>
                 </div>
@@ -131,12 +149,13 @@ class FormIdea extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        obj: state.viewIdea
+        obj: state.viewIdea,
+        businessModel: state.business
     }
 }
 const dispastchToProps=(dispatch,props )=>{
     return{
-        addView:(stado)=>dispatch(viewAdd(stado)),
+        modIdeas:(stado,id)=>dispatch(modIdea(stado,id)),
 
     }
 }

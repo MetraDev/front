@@ -36,6 +36,8 @@ class TargetIdea extends Component {
 
 
 
+
+
     render() {
         let todo = this.props.idea.map((idea) => {
             return (

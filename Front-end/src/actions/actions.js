@@ -188,6 +188,15 @@ export const fromTeam =(state) => {
     }
 }
 
+export const modIdea=(stado,id) => {
+    return {
+        type: actionTypesIdeas.modIdea,
+        stado,id
+
+
+    }
+}
+
 
 
 
