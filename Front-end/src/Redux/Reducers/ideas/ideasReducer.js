@@ -18,9 +18,7 @@ const reducer = (state = [], action) => {
 
         case actionTypesIdeas.viewAdd:
             console.log('las ideas'+ action.data)
-            state = action.data.map(ind =>{
-                return ind;
-            })
+            state = action.data
             return [...state]
 
 

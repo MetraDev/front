@@ -7,6 +7,7 @@ import {connect, Provider} from 'react-redux';
 import axios from "axios";
 import {actionTypesUser} from "./Redux/Reducers/user/usersReducer";
 import {actionTypesTeam} from "./Redux/Reducers/team/teamReducer";
+import {actionTypesIdeas} from "./Redux/Reducers/ideas/ideasReducer";
 
 const store = createStore();
 var log={
@@ -106,7 +107,7 @@ axios.get('http://52.213.25.226:3030/team', config)
             .then(rescity => {
                 const cities = rescity.data.data;
                 const team = resteam.data.data;
-                console.log('usersRaw.data.data'+cities+'users'+team)
+
                 const citiesWithUsers = team.map(team => {
                     team.cityId = cities.find(el =>team.cityId === el._id )
                     return team
@@ -151,13 +152,40 @@ axios.get('http://52.213.25.226:3030/team', config)
 //IDEAS
 //----------------------------------------------------------------------------------------------------------------------
 
+
+
+
 axios.get('http://52.213.25.226:3030/idea', config)
+    .then(residea => {
+        axios.get('http://52.213.25.226:3030/businessmodel',config)
+            .then(resbusinessmodel => {
+                const businessmodel = resbusinessmodel.data.data;
+                const idea = residea.data.data;
+                console.log('usersRaw.data.data'+businessmodel+'users'+idea)
+
+                const ideasWithUsers = idea.map(idea => {
+                    idea.businessModelId = businessmodel.find(el =>idea.businessModelId === el._id )
+                    return idea
+                })
+
+                console.log('Ideas index'+ideasWithUsers)
+                store.dispatch({
+                    type: actionTypesIdeas.viewAdd,
+                    data: ideasWithUsers})
+
+
+            })
+            .catch(err=> console.log('No ha funcionado users', err))
+    })
+    .catch(err=> console.log('No ha funcionado users', err))
+
+/*axios.get('http://52.213.25.226:3030/idea', config)
     .then(res => {
 
         store.dispatch({type: '@ADD-->VIEW',
             data: res.data.data})
     })
-    .catch(err => console.log('No ha funcionado users', err));
+    .catch(err => console.log('No ha funcionado users', err));*/
 
 
 

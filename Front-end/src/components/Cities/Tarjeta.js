@@ -39,7 +39,7 @@ class Tarjeta extends Component {
             .catch(err => console.log('No ha funcionado delete', err));
     }
 
-
+    
 
 
     /*encontrarUs = (id, dos) => { // id del usuario, id de la tarjeta

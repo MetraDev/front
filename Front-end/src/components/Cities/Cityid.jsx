@@ -98,13 +98,13 @@ class Cityid extends Component {
         var config = {
             headers: {'Authorization':  token}
         };
+        console.log('el estado',this.props.obj.id)
 
-
-        axios.put(`http://52.213.25.226:3030/city/${this.props.id}`, state, config)
+        axios.put(`http://52.213.25.226:3030/city/${this.props.obj}`, state, config)
                 .then(res => {
 
                     console.log('el estado', res.data)
-                    this.props.addCities(res.data,this.props.id)
+                    this.props.addCities(res.data,this.props.obj)
 
 
                 })
@@ -119,6 +119,7 @@ class Cityid extends Component {
             <div className={"mb-3"}>
                 <nav className={"navbar navbar-dark mt-5"}>
                     <h2 className={"text-white"}>Add city</h2>
+                    {console.log('el estado',this.props.obj)}
                 </nav>
                 <form className={"card-header"} onSubmit={this.regDatos}>
                     <div className={"divder"}>
@@ -221,7 +222,7 @@ class Cityid extends Component {
 
 const mapStateToProps = (state ,props) => {
     return {
-        id: state.movNom,
+        obj: state.movNom,
         user: state.user,
         city: state.city
     }

@@ -32,29 +32,12 @@ class TargetIdea extends Component {
         }
     }
 
-    componentDidMount() {
-
-        var config = {
-            headers: {'Authorization':  token}
-        };
-        axios.get('http://52.213.25.226:3030/businessModel', config)
-            .then(res => {
-                console.log(''+res.data.data)
-                 this.props.obj = this.props.obj.map(idea =>
-
-                 res.data.data.find(bus =>bus._id === idea.businessModelId? idea.businessModelId = bus.name:''))
-
-            })
-            .catch(err => console.log('No ha funcionado users', err));
-
-
-    }
 
 
 
 
     render() {
-        let todo = this.props.obj.map((idea) => {
+        let todo = this.props.idea.map((idea) => {
             return (
                 <div className={" col-md-4 mb-3"}>
                     <div className={"carder card  mt-4"}>
@@ -66,7 +49,7 @@ class TargetIdea extends Component {
                         <div className={"card-Body"}>
                             <div className={" form-group row"}>
                                 <h6 className={"typeee text-left mt-3 ml-4"}>Type</h6>
-                                <h6 className={" text-left mt-3 ml-3"}>{idea.businessModelId}</h6>
+                                <h6 className={" text-left mt-3 ml-3"}>{idea.businessModelId.name}</h6>
                             </div>
                             <div className={"form-group row"}>
                                 <h6 className={"typeeeb name text-left ml-4"}>Name</h6>
@@ -111,7 +94,7 @@ class TargetIdea extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        obj: state.viewAdd
+        idea: state.viewAdd
     }
 }
 const dispastchToProps=(dispatch,props )=>{

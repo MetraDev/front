@@ -10,8 +10,7 @@ class Team extends Component {
     constructor(props) {
         super(props);
 
-        localStorage.setItem('datos', this.props.obj)
-        localStorage.getItem('datos')
+
         this.state={
 
             name:this.props.obj.name,

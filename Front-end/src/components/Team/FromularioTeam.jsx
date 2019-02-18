@@ -80,7 +80,7 @@ console.log('el porque de las ocasas' , this.state.nom2)
         console.log('el estado'+this.state)
 
 
-        axios.post(`http://52.213.25.226:3030/team/`, this.state, config) // DESCARGAMOS DATOS DEL USUARIO
+        axios.post(`http://52.213.25.226:3030/team`, this.state, config) // DESCARGAMOS DATOS DEL USUARIO
             .then(res => {
                     // si los el ide del usuario coincide con el de la ciudad/user
 
