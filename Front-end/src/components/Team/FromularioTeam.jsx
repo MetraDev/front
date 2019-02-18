@@ -12,7 +12,6 @@ class FormTeam extends Component {
 
 
         this.state={
-
             name:'',
             cityId:{},
             usersDemium:[],
@@ -25,6 +24,13 @@ class FormTeam extends Component {
     regDatos = (e) => {
 
         e.preventDefault();
+        this.setState({ name:'',
+            cityId:{},
+            usersDemium:[],
+            users:[],
+            nom1:'',
+            nom2:''
+        })
 
 
     }
@@ -69,14 +75,18 @@ console.log('el porque de las ocasas' , this.state.nom2)
         var config = {
 
             headers: {'Authorization':  token}}
+
+            //stado.cityId = stado.cityId._id
         console.log('el estado'+this.state)
+
 
         axios.post(`http://52.213.25.226:3030/team/`, this.state, config) // DESCARGAMOS DATOS DEL USUARIO
             .then(res => {
                     // si los el ide del usuario coincide con el de la ciudad/user
 
-                    console.log('puuuut' + res.data)
-                    this.props.fromTeams(this.state)
+                        res.data.cityId = this.state.cityId
+
+                    this.props.fromTeams(res.data)
                 }
             )
             .catch(err => console.log('No ha funcionado el put', err));
@@ -90,7 +100,6 @@ console.log('el porque de las ocasas' , this.state.nom2)
                     <h2 className={"text-white"}>Edit team</h2>
                 </nav>
                 <form className={"card-header bg-dark"} onSubmit={this.regDatos}>
-                    { console.log(this.props.obj)}
                     <div className={"text-left"}>
                         <h4 className={"colores"}>Idea </h4>
                         <p className={"text-light "}>Plese select the idea that the team will be developing</p>

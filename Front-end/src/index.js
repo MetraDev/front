@@ -108,7 +108,7 @@ axios.get('http://52.213.25.226:3030/team', config)
                 const team = resteam.data.data;
                 console.log('usersRaw.data.data'+cities+'users'+team)
                 const citiesWithUsers = team.map(team => {
-                    team.cityId = cities.find(el =>team.cityId  === el._id )
+                    team.cityId = cities.find(el =>team.cityId === el._id )
                     return team
                 })
 

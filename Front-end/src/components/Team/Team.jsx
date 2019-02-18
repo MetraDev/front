@@ -10,11 +10,12 @@ class Team extends Component {
     constructor(props) {
         super(props);
 
-
+        localStorage.setItem('datos', this.props.obj)
+        localStorage.getItem('datos')
         this.state={
 
-            name:'',
-            cityId:'',
+            name:this.props.obj.name,
+            cityId:this.props.obj.cityId,
             users:this.props.obj.users,
             usersDemium:this.props.obj.cityId.users,
             nom1:'',
@@ -76,8 +77,8 @@ class Team extends Component {
             .then(res => {
                     // si los el ide del usuario coincide con el de la ciudad/user
 
-                    console.log('puuuut' + res.data._id)
-                this.props.addTeami(this.state,res.data._id)
+                res.data.cityId = this.state.cityId
+                this.props.addTeami(res.data,res.data._id)
                 }
             )
             .catch(err => console.log('No ha funcionado el put', err));

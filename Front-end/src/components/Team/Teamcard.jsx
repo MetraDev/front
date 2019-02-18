@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {token} from "../../index";
 import axios from "axios";
 import  {Link} from 'react-router-dom'
+import Cityid from "../Cities/Cityid";
 
 
 
@@ -20,24 +21,25 @@ class Teamcard extends Component {
     }
 
 
-   /* componentWillMount() {
-        console.log('this.props.team' , this.props.team)
-        console.log('this.props.team' , this.props.user)
 
-        const teams = this.props.team;
-        const users = this.props.user;
+    /* componentWillMount() {
+         console.log('this.props.team' , this.props.team)
+         console.log('this.props.team' , this.props.user)
 
-        const citiesWithUsers = teams.map(teams => {
-            teams.users = teams.users.map(user => users.find(el => user.userId  === el._id ) );
-            return teams
-        })
-        console.log('cities index'+citiesWithUsers)
-        this.props.addteams(citiesWithUsers)
+         const teams = this.props.team;
+         const users = this.props.user;
+
+         const citiesWithUsers = teams.map(teams => {
+             teams.users = teams.users.map(user => users.find(el => user.userId  === el._id ) );
+             return teams
+         })
+         console.log('cities index'+citiesWithUsers)
+         this.props.addteams(citiesWithUsers)
 
 
 
 
-    }*/
+     }*/
 
 
     deleteC = (id) => {
@@ -72,7 +74,7 @@ class Teamcard extends Component {
                             </div>
                             <div className={"form-group row"}>
                                 <h6 className={"typeeeb name text-left ml-4"}>City</h6>
-                                <h6 className={" text-left ml-3"}>{team.cityId.name}</h6>
+                                <h6 className={" text-left ml-3"}>{team.cityId.name || team.cityId }</h6>
 
                             </div>
                             <h5 className={"typeeeb text-left ml-2"}>Team members</h5>
@@ -111,7 +113,8 @@ class Teamcard extends Component {
 const mapStateToProps = (state) => {
     return {
         team: state.team,
-        user: state.user
+        user: state.user,
+        city: state.city
     }
 }
 

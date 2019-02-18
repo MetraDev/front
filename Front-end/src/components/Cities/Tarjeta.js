@@ -41,6 +41,7 @@ class Tarjeta extends Component {
 
 
 
+
     /*encontrarUs = (id, dos) => { // id del usuario, id de la tarjeta
         var config = {
             headers: {'Authorization': token}
