@@ -5,11 +5,24 @@
 # You can specify a custom docker image from Docker Hub as your build environment.
 image: node:6.9.4
 
+clone:
+  depth: full
+
 pipelines:
   default:
     - step:
-        caches:
+        name: Build the project
+        caches: # Cache node_modules directory, sonarcloud and node-scanner
           - node
-        script: # Modify the commands below to build your repository.
+          - sonarcloud
+          - node-scanner
+        script:
+          - cd Front-end
           - npm install
-          - npm test
+          #- npm install -g sonarqube-scanner
+          #- sonar-scanner
+
+definitions:
+  caches:
+    sonarcloud: ~/.sonar/cache
+    node-scanner: ~/.sonar/native-sonar-scanner
