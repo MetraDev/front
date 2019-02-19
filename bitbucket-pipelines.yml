@@ -19,8 +19,8 @@ pipelines:
         script:
           - cd Front-end
           - npm install
-          - npm install -g sonarqube-scanner
-          - sonar-scanner
+          #- npm install -g sonarqube-scanner
+          #- sonar-scanner
 
 definitions:
   caches:
