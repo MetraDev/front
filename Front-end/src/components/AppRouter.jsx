@@ -12,6 +12,7 @@ import login from "../pages/login";
 import cityId from "../pages/cities/cityId";
 import editUser from "../pages/user/editUser";
 import formteam from "../pages/team/formteam";
+import createIdea from "../pages/idea/fromularioIdea";
 
 
 class AppRouter extends Component{
@@ -71,6 +72,7 @@ class AppRouter extends Component{
             <Route path={'/city/:id'} component={cityId}  exact={true} />
             <Route path={'/user/:id'} component={editUser}  exact={true} />
             <Route path={'/formteam'} component={formteam}  exact={true} />
+            <Route path={'/createIdea'} component={createIdea}  exact={true} />
             <Redirect to={'/login'}/>
         </Switch>
         <div className=" footer footer-copyright text-center py-3 mt-4">© 2018 Copyright:Demium, All rights reserved</div>

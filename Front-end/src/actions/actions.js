@@ -197,6 +197,31 @@ export const modIdea=(stado,id) => {
     }
 }
 
+export const createIdea = (stado) => {
+    return {
+        type: actionTypesIdeas.crearIdea,
+        stado
+
+
+
+
+    }
+}
+
+export const deleteIdea = (id) => {
+    return {
+        type: actionTypesIdeas.deleteIdea,
+        id
+
+
+
+
+    }
+}
+
+
+
+
 
 
 

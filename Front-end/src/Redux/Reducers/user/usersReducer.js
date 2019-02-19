@@ -44,6 +44,7 @@ const reducer = (state = [] , action) => {
             state = state.filter( item =>  {
                 return item._id !== action.id});
             return [...state];
+
         case actionTypesUser.addUsuarios:
             console.log('llllll' + action.id + 'ssssssssssssss' + action.stado)
 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../../taridea.css';
-import { viewIdeass} from "../../actions/actions";
+import { viewIdeass, deleteIdea} from "../../actions/actions";
 import {connect} from "react-redux";
 import  {Link} from 'react-router-dom'
 import uuid from "uuid";
@@ -34,7 +34,20 @@ class TargetIdea extends Component {
 
 
 
+    deleteI = (id) => {
 
+        var config = {
+
+            headers: {'Authorization': token}
+        };
+        console.log('deletei' ,id)
+        axios.delete(`http://52.213.25.226:3030/idea/${id}`, config)
+            .then(res => {
+
+                this.props.deleteIdeass(id)
+            })
+            .catch(err => console.log('No ha funcionado delete', err));
+    }
 
 
 
@@ -44,8 +57,8 @@ class TargetIdea extends Component {
                 <div className={" col-md-4 mb-3"}>
                     <div className={"carder card  mt-4"}>
                         <div className={""}>
-                            <div className={" card-header bg-primary text-left"}>
-                                <h5 className={"text-white"}>{idea.title}</h5>
+                            <div className={" card-header bg-primary text-right"}>
+                                <button className={'text-danger'} onClick={()=> this.deleteI(idea._id)}>X</button>
                             </div>
                         </div>
                         <div className={"card-Body"}>
@@ -61,11 +74,11 @@ class TargetIdea extends Component {
                             <p className={"final text-left ml-2"}>{idea.description}</p>
                             <div className={"form-group row"}>
                                 <h6 className={"typeeeb text-left ml-4"}>Headquarter</h6>
-                                <h6 className={" text-left ml-3"}>{idea.Headquarter}</h6>
+                                <h6 className={" text-left ml-3"}>{idea.teamId === undefined ?  '' :idea.teamId.cityId === undefined ? '' :idea.teamId.cityId.name }</h6>
                             </div>
                             <div className={"form-group row"}>
                                 <h6 className={"typeeeb text-left ml-4"}>Team</h6>
-                                <h6 className={" text-left ml-3"}>{idea.teamId.name}</h6>
+                                <h6 className={" text-left ml-3"}>{idea.teamId === undefined ?  '' :idea.teamId.name }</h6>
                             </div>
                             <p className={"text-right mr-3"}>
                                 <button className={"text-rigth btn btn-primary mr-10"} >
@@ -92,11 +105,15 @@ const mapStateToProps = (state) => {
         idea: state.viewAdd
     }
 }
-const dispastchToProps=(dispatch,props )=>{
+const dispatchToProps=(dispatch,props )=>{
     return{
         view:(idea)=>dispatch(viewIdeass(idea)),
+        deleteIdeass:(id)=>dispatch(deleteIdea(id)),
 
     }
 }
 
-export default connect( mapStateToProps,dispastchToProps)(TargetIdea);
+export default connect( mapStateToProps,dispatchToProps)(TargetIdea);
+
+
+

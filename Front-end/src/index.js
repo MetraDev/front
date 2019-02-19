@@ -76,15 +76,6 @@ axios.get('http://52.213.25.226:3030/city', config)
     })
     .catch(err=> console.log('No ha funcionado users', err))
 
-
-/*axios.get('http://52.213.25.226:3030/city', config)
-    .then(res => {
-
-        store.dispatch({type: '@ADD_CITIES',
-            data: res.data.data})
-    })
-    .catch(err=> console.log('No ha funcionado users', err))*/
-
 //----------------------------------------------------------------------------------------------------------------------
 //USERS
 //----------------------------------------------------------------------------------------------------------------------
@@ -109,7 +100,7 @@ axios.get('http://52.213.25.226:3030/team', config)
                 const team = resteam.data.data;
 
                 const citiesWithUsers = team.map(team => {
-                    team.cityId = cities.find(el =>team.cityId === el._id )
+                    team.cityId= cities.find(el =>team.cityId && team.cityId === el._id )
                     return team
                 })
 
@@ -138,16 +129,6 @@ axios.get('http://52.213.25.226:3030/team', config)
     })
     .catch(err=> console.log('No ha funcionado users', err))
 
-
-
-
-
-/*axios.get('http://52.213.25.226:3030/team', config)
-    .then(res => {
-        store.dispatch({type: actionTypesTeam.addTeam,
-            data: res.data.data})
-    })
-    .catch(err => console.log('No ha funcionado users', err));*/
 //----------------------------------------------------------------------------------------------------------------------
 //IDEAS
 //----------------------------------------------------------------------------------------------------------------------
@@ -170,32 +151,24 @@ axios.get('http://52.213.25.226:3030/idea', config)
 
 
 
-                axios.get('http://52.213.25.226:3030/team',config)
+               /* axios.get('http://52.213.25.226:3030/team',config)
                     .then(resteam => {
                         const teams = resteam.data.data
 
                         const result = ideasWithUsers.map(idea => {
-                            idea.teamId = teams.find(el => idea.teamId === el._id || 'No existe el usuario' ) ;
+                            idea.teamId = teams.find(el =>  idea.teamId === el._id  ) ;
                             return idea
                         })
-                        console.log('holaaaaa' ,result)
+                        console.log('holaaaaa' ,result)*/
 
 
                         store.dispatch({
                             type: actionTypesIdeas.viewAdd,
-                            data: result})
+                            data: ideasWithUsers})
 
 
-                    })
-                    .catch(err=> console.log('No ha funcionado users', err))
-
-
-
-               /* console.log('Ideas index'+ideasWithUsers)
-                store.dispatch({
-                    type: actionTypesIdeas.viewAdd,
-                    data: ideasWithUsers})*/
-
+                   // })
+                    //.catch(err=> console.log('No ha funcionado users', err))
 
             })
             .catch(err=> console.log('No ha funcionado users', err))

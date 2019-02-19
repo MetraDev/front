@@ -64,7 +64,7 @@ class Teamcard extends Component {
                     <div className={"carder card  mt-4"}>
                         <div className={""}>
                             <div className={" card-header bg-primary text-left"}>
-                                <h5 className={"text-danger"}>Real unicorn</h5>
+                                <h5 className={"text-danger"}>{team.name}</h5>
                             </div>
                         </div>
                         <div className={"card-Body"}>

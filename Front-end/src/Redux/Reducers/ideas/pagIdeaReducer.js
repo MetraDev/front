@@ -10,7 +10,7 @@ export const actionTypesIdeasPages = {
 }
 
 
-const reducer = (state = idea , action) => {
+const reducer = (state = [] , action) => {
 
 
     switch (action.type) {
