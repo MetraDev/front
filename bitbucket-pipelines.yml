@@ -11,4 +11,5 @@ pipelines:
         caches:
           - node
         script: # Modify the commands below to build your repository.
-          - cd Front-end && npm install && npm test
+          - cd Front-end && npm install && cd ..
+          - cd Back-end && npm install
