@@ -17,8 +17,7 @@ pipelines:
           - sonarcloud
           - node-scanner
         script:
-          - cd Front-end && npm install && npm install -g sonarqube-scanner
-          - sonar-scanner
+          - cd Front-end && npm install && npm install -g sonarqube-scanner && sonar-scanner
 
 definitions:
   caches:
