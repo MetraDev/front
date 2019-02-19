@@ -95,15 +95,25 @@ class Formulario extends Component {
         }else
         axios.post('http://52.213.25.226:3030/city', state, config)
             .then(res => {
-                    console.log('resss' , res.data)
+
                 this.props.addCities(res.data)
 
             })
-            .catch(err => console.log('No ha funcionado', err));
+            .catch(err => this.setState({err:true}) );
+
 
     }
 
     render() {
+        if (this.state.err === true){
+
+            return(<h1 className={'bg-danger text-dark'}>
+
+                ERROR DE CARGA , VUELVA A INTENTARLO MAS TARDE
+
+
+            </h1>)
+        }else
 
         return (
 
@@ -128,10 +138,12 @@ class Formulario extends Component {
                                     <option>Madrid</option>
                                     <option>Valencia</option>
                                     <option>Barcelona</option>
-                                    <option>Zaragoza</option>
+                                    <option>Londres</option>
                                     <option>Bilbao</option>
-                                    <option>Roma</option>
+                                    <option>Milan</option>
                                     <option>Moscu</option>
+                                    <option>Minsk</option>
+                                    <option>Oporto</option>
                                 </select>
                             </div>
                             <div className="form-group row">
@@ -179,7 +191,7 @@ class Formulario extends Component {
                                         onChange={this.introDatos} >
                                     {this.props.user.map((usr) => {
                                     return (
-                                    <option name={'nom2'} value={JSON.stringify(usr)}>{usr.name}</option>)})}
+                                    <option name={'nom2'} value={JSON.stringify(usr)}>{usr.name}{':'} {usr.roleId}</option>)})}
                                 </select>
                                 <button className="col-sm-2 ml-4 btn btn-primary"
                                         onClick={(e)=>{e.preventDefault()

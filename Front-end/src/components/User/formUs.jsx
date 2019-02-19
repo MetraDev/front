@@ -14,7 +14,7 @@ class FormUs extends Component {
             surname: '',
             email: '',
             telephone: '',
-            roleId:'',
+            roleId:'None',
             nom1:[],
         };
     }

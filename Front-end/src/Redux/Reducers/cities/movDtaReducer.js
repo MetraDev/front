@@ -12,9 +12,9 @@ const reducer = (state =[] ,action) => {
 
         case actionTypesNom.envNom:
             console.log('reducer'+ action.id)
+            state =action.id
 
-
-            return [ action.id]
+            return [ state]
 
 
         default:

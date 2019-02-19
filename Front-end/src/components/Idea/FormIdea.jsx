@@ -97,7 +97,9 @@ class FormIdea extends Component {
                             <select className={'select'} id={'select'}
                                     name={'businessModelId'}
                                     onChange={this.introDatos} >
+                                <option>{this.props.obj[0].name}</option>
                                 {this.props.businessModel.map((business) => {
+
                                     return (
                                         <option name={'nom2'} value={JSON.stringify(business)}>{business.name}</option>)})}
                             </select>
@@ -118,11 +120,11 @@ class FormIdea extends Component {
                         </div>
                         <div className={"form-group row ml-1 mt-3"}>
                             <h5 className={"text-left text-light col-sm-3"}>Headquarter</h5>
-                            <label className={"text-left text-light col-sm-2 "}><b>{item.teamId.cityId.name}</b></label>
+                            <label className={"text-left text-light col-sm-2 "}><b>{item.teamId === undefined ?  '' :item.teamId.cityId === undefined ? '' :item.teamId.cityId.name }</b></label>
                         </div>
                         <div className={"form-group row ml-1"}>
                             <h5 className={"text-left text-light col-sm-3"}>Team name</h5>
-                            <label className={"text-left text-light col-sm-3 "}><b>{item.teamId.name}</b></label>
+                            <label className={"text-left text-light col-sm-3 "}><b>{item.teamId === undefined ?  '' :item.teamId.name }</b></label>
                         </div>
                         <div className={"form-group row ml-1"}>
                             <h5 className={"text-left text-light col-sm-3"}>Black date</h5>

@@ -12,7 +12,7 @@ class FormTeam extends Component {
 
 
         this.state={
-            name:'idea',
+            name:'No hay idea',
             cityId:{},
             usersDemium:[],
             users:[],
@@ -120,6 +120,16 @@ class FormTeam extends Component {
 
 
     render() {
+
+        if (this.state.err === true){
+
+            return(<h1 className={'bg-danger text-dark'}>
+
+                ERROR DE CARGA , VUELVA A INTENTARLO MAS TARDE
+
+
+            </h1>)
+        }else
         return (
             <div className={"card-header text-light"}>
                 <nav className={"navbar navbar-dark mt-3"}>

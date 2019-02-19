@@ -18,7 +18,8 @@ class Tarjeta extends Component {
         this.envios = 0;
         this.state = {
             variable: [],
-            datos: []
+            datos: [],
+            err:false
         }
 
 
@@ -36,7 +37,12 @@ class Tarjeta extends Component {
             .then(res => {
                 this.props.deleteCityy(id)
             })
-            .catch(err => console.log('No ha funcionado delete', err));
+            .catch(err => this.setState({err:false})
+            );
+    }
+
+    change=()=>{
+        this.setState({err:false})
     }
 
     
@@ -88,6 +94,15 @@ class Tarjeta extends Component {
 
 
     render() {
+        if (this.state.err === true){
+
+            return(<a onClick={()=>this.change()}><h1 className={'bg-danger text-dark'}>
+
+                ERROR DE CARGA , VUELVA A INTENTARLO MAS TARDE
+
+
+            </h1></a>)
+        }else
 
         this.envios++
         const todo = this.props.city.map((todo) => {
@@ -117,7 +132,7 @@ class Tarjeta extends Component {
                                     <h6 className={"text-light"}>{'DEL'}</h6>
                                 </button >
                                 <button className={"text-rigth badge badge-danger mr-10"}
-                                        onClick={() => this.props.movNom(todo._id)}>
+                                        onClick={() => this.props.movNom(this.state)}>
                                     <Link to={`/city/${todo._id}`}><h6 className={"text-light"}>{'EDIT'}</h6></Link>
                                 </button>
                             </p>

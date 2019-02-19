@@ -14,7 +14,7 @@ class EditUser extends Component {
 
             name: '',
             surname: '',
-            roleId:'',
+            roleId:'none',
             email: '',
             telephone: '',
             nom1:[],
