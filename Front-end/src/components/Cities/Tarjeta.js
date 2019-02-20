@@ -124,7 +124,7 @@ class Tarjeta extends Component {
                             <h6 className={"text-left ml-3 text-primary"}>Demium Team</h6>
                             <p > {todo.users.map(usuario =>{return(
                                 <p className={"text-left ml-3 "}>
-                                    {usuario.name} {usuario.roleId}
+                                    {usuario && usuario.name} {usuario &&usuario.roleId}
                                 </p>)})}</p>
                             <p className={"text-right mr-3"}>
                                 <button className={"text-rigth badge badge-primary mr-10"}
@@ -132,7 +132,7 @@ class Tarjeta extends Component {
                                     <h6 className={"text-light"}>{'DEL'}</h6>
                                 </button >
                                 <button className={"text-rigth badge badge-danger mr-10"}
-                                        onClick={() => this.props.movNom(this.state)}>
+                                        onClick={() => this.props.movNoms(todo)}>
                                     <Link to={`/city/${todo._id}`}><h6 className={"text-light"}>{'EDIT'}</h6></Link>
                                 </button>
                             </p>
@@ -170,7 +170,7 @@ const dispastchToProps = (dispatch, props) => {
             dispatch(modCity(id, nom, indx))
         },
         addCities: (cities) => dispatch(addCities(cities)),
-        movNom: (id) => dispatch(movNom(id)),
+        movNoms: (estado) => dispatch(movNom(estado)),
     }
 }
 export default connect(mapStateToProps, dispastchToProps)(Tarjeta);

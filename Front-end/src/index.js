@@ -58,9 +58,10 @@ axios.get('http://52.213.25.226:3030/city', config)
     .then(resuser => {
         const cities = rescity.data.data;
         const users = resuser.data.data;
+        console.log('stadoo city' , cities)
 
         const citiesWithUsers = cities.map(city => {
-            city.users = city.users.map(user => users.find(el =>user.id||user._id === el._id ) );
+            city.users = city.users.map(user => user && users.find(el =>el && user.id || user._id === el._id ) );
             return city
         })
 

@@ -134,10 +134,10 @@ export const modTar=(stado,id) => {
 
     }
 }
-export const movNom =(id) => {
+export const movNom =(estado) => {
     return {
         type: actionTypesNom.envNom,
-        id
+        estado
 
 
     }

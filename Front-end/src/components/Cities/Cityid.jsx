@@ -16,8 +16,7 @@ class Cityid extends Component {
             address: '',
             telephone: '',
             users:[],
-            nom1:[],
-            nom2:''
+
         };
 
 
@@ -27,7 +26,7 @@ class Cityid extends Component {
     añadirUser = (nom) =>{
         this.state.nom2 = JSON.parse(nom)
 
-
+            console.log('')
         if (this.state.users.some(item => this.state.nom2.name === item.name ))
         {alert('ya hay un role ')
         } else {
@@ -39,7 +38,7 @@ class Cityid extends Component {
 
 
     remove = name => {
-        this.setState({users:this.state.users.filter(item => item.name !== name)});
+        this.setState({users:this.state.users.filter(item =>item && item.name !== name)});
     };
 
 
@@ -55,8 +54,8 @@ class Cityid extends Component {
 
 
 
-        console.log('puffff', this.props.id)
-        let obj = this.props.city.filter(city=> city._id === this.props.id[0])
+        console.log('puffff', this.props.obj)
+        let obj = this.props.city.filter(city=> city._id === this.props.obj[0]._id)
         console.log('puffff', obj[0])
         this.setState(obj[0])
         }
@@ -74,7 +73,7 @@ class Cityid extends Component {
             alert('añade 2 usuarios')
         }
 
-        this.setState({users:[{id:'5c5b3f1c818f2c243aea3d73'},{id:'5c5b3f1c818f2c243aea3d73'}]})
+
     }
 
     introDatos = (event) =>
@@ -98,9 +97,9 @@ class Cityid extends Component {
         var config = {
             headers: {'Authorization':  token}
         };
-        console.log('el estado',this.props.obj.id)
+        console.log('el estado',this.props.obj)
 
-        axios.put(`http://52.213.25.226:3030/city/${this.props.obj}`, state, config)
+        axios.put(`http://52.213.25.226:3030/city/${this.props.obj[0]._id}`, state, config)
                 .then(res => {
 
                     console.log('el estado', res.data)
@@ -200,7 +199,7 @@ class Cityid extends Component {
                                 <div>
                                     {this.state.users.map(added =>{return(
                                         <div>
-                                            {added.name}
+                                            {added && added.name}
                                             <span onClick={() => this.remove(added.name)}>x</span>
 
                                         </div>)})}
