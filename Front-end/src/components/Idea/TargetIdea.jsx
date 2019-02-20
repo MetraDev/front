@@ -49,10 +49,39 @@ class TargetIdea extends Component {
             .catch(err => console.log('No ha funcionado delete', err));
     }
 
+    getCities=(team)=>{
+        let city= ''
+
+        if(team)
+         city = this.props.city.filter(item => item._id === team.cityId)
+
+        console.log('pufffffffffff', city)
+
+        if(city[0])
+        return(
+            <h6>{city[0].name}</h6>
+
+
+        )
+
+
+    }
+
 
 
     render() {
-        let todo = this.props.idea.map((idea) => {
+
+      /*  this.nomid= '';
+        const teams = this.props.team;
+      const idea = this.props.idea;
+      const resultado =  idea.map(idea => {
+          console.log('iiiii',idea.teamId)
+          idea.teamId= idea && teams.find(el => idea.teamId &&  idea.teamId === el._id )
+          return idea
+      })*/
+
+
+        let todo =this.props.idea.map((idea) => {
             return (
                 <div className={" col-md-4 mb-3"}>
                     <div className={"carder card  mt-4"}>
@@ -73,8 +102,10 @@ class TargetIdea extends Component {
                             <h5 className={"typeeeb text-left ml-2"}>Description</h5>
                             <p className={"final text-left ml-2"}>{idea.description}</p>
                             <div className={"form-group row"}>
+                                {console.log('las xityyyy' , idea.teamId ? idea.teamId: '' )}
                                 <h6 className={"typeeeb text-left ml-4"}>Headquarter</h6>
-                                <h6 className={" text-left ml-3"}>{idea.teamId === undefined ?  '' :idea.teamId.cityId === undefined ? '' :idea.teamId.cityId.name }</h6>
+                                <h6 className={" text-left ml-3"}>{ idea.teamId === undefined ? '': idea.teamId.cityId === undefined ? '' :idea.teamId.cityId.name ? idea.teamId.cityId.name :this.getCities(idea.teamId)}</h6>
+
                             </div>
                             <div className={"form-group row"}>
                                 <h6 className={"typeeeb text-left ml-4"}>Team</h6>
@@ -102,7 +133,9 @@ class TargetIdea extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        idea: state.viewAdd
+        idea: state.viewAdd,
+        team: state.team,
+        city: state.city
     }
 }
 const dispatchToProps=(dispatch,props )=>{

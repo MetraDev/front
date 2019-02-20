@@ -13,12 +13,17 @@ class FormIdea extends Component {
         super(props);
         this.state = {
 
-            name: this.props.obj[0].name,
-            businessModelId: this.props.obj[0].businessModelId,
-            description:this.props.obj[0].description,
-            teamId: this.props.obj[0].businessModelId,
+            name: '',
+            businessModelId: '',
+            description:'',
+            teamId:'',
         };
 
+    }
+
+    componentDidMount() {
+        if (this.props.obj)
+        this.setState(this.props.obj[0])
     }
 
     createIdea = (state,id) => {
@@ -33,6 +38,7 @@ class FormIdea extends Component {
 
                 res.data.businessModelId = this.state.businessModelId
                 res.data.teamId = this.state.teamId
+                res.data.teamId.cityId =this.state.teamId.cityId
 
                 console.log('el estado', res.data)
                 this.props.modIdeas(res.data,id)
@@ -97,7 +103,6 @@ class FormIdea extends Component {
                             <select className={'select'} id={'select'}
                                     name={'businessModelId'}
                                     onChange={this.introDatos} >
-                                <option>{this.props.obj[0].name}</option>
                                 {this.props.businessModel.map((business) => {
 
                                     return (

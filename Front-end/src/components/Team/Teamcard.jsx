@@ -58,6 +58,13 @@ class Teamcard extends Component {
 
 
     render() {
+       /* const teams = this.props.team;
+        const city = this.props.city;
+        const resultado =  teams.map(team => {
+            team.cityId= city.find(el =>team.cityId && team.cityId === el._id )
+            return team
+        })*/
+
         const team = this.props.team.map((team) => {
             return (
                 <div className={" col-md-4 mb-3"}>
@@ -86,7 +93,7 @@ class Teamcard extends Component {
                                 <h5 className={"typeeeb text-left ml-2"}>Demium team</h5>
                                 <p > {team.cityId.users.map(usuario =>{return(
                                     <p className={"text-left ml-3 "}>
-                                        {usuario.name} {usuario.roleId}
+                                        { usuario && usuario.name} { usuario && usuario.roleId}
                                     </p>)})}</p>
                             </div>
                             <p className={" row-right text-right mr-3"}>

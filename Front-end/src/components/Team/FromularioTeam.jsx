@@ -95,6 +95,7 @@ class FormTeam extends Component {
                         res.data.cityId = this.state.cityId
 
                     this.props.fromTeams(res.data)
+                this.setState({nom3: {...this.state.nom3, teamId:res.data._id }})
 
                 stado.nom3.teamId =res.data
                 console.log(' stado.name.teamId =res.data._id', stado.nom3.teamId)
@@ -209,7 +210,7 @@ class FormTeam extends Component {
                     <div className={"form-group row"}>
                         <p > {this.state.usersDemium.map(usuario =>{return(
                             <p className={"text-left ml-3 "}>
-                                {usuario.name} {usuario.roleId}
+                                {usuario && usuario.name} {usuario && usuario.roleId}
                             </p>)})}</p>
                     </div>
                     <div className={"text-right"}>

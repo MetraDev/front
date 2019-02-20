@@ -152,24 +152,27 @@ axios.get('http://52.213.25.226:3030/idea', config)
 
 
 
-               /* axios.get('http://52.213.25.226:3030/team',config)
+               axios.get('http://52.213.25.226:3030/team',config)
                     .then(resteam => {
                         const teams = resteam.data.data
 
+                        console.log('noseeee', teams)
+
                         const result = ideasWithUsers.map(idea => {
-                            idea.teamId = teams.find(el =>  idea.teamId === el._id  ) ;
+                            console.log('noseeee', idea.teamId )
+                            idea.teamId = idea.teamId && teams.find(el => el &&  idea.teamId === el._id  ) ;
                             return idea
                         })
-                        console.log('holaaaaa' ,result)*/
+                        console.log('holaaaaa' ,result)
 
 
                         store.dispatch({
                             type: actionTypesIdeas.viewAdd,
-                            data: ideasWithUsers})
+                            data: result})
 
 
-                   // })
-                    //.catch(err=> console.log('No ha funcionado users', err))
+                   })
+                    .catch(err=> console.log('No ha funcionado users', err))
 
             })
             .catch(err=> console.log('No ha funcionado users', err))

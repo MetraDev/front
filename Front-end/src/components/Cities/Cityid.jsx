@@ -103,7 +103,7 @@ class Cityid extends Component {
                 .then(res => {
 
                     console.log('el estado', res.data)
-                    this.props.addCities(res.data,this.props.obj)
+                    this.props.addCities(res.data,this.props.obj[0]._id)
 
 
                 })

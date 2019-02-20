@@ -1,10 +1,12 @@
-
+require('./config/environment');
+require('./config/mongoose');
+//const port = +process.argv.slice(2)[0]|| process.env.PORT || 3001;
+const PORT = process.PORT;
 const express = require('express')
 const app = express();
 const bodyParser= require('body-parser')
-const port = +process.argv.slice(2)[0]|| process.env.PORT || 3001;
 
-require('./config/mongoose');
+
 
 
 
@@ -17,4 +19,4 @@ app.use('/city', require ('./Routes/city.js'))
 
 
 
-app.listen(port, ()=> console.log(`Servidor escuchando en el puerto ${port}`))
+app.listen(PORT, ()=> console.log(`Servidor escuchando en el puerto ${PORT}`))
