@@ -94,9 +94,12 @@ class FormTeam extends Component {
 
 
         })
+        console.log('la promseeeeee' ,promises)
         Promise.all(promises).then(values => {
             console.log('dataas promises' ,values,values._id )
-            this.props.addUsers(values,values._id) // [3, 1337, "foo"]
+
+
+            this.props.addUsers(values[0] && values[0].data,values[0].data && values[0].data._id) // [3, 1337, "foo"]
         });
 
 

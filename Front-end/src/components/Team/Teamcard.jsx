@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../../taridea.css';
-import {addTeam, delTeam, modTeam, showTeam} from "../../actions/actions";
+import {addTeam, deleteUser, delTeam, modTeam, showTeam} from "../../actions/actions";
 import {connect} from "react-redux";
 import {token} from "../../index";
 import axios from "axios";
@@ -60,10 +60,10 @@ class Teamcard extends Component {
             headers: {'Authorization': token}
         };
         console.log('user',user)
-        if(user.length < 0){
+        if(user.length < 0 || user[0] == null ){
             console.log('user',user)
             axios.delete(`http://52.213.25.226:3030/team/${id}`, config)
-                .then(res => this.props.deleteUserS(id))
+                .then(res => this.props.delTeams(id))
                 .catch(err => console.log(err))
         }
 
@@ -101,7 +101,7 @@ class Teamcard extends Component {
                             <h5 className={"typeeeb text-left ml-2"}>Team members</h5>
                             <p > {team.users.map(usuario =>{return(
                                 <p className={"text-left ml-3 "}>
-                                    {usuario.name} {usuario.roleId}
+                                    {usuario && usuario.name} {usuario && usuario.roleId}
                                 </p>)})}</p>
                             <div className={"form-group"}>
                                 <h5 className={"typeeeb text-left ml-2"}>Demium team</h5>
@@ -149,6 +149,7 @@ const dispastchToProps=(dispatch,props )=>{
         showTeamm:(data) =>dispatch(showTeam(data)),
         delTeams:(id) =>dispatch(delTeam(id)),
         addteams:(stado) =>dispatch(addTeam(stado)),
+
 
 
     }

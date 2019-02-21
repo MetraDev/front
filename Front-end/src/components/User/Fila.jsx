@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import '../../file.css'
 import FormUs from "./formUs";
 import {connect} from 'react-redux';
-import {deleteUser, editUser} from "../../actions/actions";
+import {deleteUser, editUser, modIdea} from "../../actions/actions";
 import {token} from "../../index";
 import {Link} from 'react-router-dom'
 import axios from "axios";
@@ -21,7 +21,7 @@ class Fila extends Component {
     }
 
 
-    deleteC = (id) => {
+    deleteC = (id,team) => {
         var config = {
             headers: {'Authorization': token}
         };
@@ -32,6 +32,27 @@ class Fila extends Component {
                     this.props.obj.push(index)
                 }
                 this.props.deleteUserS(id)
+
+               let teams = this.props.team.find(item=> item &&  item.name === team )
+                console.log('filaaaa133',teams)
+               let result = teams && teams.users.filter(item => item && item._id !== id)
+                console.log('filaaaa11',result)
+
+                if(teams){
+                    teams.users = result
+                    console.log('filaaaa2',teams.users )
+                this.props.modIdeas(teams,teams._id)}
+
+                let city = this.props.city.find(item=> item &&  item.name === team )
+                let cityRes = city && city.users.filter(item => item && item._id !== id)
+                console.log('result',cityRes)
+
+                if(city){
+                    city.users = cityRes
+                    console.log('filacityaaa',city.users )
+                    this.props.modIdeas(city,city._id)}
+
+
             })
             .catch(err => console.log('No ha funcionado delete', err));
     }
@@ -51,7 +72,7 @@ class Fila extends Component {
                         <td colSpan={"1"}>{user.roleId}</td>
                         <td colSpan={"1"}>{user.telephone }</td>
                         <td width="1" height="50" >
-                        <button  onClick={() => this.deleteC(user._id)} className="col-sm-5 text-center btn btn-dark">
+                        <button  onClick={() => this.deleteC(user._id,user.telephone)} className="col-sm-5 text-center btn btn-dark">
                             <h5 className={'text-center'}>X</h5>
                         </button></td>
                     </tr>
@@ -90,6 +111,8 @@ class Fila extends Component {
 const mapStateToProps = (state) => {
     return {
         obj: state.user,
+        team: state.team,
+        city: state.city
 
     }
 }
@@ -97,6 +120,7 @@ const dispastchToProps = (dispatch, props) => {
     return {
         editUser: (id) => dispatch(editUser(id)),
         deleteUserS: (id) => dispatch(deleteUser(id)),
+        modIdeas:(stado,id)=>dispatch(modIdea(stado,id))
     }
 }
 

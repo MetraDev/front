@@ -127,7 +127,7 @@ class Team extends Component {
                     { console.log(this.props.obj)}
                     <div className={"text-left"}>
                         <h4 className={"colores"}>Idea </h4>
-                        <p className={"text-light "}>Plese select the idea that the team will be developing</p>
+                        <p className={"text-light "}>Please select the idea that the team will be developing</p>
                     </div>
                     <div className={"form-group row text-left"}>
                         <h6 className={" col-sm-2"}>Selected idea</h6>
@@ -147,7 +147,7 @@ class Team extends Component {
                     </div>
                     <div className={"text-left"}>
                         <h4 className={"colores"}>Headquarter </h4>
-                        <p className={"text-light "}>Plese select the headquarter where the team is located</p>
+                        <p className={"text-light "}>Please select the headquarter where the team is located</p>
                     </div>
                     <div className={"form-group row text-left"}>
                         <h6 className={"col-sm-2"}>Selected city</h6>
@@ -175,10 +175,10 @@ class Team extends Component {
 
                     <div className={"text-left"}>
                         <h4 className={"colores mt-3"}>Team members </h4>
-                        <p className={"text-light "}>Plese select the team members and choose their roles </p>
+                        <p className={"text-light "}>Please select the team members and choose their roles </p>
 
                     </div>
-                    <h5 className={"colores text-left"}>Selceted members </h5>
+                    <h5 className={"colores text-left"}>Selected members </h5>
                     <select className={'select'} id={'select'}
                             name={'nom1'}
                             onChange={this.introDatos} >
@@ -206,7 +206,7 @@ class Team extends Component {
                     </div>
                     <div className={"text-left"}>
                         <h4 className={"colores mt-3"}>Demium Team</h4>
-                        <p className={"text-light "}>Plese select the team members and choose their roles </p>
+                        <p className={"text-light "}>Please select the team members and choose their roles </p>
                     </div>
                     <div>
                         {console.log('los users' ,this.props.obj )}

@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import axios from "axios";
 import {token} from '../../index'
 import {BrowserRouter, Switch, Route, Redirect, Link, NavLink} from 'react-router-dom'
-import {deleteCity, modCity, addCities,movNom} from "../../actions/actions";
+import {deleteCity, modCity, addCities, movNom, modTar} from "../../actions/actions";
 import {getCities} from '../../index'
 
 
@@ -36,6 +36,19 @@ class Tarjeta extends Component {
         axios.delete(`http://52.213.25.226:3030/city/${id}`, config)
             .then(res => {
                 this.props.deleteCityy(id)
+
+
+
+
+               let team = this.props.team.filter(item => item && item.cityId && item.cityId._id === id)
+
+                let teams= team[0]
+
+                if(teams){
+                    teams.cityId=''
+                    console.log('filacityaaa', teams.cityId )
+                    console.log('filacityaaa', teams )
+                    this.props.addTeami(teams,teams._id)}
             })
             .catch(err => this.setState({err:false})
             );
@@ -159,6 +172,7 @@ const mapStateToProps = (state) => {
     return {
         city: state.city,
         user: state.user,
+        team: state.team,
     }
 
 }
@@ -171,6 +185,7 @@ const dispastchToProps = (dispatch, props) => {
         },
         addCities: (cities) => dispatch(addCities(cities)),
         movNoms: (estado) => dispatch(movNom(estado)),
+        addTeami:(stado,id)=> dispatch (modTar(stado,id)),
     }
 }
 export default connect(mapStateToProps, dispastchToProps)(Tarjeta);
