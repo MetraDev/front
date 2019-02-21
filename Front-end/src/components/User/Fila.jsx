@@ -40,13 +40,14 @@ class Fila extends Component {
 
     render() {
         const user = this.props.obj.map((user) => {
+
                 return (
                     <tr>
                         <td colSpan={"1"}><Link to={'/user/:id'}
                                                 onClick={() => this.props.editUser(user._id)}>{user.name + ' ' + user.surname}</Link></td>
                         <td colSpan={"1"}>{user.email}</td>
                         <td colSpan={"1"}>{user.roleId}</td>
-                        <td colSpan={"1"}>{user.telephone}</td>
+                        <td colSpan={"1"}>{user.telephone }</td>
                         <td width="1" height="50" >
                         <button  onClick={() => this.deleteC(user._id)} className="col-sm-5 text-center btn btn-dark">
                             <h5 className={'text-center'}>X</h5>

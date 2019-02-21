@@ -99,6 +99,35 @@ class Cityid extends Component {
         };
         console.log('el estado',this.props.obj)
 
+        var n1 = this.state.users && this.state.users[0]
+        var n2 = this.state.users && this.state.users[1]
+
+        if(n1){
+            n1.telephone =this.state.name
+            axios.put(`http://52.213.25.226:3030/user/${n1._id}`, n1, config)
+                .then(res => {
+
+                    this.props.addUsers(n1,n1._id)
+
+                    if(n2){
+                        n2.telephone =this.state.name
+                        axios.put(`http://52.213.25.226:3030/user/${n2._id}`, n2, config)
+                            .then(res => {
+
+                                if(n2){
+
+
+                                    this.props.addUsers(n2,n2._id)}
+
+                            })
+                            .catch(err => this.setState({err:true}) );}
+
+                })
+                .catch(err => this.setState({err:true}) );}
+
+
+
+
         axios.put(`http://52.213.25.226:3030/city/${this.props.obj[0]._id}`, state, config)
                 .then(res => {
 
@@ -112,7 +141,8 @@ class Cityid extends Component {
     }
 
     render() {
-
+        const roles = this.props.user.filter(item =>{if (item.roleId === "TM" ||item.roleId === "DP" ) return item})
+        const soloLibres = roles.filter(item =>{if (item.city === undefined) return item})
 
             return (
             <div className={"mb-3"}>
@@ -185,8 +215,8 @@ class Cityid extends Component {
                                 <select className={'select'} id={'select'}
                                         name={'nom2'}
                                         onChange={this.introDatos} >
-                                    <option>Selecciona un usuario</option>
-                                    {this.props.user.map((usr) => {
+                                    <option selected={'true' } value={''} disabled>Selecciona un usuario</option>
+                                    {roles.map((usr) => {
                                         return (
                                             <option name={'nom2'} value={JSON.stringify(usr)}>{usr.name}</option>)})}
                                 </select>
@@ -223,7 +253,7 @@ class Cityid extends Component {
 const mapStateToProps = (state ,props) => {
     return {
         obj: state.movNom,
-        user: state.user,
+        user: state.user.filter(item =>{if (item.roleId === "TM" ||item.roleId === "DP" ) return item}),
         city: state.city
     }
 

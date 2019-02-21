@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import '../../forms.css';
 import {connect} from "react-redux";
-import {addCities,formCity} from "../../actions/actions";
+import {addCities, addUser, editUser, formCity} from "../../actions/actions";
 import axios from "axios";
 import {token} from '../../index'
 
@@ -13,7 +13,7 @@ class Formulario extends Component {
         this.count =0;
         this.state = {
 
-            name: 'Madrid',
+
             address: '',
             telephone: '',
             users:[],
@@ -36,7 +36,7 @@ class Formulario extends Component {
         }
 
         this.setState({
-            name: 'Madrid',
+
             address: '',
             telephone: '',
             users:[],
@@ -93,6 +93,43 @@ class Formulario extends Component {
 
            alert('pollitos')
         }else
+
+
+        var n1 = this.state.users && this.state.users[0]
+        var n2 = this.state.users && this.state.users[1]
+
+
+
+
+
+        if(n1){
+            n1.telephone =this.state.name
+        axios.put(`http://52.213.25.226:3030/user/${n1._id}`, n1, config)
+            .then(res => {
+
+                this.props.addUsers(n1,n1._id)
+
+                if(n2){
+                    n2.telephone =this.state.name
+                axios.put(`http://52.213.25.226:3030/user/${n2._id}`, n2, config)
+                    .then(res => {
+
+                        if(n2){
+
+
+                            this.props.addUsers(n2,n2._id)}
+
+                    })
+                    .catch(err => this.setState({err:true}) );}
+
+            })
+            .catch(err => this.setState({err:true}) );}
+
+
+
+
+
+
         axios.post('http://52.213.25.226:3030/city', state, config)
             .then(res => {
 
@@ -106,8 +143,8 @@ class Formulario extends Component {
 
     render() {
 
-        const roles = this.props.user.filter(item =>{if (item.roleId === "TM" ||item.roleId === "DP" ) return item})
-        const soloLibres = roles.filter(item =>{if (item.city === undefined) return item})
+
+
         if (this.state.err === true){
 
             return(<h1 className={'bg-danger text-dark'}>
@@ -194,7 +231,7 @@ class Formulario extends Component {
                                         name={'nom2'}
                                         onChange={this.introDatos} >
                                     <option selected={'true' } value={''} disabled>Selecciona un usuario</option>
-                                    {roles.map((usr) => {
+                                    {this.props.user.map((usr) => {
                                     return (
                                     <option name={'nom2'} value={JSON.stringify(usr)}>{usr.name}{':'} {usr.roleId}</option>)})}
                                 </select>
@@ -232,7 +269,7 @@ class Formulario extends Component {
 
 const mapStateToProps = (state ,props) => {
     return {
-        user: state.user,
+        user: state.user.filter(item =>{if (item.roleId === "TM" ||item.roleId === "DP" ) return item}),
         objs: state.movNom,
         role: state.role
     }
@@ -242,6 +279,7 @@ const mapStateToProps = (state ,props) => {
 const dispastchToProps=(dispatch,props )=>{
     return{
         addCities:(stado)=>dispatch(formCity(stado)),
+        addUsers:(stado,id)=>dispatch(addUser(stado,id)),
 
 
     }

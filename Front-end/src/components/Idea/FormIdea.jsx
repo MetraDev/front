@@ -103,7 +103,7 @@ class FormIdea extends Component {
                             <select className={'select'} id={'select'}
                                     name={'businessModelId'}
                                     onChange={this.introDatos} >
-                                <option>Select business</option>
+                                <option selected={'true' }  disabled>Select business</option>
                                 {this.props.businessModel.map((business) => {
 
                                     return (

@@ -139,7 +139,7 @@ class FormTeam extends Component {
                         <select className={'select from-control'} id={'select'}
                                 name={'nom3'}
                                 onChange={this.introDatos} >
-                            <option>Select idea</option>
+                            <option selected={'true' }  disabled>Select idea</option>
                             {ideas.map((idea) => {
                                 return (
                                     <option name={'nom3'} value={JSON.stringify(idea)}>{idea.name}</option>)})}
@@ -155,7 +155,7 @@ class FormTeam extends Component {
                         <select className={'select'} id={'select'}
                                 name={'nom2'}
                                 onChange={this.introDatos} >
-                            <option>Selecciona una ciudad</option>
+                            <option selected={'true' }  disabled>Selecciona una ciudad</option>
                             {this.props.city.map((city) => {
                                 return (
                                     <option name={'nom2'} value={JSON.stringify(city)}>{city.name}{': '}{city.address}</option>)})}
@@ -178,7 +178,7 @@ class FormTeam extends Component {
                     <select className={'select'} id={'select'}
                             name={'nom1'}
                             onChange={this.introDatos} >
-                        <option>Selecciona un usuario</option>
+                        <option selected={'true' }  disabled>Selecciona un usuario</option>
                         {this.props.user.map((usr) => {
                             return (
                                 <option name={'nom1'} value={JSON.stringify(usr)}>{usr.name}</option>)})}
