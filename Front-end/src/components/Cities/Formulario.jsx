@@ -189,6 +189,7 @@ class Formulario extends Component {
                                 <select className={'select'} id={'select'}
                                         name={'nom2'}
                                         onChange={this.introDatos} >
+                                    <option>Selecciona un usuario</option>
                                     {this.props.user.map((usr) => {
                                     return (
                                     <option name={'nom2'} value={JSON.stringify(usr)}>{usr.name}{':'} {usr.roleId}</option>)})}

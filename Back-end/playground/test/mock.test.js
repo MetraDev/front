@@ -55,9 +55,3 @@ describe ('Mock de funciones', ()=> {
 
     })
 })
-
-
-slect[0].name
-slect[0].name
-
-select[0] && select[0].name

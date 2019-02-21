@@ -16,7 +16,7 @@ class Team extends Component {
             name:this.props.obj.name,
             cityId:this.props.obj.cityId,
             users:this.props.obj.users,
-            usersDemium:this.props.obj.cityId.users,
+            usersDemium: this.props.obj.cityId && this.props.obj.cityId.users,
             nom1:'',
             nom2:''
 
@@ -136,6 +136,7 @@ class Team extends Component {
                         <select className={'select from-control'} id={'select'}
                                 name={'nom3'}
                                 onChange={this.introDatos} >
+                            <option>Selecciona una idea</option>
                             {this.props.idea.map((idea) => {
                                 return (
                                     <option name={'nom3'} value={JSON.stringify(idea)}>{idea.name}</option>)})}
@@ -148,12 +149,13 @@ class Team extends Component {
                     </div>
                     <div className={"form-group row text-left"}>
                         <h6 className={"col-sm-2"}>Selected city</h6>
-                        <p className={"col-sm-2 text-light"}>{this.props.obj.cityId.name}</p>
+                        <p className={"col-sm-2 text-light"}>{this.state.cityId && this.state.cityId.name}</p>
                     </div><div className={"form-group row text-left"}>
                         <h6 className={"col-sm-2"}>Change city</h6>
                         <select className={'select'} id={'select'}
                                 name={'nom2'}
                                 onChange={this.introDatos} >
+                            <option>Selecciona una ciudad</option>
                             {this.props.city.map((city) => {
                                 return (
                                     <option name={'nom2'} value={JSON.stringify(city)}>{city.name}</option>)})}
@@ -178,6 +180,7 @@ class Team extends Component {
                     <select className={'select'} id={'select'}
                             name={'nom1'}
                             onChange={this.introDatos} >
+                        <option>Selecciona un usuario</option>
                         {this.props.user.map((usr) => {
                             return (
                                 <option name={'nom1'} value={JSON.stringify(usr)}>{usr.name}</option>)})}
@@ -192,7 +195,7 @@ class Team extends Component {
                     </button>
                     <div>
                         {console.log('los users' ,this.props.obj )}
-                        {this.state.users.map(added =>{return(
+                        {this.state.users && this.state.users.map(added =>{return(
                             <div>
                                 {added && added.name}{added && added.roleId}
 
@@ -205,7 +208,7 @@ class Team extends Component {
                     </div>
                     <div>
                         {console.log('los users' ,this.props.obj )}
-                        {this.state.usersDemium.map(added =>{return(
+                        {this.state.usersDemium && this.state.usersDemium.map(added =>{return(
                             <div>
                                 {added && added.name}{added && added.roleId}
                             </div>)})}

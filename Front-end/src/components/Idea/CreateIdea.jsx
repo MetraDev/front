@@ -108,6 +108,7 @@ class CreateIdea extends Component {
                                 <select className={'select'} id={'select'}
                                         name={'businessModelId'}
                                         onChange={this.introDatos} >
+                                    <option>Select business</option>
                                     {this.props.businessModel.map((business) => {
                                         return (
                                             <option name={'nom2'} value={JSON.stringify(business)}>{business.name}</option>)})}

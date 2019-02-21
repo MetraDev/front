@@ -160,6 +160,7 @@ class EditUser extends Component {
                                     className="col-sm-3 mt-2 form-control  "
                                     value={this.state.roleId}
                                     onChange={this.introDatos}>
+                                    <option>Selecciona un role</option>
                                     {this.props.role.map((usr) => {
 
                                         return (

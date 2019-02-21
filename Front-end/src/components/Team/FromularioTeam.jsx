@@ -161,6 +161,7 @@ class FormTeam extends Component {
                         <select className={'select'} id={'select'}
                                 name={'nom2'}
                                 onChange={this.introDatos} >
+                            <option>Selecciona una ciudad</option>
                             {this.props.city.map((city) => {
                                 return (
                                     <option name={'nom2'} value={JSON.stringify(city)}>{city.name}{': '}{city.address}</option>)})}
@@ -183,6 +184,7 @@ class FormTeam extends Component {
                     <select className={'select'} id={'select'}
                             name={'nom1'}
                             onChange={this.introDatos} >
+                        <option>Selecciona un usuario</option>
                         {this.props.user.map((usr) => {
                             return (
                                 <option name={'nom1'} value={JSON.stringify(usr)}>{usr.name}</option>)})}

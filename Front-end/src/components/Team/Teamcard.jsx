@@ -81,7 +81,7 @@ class Teamcard extends Component {
                             </div>
                             <div className={"form-group row"}>
                                 <h6 className={"typeeeb name text-left ml-4"}>City</h6>
-                                <h6 className={" text-left ml-3"}>{team.cityId.name || team.cityId }</h6>
+                                <h6 className={" text-left ml-3"}>{team.cityId && team.cityId.name || team.cityId }</h6>
 
                             </div>
                             <h5 className={"typeeeb text-left ml-2"}>Team members</h5>
@@ -91,7 +91,7 @@ class Teamcard extends Component {
                                 </p>)})}</p>
                             <div className={"form-group"}>
                                 <h5 className={"typeeeb text-left ml-2"}>Demium team</h5>
-                                <p > {team.cityId.users.map(usuario =>{return(
+                                <p > {team.cityId && team.cityId.users.map(usuario =>{return(
                                     <p className={"text-left ml-3 "}>
                                         { usuario && usuario.name} { usuario && usuario.roleId}
                                     </p>)})}</p>
