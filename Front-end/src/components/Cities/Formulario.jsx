@@ -99,20 +99,6 @@ class Formulario extends Component {
         var n2 = this.state.users && this.state.users[1]
 
 
-        var p1 = Promise.resolve(3);
-        var p2 = 1337;
-        var p3 = new Promise((resolve, reject) => {
-            setTimeout(resolve, 100, "foo");
-        });
-
-        Promise.all([p1, p2, p3]).then(values => {
-            console.log(values); // [3, 1337, "foo"]
-        });
-
-
-
-
-
         if(n1){
             n1.telephone =this.state.name
         axios.put(`http://52.213.25.226:3030/user/${n1._id}`, n1, config)

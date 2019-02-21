@@ -54,6 +54,20 @@ class Teamcard extends Component {
             })
             .catch(err => console.log('No ha funcionado delete', err));
     }
+    autoDelete=(user,id)=>{
+        var config = {
+
+            headers: {'Authorization': token}
+        };
+        console.log('user',user)
+        if(user.length < 0){
+            console.log('user',user)
+            axios.delete(`http://52.213.25.226:3030/team/${id}`, config)
+                .then(res => this.props.deleteUserS(id))
+                .catch(err => console.log(err))
+        }
+
+    }
 
 
 
@@ -101,7 +115,7 @@ class Teamcard extends Component {
                             </p>
                             <p className={" row-right text-right mr-3"}>
                                <button onClick={()=> this.deleteC(team._id)}> Delete</button>
-                            </p>
+                            </p> {this.autoDelete(team.users,team._id )}
                         </div>
                     </div>
                 </div>

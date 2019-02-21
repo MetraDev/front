@@ -12,7 +12,7 @@ class FormTeam extends Component {
 
 
         this.state={
-            name:'No hay idea',
+            name:'',
             cityId:{},
             usersDemium:[],
             users:[],
