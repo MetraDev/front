@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../../team.css'
-import {fromTeam, modIdea} from "../../actions/actions";
+import {addUser, fromTeam, modIdea} from "../../actions/actions";
 import {connect} from "react-redux";
 import  {Link} from 'react-router-dom'
 import {token} from '../../index'
@@ -85,6 +85,19 @@ class FormTeam extends Component {
 
             //stado.cityId = stado.cityId._id
         console.log('el estado'+this.state.name)
+
+
+
+        const promises = this.state.users.map(item=>{
+            item.telephone = this.state.name
+            return axios.put(`http://52.213.25.226:3030/user/${item._id}`, item, config)
+
+
+        })
+        Promise.all(promises).then(values => {
+            console.log('dataas promises' ,values,values._id )
+            this.props.addUsers(values,values._id) // [3, 1337, "foo"]
+        });
 
 
         axios.post(`http://52.213.25.226:3030/team`, this.state, config) // DESCARGAMOS DATOS DEL USUARIO
@@ -225,7 +238,7 @@ const mapStateToProps = (state) => {
     return {
         obj: state.teamShow,
         city: state.city,
-        user: state.user,
+        user: state.user.filter(item =>{if (item.roleId !== "TM" ||item.roleId !== "DP" ) return item}),
         idea: state.viewAdd
 
 
@@ -236,6 +249,7 @@ const dispastchToProps=(dispatch,props )=>{
     return{
         fromTeams:(state)=> dispatch (fromTeam(state)),
         modIdeas:(stado,id)=>dispatch(modIdea(stado,id)),
+        addUsers:(stado,id)=>dispatch(addUser(stado,id)),
 
     }
 }
