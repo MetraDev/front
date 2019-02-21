@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../../team.css'
-import {addTeam, modTar} from "../../actions/actions";
+import {addTeam, modIdea, modTar} from "../../actions/actions";
 import {connect} from "react-redux";
 import  {Link} from 'react-router-dom'
 import {token} from '../../index'
@@ -21,6 +21,20 @@ class Team extends Component {
             nom2:''
 
         }
+
+    }
+
+    añadirIdea= (nom) =>{
+        this.state.nom3 = JSON.parse(nom)
+        console.log('el porque de las ocasas' , this.state.nom3.name)
+
+        let idea = this.state.nom3.name
+        console.log('el porque de las ocasas' , idea)
+        this.setState({
+            ['name']: idea
+        });
+        console.log('el porque de las ocasas' , this.state.name)
+
 
     }
     añadirCity= (nom) =>{
@@ -66,7 +80,7 @@ class Team extends Component {
         });
     }
 
-    put=(id)=>{
+    put=(id,stado)=>{
         var config = {
 
             headers: {'Authorization':  token}}
@@ -78,6 +92,21 @@ class Team extends Component {
 
                 res.data.cityId = this.state.cityId
                 this.props.addTeami(res.data,res.data._id)
+
+
+                stado.nom3.teamId =res.data
+                console.log(' stado.name.teamId =res.data._id', stado.nom3.teamId)
+                axios.put(`http://52.213.25.226:3030/idea/${this.state.nom3._id}`, this.state.nom3, config) // DESCARGAMOS DATOS DEL USUARIO
+                    .then(res => {
+                            // si los el ide del usuario coincide con el de la ciudad/user
+                            res.data.businessModelId = this.state.nom3.businessModelId
+                            res.data.teamId = stado.nom3.teamId
+                            res.data.teamId.cityId = stado.nom3.teamId.cityId
+
+                            this.props.modIdeas(res.data,this.state.nom3._id)
+                        }
+                    )
+                    .catch(err => console.log('No ha funcionado el put', err));
                 }
             )
             .catch(err => console.log('No ha funcionado el put', err));
@@ -104,15 +133,14 @@ class Team extends Component {
                     </div>
                     <div className={"form-gruop row text-left"}>
                         <h6 className={"col-sm-2 text-left "}>Change idea</h6>
-                        <select required className={"col-sm-2 form-control text-left "}
-                                name={"name"}
-                                value={this.state.name}
-                                onChange={this.introDatos}>
-                            <option>Saas</option>
-                            <option>Ideas</option>
-                            <option>Unicorn</option>
+                        <select className={'select from-control'} id={'select'}
+                                name={'nom3'}
+                                onChange={this.introDatos} >
+                            {this.props.idea.map((idea) => {
+                                return (
+                                    <option name={'nom3'} value={JSON.stringify(idea)}>{idea.name}</option>)})}
                         </select>
-                        <button className={"col-sm-2 ml-4 btn  btn-primary text-light"}>SELECT</button>
+                        <button className={"col-sm-2 ml-4 btn  btn-primary text-light"} onClick={()=> this.añadirIdea(this.state.nom3)}>SELECT</button>
                     </div>
                     <div className={"text-left"}>
                         <h4 className={"colores"}>Headquarter </h4>
@@ -166,7 +194,7 @@ class Team extends Component {
                         {console.log('los users' ,this.props.obj )}
                         {this.state.users.map(added =>{return(
                             <div>
-                                {added.name}{added.roleId}
+                                {added && added.name}{added && added.roleId}
 
                                 <button className={"col-sm-1 ml-4 btn  btn-primary text-light"} onClick={()=>this.remove(added.name)}>Remove</button>
                             </div>)})}
@@ -179,11 +207,11 @@ class Team extends Component {
                         {console.log('los users' ,this.props.obj )}
                         {this.state.usersDemium.map(added =>{return(
                             <div>
-                                {added.name}{added.roleId}
+                                {added && added.name}{added && added.roleId}
                             </div>)})}
                     </div>
                     <div className={"text-right"}>
-                        <button className={"col-sm-2 ml-4 btn  btn-primary text-light"} onClick={()=>this.put(this.props.obj._id)}>
+                        <button className={"col-sm-2 ml-4 btn  btn-primary text-light"} onClick={()=>this.put(this.props.obj._id,this.state)}>
                             <Link to={"/teamcard"}><h5 className={'text-light'}>Save</h5></Link>
                         </button>
                         <button className={"col-sm-2 ml-4 btn  btn-danger text-light"}><Link to={"/teamcard"}><h5 className={'text-light'}>Cancel</h5></Link></button>
@@ -198,7 +226,8 @@ const mapStateToProps = (state) => {
     return {
         obj: state.teamShow,
         city: state.city,
-        user: state.user
+        user: state.user,
+        idea: state.viewAdd
 
     }
 }
@@ -206,6 +235,7 @@ const mapStateToProps = (state) => {
 const dispastchToProps=(dispatch,props )=>{
     return{
         addTeami:(stado,id)=> dispatch (modTar(stado,id)),
+        modIdeas:(stado,id)=>dispatch(modIdea(stado,id))
 
     }
 }

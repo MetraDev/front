@@ -112,7 +112,11 @@ class Teamcard extends Component {
                 <div className={"row mt-4"}>
                     {team}
                 </div>
-                <button className={'bg-primary text-light'}><Link to={'/formteam'}> <h1>Add</h1></Link></button>
+                <div className={'text-right'}>
+                    <Link to={'/formteam'}> <h1>Add</h1>
+                    </Link>
+                </div>
+
             </div>
         )
     }
