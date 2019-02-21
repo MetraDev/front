@@ -122,15 +122,8 @@ class FormTeam extends Component {
 
     render() {
 
-        if (this.state.err === true){
 
-            return(<h1 className={'bg-danger text-dark'}>
-
-                ERROR DE CARGA , VUELVA A INTENTARLO MAS TARDE
-
-
-            </h1>)
-        }else
+            const ideas = this.props.idea.filter(item =>{if (item.teamId === undefined) return item})
         return (
             <div className={"card-header text-light"}>
                 <nav className={"navbar navbar-dark mt-3"}>
@@ -146,7 +139,8 @@ class FormTeam extends Component {
                         <select className={'select from-control'} id={'select'}
                                 name={'nom3'}
                                 onChange={this.introDatos} >
-                            {this.props.idea.map((idea) => {
+                            <option>Select idea</option>
+                            {ideas.map((idea) => {
                                 return (
                                     <option name={'nom3'} value={JSON.stringify(idea)}>{idea.name}</option>)})}
                         </select>

@@ -16,7 +16,7 @@ class FormIdea extends Component {
             name: '',
             businessModelId: '',
             description:'',
-            teamId:'',
+
         };
 
     }
@@ -126,7 +126,7 @@ class FormIdea extends Component {
                         </div>
                         <div className={"form-group row ml-1 mt-3"}>
                             <h5 className={"text-left text-light col-sm-3"}>Headquarter</h5>
-                            <label className={"text-left text-light col-sm-2 "}><b>{item.teamId === undefined ?  '' :item.teamId.cityId === undefined ? '' :item.teamId.cityId.name }</b></label>
+                            <label className={"text-left text-light col-sm-2 "}><b>{item.teamId === undefined ?  '':item.teamId.cityId === undefined ? '' :item.teamId.cityId.name }</b></label>
                         </div>
                         <div className={"form-group row ml-1"}>
                             <h5 className={"text-left text-light col-sm-3"}>Team name</h5>

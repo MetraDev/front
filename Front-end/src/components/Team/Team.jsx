@@ -114,6 +114,8 @@ class Team extends Component {
 
 
     render() {
+
+        const ideas = this.props.idea.filter(item =>{if (item.teamId === undefined) return item})
         return (
             <div className={"card-header text-light"}>
                 <nav className={"navbar navbar-dark mt-3"}>
@@ -137,9 +139,9 @@ class Team extends Component {
                                 name={'nom3'}
                                 onChange={this.introDatos} >
                             <option>Selecciona una idea</option>
-                            {this.props.idea.map((idea) => {
+                            {ideas.map((idea) => {
                                 return (
-                                    <option name={'nom3'} value={JSON.stringify(idea)}>{idea.name}</option>)})}
+                                    <option name={'nom3'} value={JSON.stringify(idea)}>{idea && idea.name}</option>)})}
                         </select>
                         <button className={"col-sm-2 ml-4 btn  btn-primary text-light"} onClick={()=> this.añadirIdea(this.state.nom3)}>SELECT</button>
                     </div>
@@ -158,7 +160,7 @@ class Team extends Component {
                             <option>Selecciona una ciudad</option>
                             {this.props.city.map((city) => {
                                 return (
-                                    <option name={'nom2'} value={JSON.stringify(city)}>{city.name}</option>)})}
+                                    <option name={'nom2'} value={JSON.stringify(city)}>{city.name}{': '}{city.address}</option>)})}
                         </select>
                         <button className={"col-sm-2 ml-4 btn  btn-primary text-light"}
                                 onClick={(e)=>{e.preventDefault()

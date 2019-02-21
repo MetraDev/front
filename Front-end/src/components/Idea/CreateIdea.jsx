@@ -15,7 +15,7 @@ class CreateIdea extends Component {
             name: 'idea sin mas',
             businessModelId: '',
             description:'',
-            teamId: '',
+
         };
 
     }
