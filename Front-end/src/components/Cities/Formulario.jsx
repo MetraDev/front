@@ -105,6 +105,9 @@ class Formulario extends Component {
     }
 
     render() {
+
+        const roles = this.props.user.filter(item =>{if (item.roleId === "TM" ||item.roleId === "DP" ) return item})
+        const soloLibres = roles.filter(item =>{if (item.city === undefined) return item})
         if (this.state.err === true){
 
             return(<h1 className={'bg-danger text-dark'}>
@@ -115,8 +118,9 @@ class Formulario extends Component {
             </h1>)
         }else
 
-        return (
 
+
+        return (
 
             <div className={"mb-3"}>
                 <nav className={"navbar navbar-dark mt-5"}>
@@ -189,8 +193,8 @@ class Formulario extends Component {
                                 <select className={'select'} id={'select'}
                                         name={'nom2'}
                                         onChange={this.introDatos} >
-                                    <option>Selecciona un usuario</option>
-                                    {this.props.user.map((usr) => {
+                                    <option selected={'true' } value={''} disabled>Selecciona un usuario</option>
+                                    {roles.map((usr) => {
                                     return (
                                     <option name={'nom2'} value={JSON.stringify(usr)}>{usr.name}{':'} {usr.roleId}</option>)})}
                                 </select>
