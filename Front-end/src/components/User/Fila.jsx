@@ -33,27 +33,47 @@ class Fila extends Component {
                 }
                 this.props.deleteUserS(id)
 
-               let teams = this.props.team.find(item=> item &&  item.name === team )
-                console.log('filaaaa133',teams)
-               let result = teams && teams.users.filter(item => item && item._id !== id)
-                console.log('filaaaa11',result)
+                let teams = this.props.team.find(item => item && item.name === team)
+                console.log('filaaaa133', teams)
+                let result = teams && teams.users.filter(item => item && item._id !== id)
+                console.log('filaaaa11', result)
 
-                if(teams){
+                if (teams) {
                     teams.users = result
-                    console.log('filaaaa2',teams.users )
-                this.props.addTeami(teams,teams._id)}
+                    console.log('filaaaa2', teams.users)
+                    this.props.addTeami(teams, teams._id)
+                }
 
-                let city = this.props.city.find(item=> item &&  item.name === team )
+                let city = this.props.city.find(item => item && item.name === team)
                 let cityRes = city && city.users.filter(item => item && item._id !== id)
-                console.log('result',cityRes)
+                console.log('result', cityRes)
 
-                if(city){
+                if (city) {
                     city.users = cityRes
-                    console.log('filacityaaa',city.users )
-                    this.props.addCities(city,city._id)}
+                    console.log('filacityaaa', city.users)
+                    this.props.addCities(city, city._id)
+                }
+
+                    let teamsCity = this.props.team.find(item=> item &&  item.cityId.name === team )
+                    if(teamsCity && teamsCity.cityId){
+                        console.log('filac9090980', teamsCity)
+
+                        teamsCity.cityId.users  =  cityRes
+                        this.props.addTeami(teamsCity, teamsCity._id)
+                    }
+                //team.cityId.users
+                //this.props.addTeami(teams,teams._id)
+
+            }
 
 
-            })
+
+
+            )
+
+
+
+
             .catch(err => console.log('No ha funcionado delete', err));
     }
 
