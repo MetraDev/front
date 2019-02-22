@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import '../../file.css'
 import FormUs from "./formUs";
 import {connect} from 'react-redux';
-import {deleteUser, editUser, modIdea} from "../../actions/actions";
+import {addCity, deleteUser, editUser, modIdea, modTar} from "../../actions/actions";
 import {token} from "../../index";
 import {Link} from 'react-router-dom'
 import axios from "axios";
@@ -41,7 +41,7 @@ class Fila extends Component {
                 if(teams){
                     teams.users = result
                     console.log('filaaaa2',teams.users )
-                this.props.modIdeas(teams,teams._id)}
+                this.props.addTeami(teams,teams._id)}
 
                 let city = this.props.city.find(item=> item &&  item.name === team )
                 let cityRes = city && city.users.filter(item => item && item._id !== id)
@@ -50,7 +50,7 @@ class Fila extends Component {
                 if(city){
                     city.users = cityRes
                     console.log('filacityaaa',city.users )
-                    this.props.modIdeas(city,city._id)}
+                    this.props.addCities(city,city._id)}
 
 
             })
@@ -120,7 +120,9 @@ const dispastchToProps = (dispatch, props) => {
     return {
         editUser: (id) => dispatch(editUser(id)),
         deleteUserS: (id) => dispatch(deleteUser(id)),
-        modIdeas:(stado,id)=>dispatch(modIdea(stado,id))
+        modIdeas:(stado,id)=>dispatch(modIdea(stado,id)),
+        addTeami:(stado,id)=> dispatch (modTar(stado,id)),
+        addCities:(stado,id)=>dispatch(addCity(stado,id)),
     }
 }
 

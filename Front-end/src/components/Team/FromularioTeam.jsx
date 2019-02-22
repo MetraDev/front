@@ -87,7 +87,7 @@ class FormTeam extends Component {
         console.log('el estado'+this.state.name)
 
 
-
+            console.log('this.state.users', this.state.users)
         const promises = this.state.users.map(item=>{
             item.telephone = this.state.name
             return axios.put(`http://52.213.25.226:3030/user/${item._id}`, item, config)
@@ -96,10 +96,11 @@ class FormTeam extends Component {
         })
         console.log('la promseeeeee' ,promises)
         Promise.all(promises).then(values => {
-            console.log('dataas promises' ,values,values._id )
 
-
-            this.props.addUsers(values[0] && values[0].data,values[0].data && values[0].data._id) // [3, 1337, "foo"]
+           let res = values.map ((item,index) => item && item.data)
+            console.log('dataas promises' ,res,res._id )
+            res.map(item =>{  return this.props.addUsers(item,  item._id)})
+            // [3, 1337, "foo"]
         });
 
 
@@ -197,7 +198,7 @@ class FormTeam extends Component {
                         <option selected={'true' }  disabled>Selecciona un usuario</option>
                         {this.props.user.map((usr) => {
                             return (
-                                <option name={'nom1'} value={JSON.stringify(usr)}>{usr.name}</option>)})}
+                                <option name={'nom1'} value={JSON.stringify(usr)}>{usr.name} {':' + usr.roleId}</option>)})}
                     </select>
                     <button className="col-sm-2 ml-4 btn btn-primary"
                             onClick={(e)=>{e.preventDefault()
@@ -241,7 +242,7 @@ const mapStateToProps = (state) => {
     return {
         obj: state.teamShow,
         city: state.city,
-        user: state.user.filter(item =>{if (item.roleId !== "TM" ||item.roleId !== "DP" ) return item}),
+        user: state.user.filter(item => { if( item.roleId === "DP" || item.roleId === "TM" ){console.log(item.roleId)} else return item}),
         idea: state.viewAdd
 
 
