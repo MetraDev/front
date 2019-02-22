@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../../team.css'
-import {addTeam, modIdea, modTar} from "../../actions/actions";
+import {addTeam, addUser, modIdea, modTar} from "../../actions/actions";
 import {connect} from "react-redux";
 import  {Link} from 'react-router-dom'
 import {token} from '../../index'
@@ -85,6 +85,24 @@ class Team extends Component {
 
             headers: {'Authorization':  token}}
             console.log('el estado'+this.state)
+
+        console.log('this.state.users', this.state.users)
+        const promises = this.state.users.map(item=>{
+            item.telephone = this.state.name
+            return axios.put(`http://52.213.25.226:3030/user/${item._id}`, item, config)
+
+
+        })
+        console.log('la promseeeeee' ,promises)
+        Promise.all(promises).then(values => {
+
+            let res = values.map ((item,index) => item && item.data)
+            console.log('dataas promises' ,res,res._id )
+            res.map(item =>{  return this.props.addUsers(item,  item._id)})
+            // [3, 1337, "foo"]
+        });
+
+
 
         axios.put(`http://52.213.25.226:3030/team/${id}`, this.state, config) // DESCARGAMOS DATOS DEL USUARIO
             .then(res => {
@@ -240,7 +258,8 @@ const mapStateToProps = (state) => {
 const dispastchToProps=(dispatch,props )=>{
     return{
         addTeami:(stado,id)=> dispatch (modTar(stado,id)),
-        modIdeas:(stado,id)=>dispatch(modIdea(stado,id))
+        modIdeas:(stado,id)=>dispatch(modIdea(stado,id)),
+        addUsers:(stado,id)=>dispatch(addUser(stado,id)),
 
     }
 }
