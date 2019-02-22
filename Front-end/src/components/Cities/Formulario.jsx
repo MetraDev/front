@@ -66,7 +66,7 @@ class Formulario extends Component {
         this.state.nom2 = JSON.parse(nom)
 
 
-        if (this.state.users.some(item => this.state.nom2.name === item.name ))
+        if (this.state.users.some(item => this.state.nom2.name === item.name || this.state.nom2.roleId === item.roleId ))
               {alert('ya hay un role ')
                 } else {
 

@@ -50,7 +50,7 @@ class Team extends Component {
         this.state.nom1 = JSON.parse(nom)
 
 
-        if (this.state.users.some(item => this.state.nom1.name === item.name ))
+        if (this.state.users.some(item => this.state.nom1.name === item.name || this.state.nom1.roleId === item.roleId ))
         {alert('ya hay un role ')
         } else {
 
@@ -185,7 +185,7 @@ class Team extends Component {
                         <option selected={'true' }  disabled>Selecciona un usuario</option>
                         {this.props.user.map((usr) => {
                             return (
-                                <option name={'nom1'} value={JSON.stringify(usr)}>{usr.name}</option>)})}
+                                <option name={'nom1'} value={JSON.stringify(usr)}>{usr.name} {':' + usr.roleId}</option>)})}
                     </select>
                     <button className="col-sm-2 ml-4 btn btn-primary"
                             onClick={(e)=>{e.preventDefault()
@@ -231,7 +231,7 @@ const mapStateToProps = (state) => {
     return {
         obj: state.teamShow,
         city: state.city,
-        user: state.user,
+        user: state.user.filter(item => { if( item.roleId === "DP" || item.roleId === "TM" ){console.log(item.roleId)} else return item}),
         idea: state.viewAdd
 
     }

@@ -54,7 +54,7 @@ class FormTeam extends Component {
         this.state.nom1 = JSON.parse(nom)
 
 
-        if (this.state.users.some(item => this.state.nom1.name === item.name ))
+        if (this.state.users.some(item => this.state.nom1.name === item.name || this.state.nom1.roleId === item.roleId ))
         {alert('ya hay un role ')
         } else {
 
