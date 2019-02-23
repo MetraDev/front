@@ -61,8 +61,24 @@ class Team extends Component {
 
 
     remove = name => {
+
+        var config = {
+
+            headers: {'Authorization':  token}
+        }
         console.log('el remove' , name)
-        this.setState({users:this.state.users.filter(item => item.name !== name)});
+        this.setState({users:this.state.users.filter(item => item.name !== name.name)});
+         name.telephone = 'No team'
+        axios.put(`http://52.213.25.226:3030/user/${name._id}`, name, config)
+            .then(res => {
+
+                this.props.addUsers(res.data, res.data._id)
+                }
+
+            )
+
+
+
     };
 
     regDatos = (e) => {
@@ -219,7 +235,7 @@ class Team extends Component {
                             <div>
                                 {added && added.name}{added && added.roleId}
 
-                                <button className={"col-sm-1 ml-4 btn  btn-primary text-light"} onClick={()=>this.remove(added.name)}>Remove</button>
+                                <button className={"col-sm-1 ml-4 btn  btn-primary text-light"} onClick={()=>this.remove(added)}>Remove</button>
                             </div>)})}
                     </div>
                     <div className={"text-left"}>

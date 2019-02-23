@@ -25,6 +25,10 @@ class FormTeam extends Component {
 
         e.preventDefault();
 
+        if (this.state.users.length === 0){
+            return
+        }
+
 
 
     }
@@ -192,9 +196,11 @@ class FormTeam extends Component {
 
                     </div>
                     <h5 className={"colores text-left"}>Selected members </h5>
-                    <select className={'select'} id={'select'}
+                    <select
+                            className={'select'} id={'select'}
                             name={'nom1'}
-                            onChange={this.introDatos} >
+                            onChange={this.introDatos}
+                            required>
                         <option selected={'true' }  disabled>Selecciona un usuario</option>
                         {this.props.user.map((usr) => {
                             return (

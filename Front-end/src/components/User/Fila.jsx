@@ -39,9 +39,12 @@ class Fila extends Component {
                 console.log('filaaaa11', result)
 
                 if (teams) {
-                    teams.users = result
+                teams.users = result
+
+                    axios.put(`http://52.213.25.226:3030/team/${teams._id}`, teams, config)
                     console.log('filaaaa2', teams.users)
                     this.props.addTeami(teams, teams._id)
+                        .catch(err => console.log('no lo has conseguido'  ,err))
                 }
 
                 let city = this.props.city.find(item => item && item.name === team)
@@ -50,16 +53,20 @@ class Fila extends Component {
 
                 if (city) {
                     city.users = cityRes
+                    axios.put(`http://52.213.25.226:3030/city/${city._id}`, city, config)
                     console.log('filacityaaa', city.users)
                     this.props.addCities(city, city._id)
+                        .catch(err => console.log('no lo has conseguido city'  ,err))
                 }
 
-                    let teamsCity = this.props.team.find(item=> item &&  item.cityId.name === team )
-                    if(teamsCity && teamsCity.cityId){
-                        console.log('filac9090980', teamsCity)
+                let teamsCity = this.props.team.find(item=> item &&  item.cityId.name === team )
+                if(teamsCity && teamsCity.cityId) {
 
-                        teamsCity.cityId.users  =  cityRes
-                        this.props.addTeami(teamsCity, teamsCity._id)
+                    teamsCity.cityId.users  =  cityRes
+                    axios.put(`http://52.213.25.226:3030/team/${teamsCity._id}`, teamsCity, config)
+                    console.log('filac9090980', teamsCity)
+                    this.props.addTeami(teamsCity, teamsCity._id)
+                        .catch(err => console.log('no lo has conseguido team final'  ,err))
                     }
                 //team.cityId.users
                 //this.props.addTeami(teams,teams._id)

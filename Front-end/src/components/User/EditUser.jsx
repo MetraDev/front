@@ -172,10 +172,10 @@ class EditUser extends Component {
                     </div>
                     <div className={"text-right col-dm-2"}>
                         <button type="submit" onClick={()=>
-                            this.createUser(this.state)}  className="col-sm-2 ml-4  btn btn-primary">
-                            <Link to={'/user'}>Save Changes</Link>
+                            this.createUser(this.state)}  className="col-sm-2 ml-4  btn ">
+                            <Link  to={'/user'} >Save Changes</Link>
                         </button>
-                        <button type="submit"   className="col-sm-2 ml-4 text-light btn btn-primary">
+                        <button type="submit"   className="col-sm-2 ml-4 text-light btn ">
                             <Link to={'/user'}>Go Back</Link>
                         </button>
                     </div>

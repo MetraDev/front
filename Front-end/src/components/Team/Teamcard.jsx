@@ -82,6 +82,7 @@ class Teamcard extends Component {
         const team = this.props.team.map((team) => {
             return (
                 <div className={" col-md-4 mb-3"}>
+                    {this.autoDelete(team.users,team._id )}
                     <div className={"carder card  mt-4"}>
                         <div className={""}>
                             <div className={" card-header bg-primary text-left"}>
@@ -115,7 +116,7 @@ class Teamcard extends Component {
                             </p>
                             <p className={" row-right text-right mr-3"}>
                                <button onClick={()=> this.deleteC(team._id)}> Delete</button>
-                            </p> {this.autoDelete(team.users,team._id )}
+                            </p>
                         </div>
                     </div>
                 </div>

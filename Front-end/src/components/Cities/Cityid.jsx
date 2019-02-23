@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import '../../forms.css';
 import {connect} from "react-redux";
-import {addCity} from "../../actions/actions";
+import {addCity, addUser} from "../../actions/actions";
 import axios from "axios";
 import {token} from '../../index'
 import {BrowserRouter, Switch, Route, Redirect, Link, NavLink} from 'react-router-dom'
@@ -38,21 +38,26 @@ class Cityid extends Component {
 
 
     remove = name => {
-        this.setState({users:this.state.users.filter(item =>item && item.name !== name)});
-    };
-
-
-    componentDidMount() {
-
-
-
-
         var config = {
             headers: {'Authorization':  token}
         };
 
+        this.setState({users:this.state.users.filter(item =>item && item.name !== name.name)});
+        name.telephone = 'No City'
+        axios.put(`http://52.213.25.226:3030/user/${name._id}`, name, config)
+            .then(res => {
+
+                    this.props.addUsers(res.data, res.data._id)
+                }
+
+            )
+    };
 
 
+    componentDidMount() {
+        var config = {
+            headers: {'Authorization':  token}
+        };
 
         console.log('puffff', this.props.obj)
         let obj = this.props.city.filter(city=> city._id === this.props.obj[0]._id)
@@ -231,7 +236,7 @@ class Cityid extends Component {
                                     {this.state.users.map(added =>{return(
                                         <div>
                                             {added && added.name}
-                                            <span onClick={() => this.remove(added.name)}>x</span>
+                                            <span onClick={() => this.remove(added)}>x</span>
 
                                         </div>)})}
                                 </div>
@@ -241,8 +246,8 @@ class Cityid extends Component {
                     </div>
                     <div className={"text-right col-dm-2"}>
                         <button type="submit"  onClick={()=>{this.createCity(this.state)
-                        }}className="col-sm-2 ml-4 btn btn-primary">
-                            <Link to={`/cities`}>Save</Link>
+                        }}className="col-sm-2 ml-4 btn">
+                            <Link to={'/cities'}>Save</Link>
                         </button>
                     </div>
                 </form>
@@ -262,6 +267,7 @@ const mapStateToProps = (state ,props) => {
 const dispastchToProps=(dispatch,props )=>{
     return{
         addCities:(stado,id)=>dispatch(addCity(stado,id)),
+        addUsers:(stado,id)=>dispatch(addUser(stado,id)),
 
 
     }
