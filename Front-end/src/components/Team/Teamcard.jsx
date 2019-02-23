@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../../taridea.css';
-import {addTeam, addUser, deleteUser, delTeam, modTeam, showTeam} from "../../actions/actions";
+import {addTeam, addUser, deleteUser, delTeam, modIdea, modTeam, showTeam} from "../../actions/actions";
 import {connect} from "react-redux";
 import {token} from "../../index";
 import axios from "axios";
@@ -59,24 +59,42 @@ class Teamcard extends Component {
                             this.props.addUsers(item,  item._id)
                         }).catch(err =>{console.log('error en team ' , err)})
 
-
                 })
+
+              let idea = this.props.idea.find(item => item && item.name === team.name)
+                console.log(' team por idea ' , idea)
+                if(idea){
+                    delete idea.teamId
+
+                    axios.put(`http://52.213.25.226:3030/idea/${idea._id}`, idea, config)
+                        .then(res =>{
+                            this.props.modIdeas(idea,  idea._id)
+                        }).catch(err =>{console.log('error en team ' , err)})
+
+
+                }
+
+
 
 
             })
             .catch(err => console.log('No ha funcionado delete', err));
     }
-    autoDelete=(user,id)=>{
+    autoDelete=(user,id, team)=>{
         var config = {
 
             headers: {'Authorization': token}
         };
         console.log('user',user)
         if(user.length < 0 || user[0] == null ){
-            console.log('user',user)
+            alert(`el equipo ${team.name} fue eliminado por falta de usuarios`)
+
+            this.deleteC(id,team)
+
+           /* console.log('user',user)
             axios.delete(`http://52.213.25.226:3030/team/${id}`, config)
                 .then(res => this.props.delTeams(id))
-                .catch(err => console.log(err))
+                .catch(err => console.log(err))*/
         }
 
     }
@@ -94,7 +112,7 @@ class Teamcard extends Component {
         const team = this.props.team.map((team) => {
             return (
                 <div className={" col-md-4 mb-3"}>
-                    {this.autoDelete(team.users,team._id )}
+                    {this.autoDelete(team.users,team._id,team )}
                     <div className={"carder card  mt-4"}>
                         <div className={""}>
                             <div className={" card-header bg-primary text-left"}>
@@ -152,7 +170,8 @@ const mapStateToProps = (state) => {
     return {
         team: state.team,
         user: state.user,
-        city: state.city
+        city: state.city,
+        idea: state.viewAdd
     }
 }
 
@@ -163,6 +182,7 @@ const dispastchToProps=(dispatch,props )=>{
         delTeams:(id) =>dispatch(delTeam(id)),
         addteams:(stado) =>dispatch(addTeam(stado)),
         addUsers:(stado,id)=>dispatch(addUser(stado,id)),
+        modIdeas:(stado,id)=>dispatch(modIdea(stado,id)),
 
 
 
