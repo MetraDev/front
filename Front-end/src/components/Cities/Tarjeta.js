@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import axios from "axios";
 import {token} from '../../index'
 import {BrowserRouter, Switch, Route, Redirect, Link, NavLink} from 'react-router-dom'
-import {deleteCity, modCity, addCities, movNom, modTar} from "../../actions/actions";
+import {deleteCity, modCity, addCities, movNom, modTar, addUser} from "../../actions/actions";
 import {getCities} from '../../index'
 
 
@@ -27,7 +27,7 @@ class Tarjeta extends Component {
     }
 
 
-    deleteC = (id) => {
+    deleteC = (id,city) => {
 
         var config = {
 
@@ -36,6 +36,24 @@ class Tarjeta extends Component {
         axios.delete(`http://52.213.25.226:3030/city/${id}`, config)
             .then(res => {
                 this.props.deleteCityy(id)
+
+
+             city && city.users.map(item=>{
+                    item.telephone = 'No tiene ciudad'
+                    return axios.put(`http://52.213.25.226:3030/user/${item._id}`, item, config)
+                        .then( res => {
+                            this.props.addUsers(item,  item._id)
+                        }).catch(err => console.log('error de city',err))
+                })
+
+                /*console.log('la promseeeeee' ,promises)
+                Promise.all(promises).then(values => {
+
+                    let res = values.map ((item,index) => item && item.data)
+                    console.log('dataas promises' ,res,res._id )
+                    res.map(item =>{  return this.props.addUsers(item,  item._id)})
+                    // [3, 1337, "foo"]
+                });*/
 
 
 
@@ -48,7 +66,13 @@ class Tarjeta extends Component {
                     teams.cityId=''
                     console.log('filacityaaa', teams.cityId )
                     console.log('filacityaaa', teams )
-                    this.props.addTeami(teams,teams._id)}
+                    this.props.addTeami(teams,teams._id)
+                }
+
+
+
+
+
             })
             .catch(err => this.setState({err:false})
             );
@@ -141,7 +165,7 @@ class Tarjeta extends Component {
                                 </p>)})}</p>
                             <p className={"text-right mr-3"}>
                                 <button className={"text-rigth badge badge-primary mr-10"}
-                                        onClick={() => {this.deleteC(todo._id)}}>
+                                        onClick={() => {this.deleteC(todo._id,todo)}}>
                                     <h6 className={"text-light"}>{'DEL'}</h6>
                                 </button >
                                 <button className={"text-rigth badge badge-danger mr-10"}
@@ -186,6 +210,7 @@ const dispastchToProps = (dispatch, props) => {
         addCities: (cities) => dispatch(addCities(cities)),
         movNoms: (estado) => dispatch(movNom(estado)),
         addTeami:(stado,id)=> dispatch (modTar(stado,id)),
+        addUsers:(stado,id)=>dispatch(addUser(stado,id)),
     }
 }
 export default connect(mapStateToProps, dispastchToProps)(Tarjeta);
