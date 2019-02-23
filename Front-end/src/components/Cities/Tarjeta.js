@@ -69,10 +69,6 @@ class Tarjeta extends Component {
                     this.props.addTeami(teams,teams._id)
                 }
 
-
-
-
-
             })
             .catch(err => this.setState({err:false})
             );

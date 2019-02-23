@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../../taridea.css';
-import {addTeam, deleteUser, delTeam, modTeam, showTeam} from "../../actions/actions";
+import {addTeam, addUser, deleteUser, delTeam, modTeam, showTeam} from "../../actions/actions";
 import {connect} from "react-redux";
 import {token} from "../../index";
 import axios from "axios";
@@ -42,7 +42,7 @@ class Teamcard extends Component {
      }*/
 
 
-    deleteC = (id) => {
+    deleteC = (id,team) => {
 
         var config = {
 
@@ -51,6 +51,18 @@ class Teamcard extends Component {
         axios.delete(`http://52.213.25.226:3030/team/${id}`, config)
             .then(res => {
                 this.props.delTeams(id)
+
+                team && team.users.map(item=>{
+                    item.telephone = 'No tiene team'
+                    return axios.put(`http://52.213.25.226:3030/user/${item._id}`, item, config)
+                        .then(res =>{
+                            this.props.addUsers(item,  item._id)
+                        }).catch(err =>{console.log('error en team ' , err)})
+
+
+                })
+
+
             })
             .catch(err => console.log('No ha funcionado delete', err));
     }
@@ -115,7 +127,7 @@ class Teamcard extends Component {
                                 <Link  to={'/teamedit'}><button onClick={()=> this.props.showTeamm(team)}> Edit</button></Link>
                             </p>
                             <p className={" row-right text-right mr-3"}>
-                               <button onClick={()=> this.deleteC(team._id)}> Delete</button>
+                               <button onClick={()=> this.deleteC(team._id,team)}> Delete</button>
                             </p>
                         </div>
                     </div>
@@ -146,10 +158,11 @@ const mapStateToProps = (state) => {
 
 const dispastchToProps=(dispatch,props )=>{
     return{
-        modTeamm:(name,user1,user2,id)=>dispatch(modTeam(name,user1,user2,id)),
+
         showTeamm:(data) =>dispatch(showTeam(data)),
         delTeams:(id) =>dispatch(delTeam(id)),
         addteams:(stado) =>dispatch(addTeam(stado)),
+        addUsers:(stado,id)=>dispatch(addUser(stado,id)),
 
 
 

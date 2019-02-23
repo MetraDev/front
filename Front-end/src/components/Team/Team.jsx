@@ -18,7 +18,8 @@ class Team extends Component {
             users:this.props.obj.users,
             usersDemium: this.props.obj.cityId && this.props.obj.cityId.users,
             nom1:'',
-            nom2:''
+            nom2:'',
+            nom3:this.props.obj.name
 
         }
 
