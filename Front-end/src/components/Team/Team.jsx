@@ -102,6 +102,9 @@ class Team extends Component {
 
             headers: {'Authorization':  token}}
             console.log('el estado'+this.state)
+        if (this.state.name === '' || this.state.users.length === 0 ){
+            alert('Debes seleccionar un nombre y añadir un usuario')
+        }
 
         console.log('this.state.users', this.state.users)
         const promises = this.state.users.map(item=>{
@@ -282,7 +285,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-const dispastchToProps=(dispatch,props )=>{
+const dispastchToProps=(dispatch)=>{
     return{
         addTeami:(stado,id)=> dispatch (modTar(stado,id)),
         modIdeas:(stado,id)=>dispatch(modIdea(stado,id)),

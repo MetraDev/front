@@ -5,9 +5,8 @@ import CreateIdea from "../../components/Idea/CreateIdea";
 const createIdea =()=>{
 
     return(
-        <div>
-            <CreateIdea/>
-        </div>)
+        <CreateIdea/>
+        )
 }
 export default connect()(createIdea);
 

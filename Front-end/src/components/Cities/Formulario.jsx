@@ -13,7 +13,7 @@ class Formulario extends Component {
         this.count =0;
         this.state = {
 
-
+            name:'',
             address: '',
             telephone: '',
             users:[],
@@ -29,14 +29,12 @@ class Formulario extends Component {
     regDatos = (e) => {
         e.preventDefault()
 
-        console.log('preubaaaa'+ this.state.users)
-
         if(this.state.users === []){
            alert('añade 2 usuarios')
         }
 
         this.setState({
-
+            name:'',
             address: '',
             telephone: '',
             users:[],

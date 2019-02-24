@@ -25,18 +25,15 @@ class FormTeam extends Component {
 
         e.preventDefault();
 
-        if (this.state.users.length === 0){
-            return
-        }
+
 
 
 
     }
     añadirCity= (nom) =>{
         this.state.nom2 = JSON.parse(nom)
-        console.log('el porque de las ocasas' , this.state.nom2)
         this.setState({cityId:this.state.nom2, usersDemium :this.state.nom2.users})
-        console.log('el porque de las ocasas' , this.state.cityId)
+
 
     }
 
@@ -90,7 +87,9 @@ class FormTeam extends Component {
             //stado.cityId = stado.cityId._id
         console.log('el estado'+this.state.name)
 
-
+        if (this.state.name === '' || this.state.users.length === 0 ){
+            alert('Debes seleccionar un nombre y añadir un usuario')
+        }
             console.log('this.state.users', this.state.users)
         const promises = this.state.users.map(item=>{
             item.telephone = this.state.name
@@ -170,7 +169,8 @@ class FormTeam extends Component {
                         <h6 className={"col-sm-2 text-left "}>Selected idea</h6>
                         <select className={'select form-control col-sm-2'} id={'select'}
                                 name={'nom3'}
-                                onChange={this.introDatos} >
+                                onChange={this.introDatos}
+                                required>
                             <option selected={'true' }  disabled>Select idea</option>
                             {ideas.map((idea) => {
                                 return (
@@ -209,7 +209,7 @@ class FormTeam extends Component {
                     <h5 className={"colores text-left"}>Selected members </h5>
                     <div className={'form-group row'}>
                     <select
-                            className={'select   form-control col-sm-2'} id={'select'}
+                            className={'select ml-3  form-control col-sm-2'} id={'select'}
                             name={'nom1'}
                             onChange={this.introDatos}
                             required>

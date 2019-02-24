@@ -124,22 +124,7 @@ class CreateIdea extends Component {
                                     placeholder={''}
                                     onChange={this.introDatos}/>
                             </div>
-                            <div className={"text-left "}>
-                                <h5 className={"bg-danger badge-pill text-center text-light col-sm-3"}>Not
-                                    Available</h5>
-                            </div>
-                            <div className={"form-group row ml-1 mt-3"}>
-                                <h5 className={"text-left text-light col-sm-3"}>Headquarter</h5>
-                                <label className={"text-left text-light col-sm-2 "}><b></b></label>
-                            </div>
-                            <div className={"form-group row ml-1"}>
-                                <h5 className={"text-left text-light col-sm-3"}>Team name</h5>
-                                <label className={"text-left text-light col-sm-3 "}><b></b></label>
-                            </div>
-                            <div className={"form-group row ml-1"}>
-                                <h5 className={"text-left text-light col-sm-3"}>Black date</h5>
-                                <label className={"text-left text-light col-sm-2 "}><b>19/91/2019</b></label>
-                            </div>
+
                         </div>
                     </div>
                     <div className={"text-right col-dm-2"}>

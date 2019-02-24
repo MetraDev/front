@@ -25,21 +25,17 @@ class EditUser extends Component {
         e.preventDefault();
 
     }
+    introDatosNumber = (event) =>
+    {
+        if (event.target.value.match (/^([0-9]{1,3})*$/)){
+            this.setState({ [event.target.name]: event.target.value });
+        }
+    }
 
     introDatos = (event) => {
         const {value, name} = event.target;
         this.setState({
             [name]: value
-        });
-    }
-    stateCancel = (event) => {   // MAS ADELANTE SERA PARA CANCELAR LA OPERACION
-        this.setState({
-            name: '',
-            surname: '',
-            roleId:'',
-            email: '',
-            telephone: '',
-            nom1:[],
         });
     }
 
@@ -121,36 +117,18 @@ class EditUser extends Component {
                                     placeholder={this.state.email}/>
                             </div>
                             <div className={"row form-group text-left"}>
-                                <h4 className={"col-sm-1 text-light mt-2 ml-3"}>Phone:</h4>
+                                <h4 className={"col-sm-1 text-light mt-2 ml-3"}>Contact:</h4>
                                 <input                                             //TELEFONO
                                     type="telephone"
                                     className="texl-left col-sm-3 ml-5"
                                     value={this.state.telephone}
                                     name="telephone"
-                                    onChange={this.introDatos}
-                                    placeholder={this.state.telephone}/>
+                                    onChange={this.introDatosNumber}
+                                    placeholder={this.state.telephone}
+                                     disabled/>
                             </div>
                         </div>
                         <div className={"divleft"}>
-                            <h4 className={"col text-left text-light mt-2"}> Headquarter</h4>
-                            <div className={"row form-group"}>
-                            </div>
-                            <div className={"form-group row"}>
-                                <h5 className={"col-sm-2 text-left text-light ml-3"}>City</h5>
-                                <select                                         //CIUDAD
-                                    name="headquarter"
-                                    className="col-sm-3 form-control "
-                                    value={this.state.headquarter}
-                                    onChange={this.introDatos}>
-                                    <option>Madrid</option>
-                                    <option>Valencia</option>
-                                    <option>Barcelona</option>
-                                    <option>Zaragoza</option>
-                                    <option>Bilbao</option>
-                                    <option>Roma</option>
-                                    <option>Moscu</option>
-                                </select>
-                            </div>
                             <h4 className={"col text-left text-light mt-2"}>Role</h4>
                             <div className="form-group row">
                                 <h6 className={"col-sm-2 text-left text-light mt-3 ml-3"}>Type </h6>

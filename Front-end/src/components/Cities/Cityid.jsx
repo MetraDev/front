@@ -219,7 +219,7 @@ class Cityid extends Component {
                             </div>
                             <div className={"form-group row"}>
                                 <h5 className={"col-sm-2 text-left text-light ml-3"}>Team</h5>
-                                <select className={'select'} id={'select'}
+                                <select className={'select  form-control col-sm-5'} id={'select'}
                                         name={'nom2'}
                                         onChange={this.introDatos} >
                                     <option selected={'true' } value={''} disabled>Selecciona un usuario</option>

@@ -141,12 +141,13 @@ class Teamcard extends Component {
                                         { usuario && usuario.name} { usuario && usuario.roleId}
                                     </p>)})}</p>
                             </div>
-                            <p className={" row-right text-right mr-3"}>
-                                <Link  to={'/teamedit'}><button onClick={()=> this.props.showTeamm(team)}> Edit</button></Link>
-                            </p>
-                            <p className={" row-right text-right mr-3"}>
-                               <button onClick={()=> this.deleteC(team._id,team)}> Delete</button>
-                            </p>
+                            <div className={'form-group text-right'}>
+
+                                <Link  to={'/teamedit'}><button className={'text-right bg bg-primary'} onClick={()=> this.props.showTeamm(team)}> Edit</button></Link>
+
+                               <button className={'ml-2 text-right bg bg-danger'} onClick={()=> this.deleteC(team._id,team)}> Delete</button>
+
+                            </div>
                         </div>
                     </div>
                 </div>

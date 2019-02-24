@@ -21,6 +21,15 @@ class FormUs extends Component {
 
     regDatos = (e) => {
         e.preventDefault();
+        this.setState( {
+
+            name: '',
+            surname: '',
+            email: '',
+            telephone: '',
+            roleId:'None',
+            nom1:[],
+        })
 
     }
 
@@ -31,20 +40,11 @@ class FormUs extends Component {
         });
     }
 
-    componentDidMount() {
-
-
-        var config = {
-            headers: {'Authorization': token}
-        };
-
-
-
-
-                /*
-                store.dispatch({type: actionTypes.createCity,
-                    data: res.data.data})*/
-
+    introDatosNumber = (event) =>
+    {
+        if (event.target.value.match (/^([0-9]{1,3})*$/)){
+            this.setState({ [event.target.name]: event.target.value });
+        }
     }
 
     createUser = (state) => {
@@ -80,13 +80,14 @@ class FormUs extends Component {
                         <div>
                             <div className="form-group text-left">
                                 <h4 className={"col-sm-2 text-left text-light"}>Name</h4>
-                                <input required
+                                <input
                                     className={"stilo ml-3 col-sm-5"}//DIRECCION
                                     type="text"
                                     name={"name"}
                                     value={this.state.name}
                                     placeholder={"name"}
-                                    onChange={this.introDatos}/>
+                                    onChange={this.introDatos}
+                                       required />
                             </div>
                             <div className="form-group text-left">
                                 <h4 className={"col-sm-2 text-left text-light"}>Surname</h4>
@@ -96,7 +97,8 @@ class FormUs extends Component {
                                     name={"surname"}
                                     value={this.state.surname}
                                     placeholder={"surname"}
-                                    onChange={this.introDatos}/>
+                                    onChange={this.introDatos}
+                                       required />
                             </div>
                             <div className={"row form-group text-left"}>
                                 <h4 className={"col-sm-1 text-light mt-2 ml-3"}>Email:</h4>
@@ -106,49 +108,33 @@ class FormUs extends Component {
                                     value={this.state.email}
                                     name="email"
                                     onChange={this.introDatos}
-                                    placeholder="email"/>
+                                    placeholder="email"
+                                    required />
                             </div>
                             <div className={"row form-group text-left"}>
                                 <h4 className={"col-sm-1 text-light mt-2 ml-3"}>Phone:</h4>
                                 <input
-                                    required  //TELEFONO
+                                     //TELEFONO
                                     type="telephone"
                                     className="texl-left col-sm-3 ml-5"
                                     value={this.state.telephone}
                                     name="telephone"
-                                    onChange={this.introDatos}
-                                    placeholder="Phone"/>
+                                    onChange={this.introDatosNumber}
+                                    placeholder="Phone"
+                                    required />
                             </div>
                         </div>
                         <div className={"divleft"}>
-                            <h4 className={"col text-left text-light mt-2"}> Headquarter</h4>
-                            <div className={"row form-group"}>
-                            </div>
-                            <div className={"form-group row"}>
-                                <h5 className={"col-sm-2 text-left text-light ml-3"}>City</h5>
-                                <select required                                        //CIUDAD
-                                    name="headquarter"
-                                    className="col-sm-3 form-control "
-                                    value={this.state.headquarter}
-                                    onChange={this.introDatos}>
-                                    <option>Madrid</option>
-                                    <option>Valencia</option>
-                                    <option>Barcelona</option>
-                                    <option>Zaragoza</option>
-                                    <option>Bilbao</option>
-                                    <option>Roma</option>
-                                    <option>Moscu</option>
-                                </select>
-                            </div>
+
                             <h4 className={"col text-left text-light mt-2"}>Role</h4>
                             <div className="form-group row">
                                 <h6 className={"col-sm-2 text-left text-light mt-3 ml-3"}>Type </h6>
-
                                 <select                                         //PAIS
                                     name="roleId"
                                     className="col-sm-3 mt-2 form-control  "
                                     value={this.state.roleId}
-                                    onChange={this.introDatos}>
+                                    onChange={this.introDatos}
+                                    required>
                                     <option>Selecciona un role</option>
                                     {this.props.role.map((usr) => {
                                         return (
