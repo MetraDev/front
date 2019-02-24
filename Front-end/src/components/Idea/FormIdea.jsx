@@ -77,7 +77,7 @@ class FormIdea extends Component {
 
 
     const data = this.props.obj.map((item)=>{
-        return( <div className={"card-header"}>
+        return( <div className={""}>
             <nav className={"navbar navbar-dark mt-5"}>
                 {console.log('edit idea' , this.props.obj[0].name)}
                 <h3 className={"text-white"}>Edit Idea</h3>
@@ -100,7 +100,7 @@ class FormIdea extends Component {
                         </div>
                         <div className={"form-group row"}>
                             <h6 className={"col-sm-2 text-left text-light ml-3"}>Type</h6>
-                            <select className={'select'} id={'select'}
+                            <select className={'select form-control col-sm-5'} id={'select'}
                                     name={'businessModelId'}
                                     onChange={this.introDatos} >
                                 <option selected={'true' }  disabled>Select business</option>
