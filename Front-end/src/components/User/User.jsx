@@ -9,7 +9,7 @@ class User extends Component {
 
     render() {
         return (
-            <div className={"card-header"}>
+            <div className={""}>
                 <Fila/>
             </div>
         )

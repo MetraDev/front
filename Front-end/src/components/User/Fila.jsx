@@ -81,8 +81,7 @@ class Fila extends Component {
 
                 .catch(err => console.log('no lo has conseguido team final'  ,err))
         }
-        //team.cityId.users
-        //this.props.addTeami(teams,teams._id)
+
     }
 
 

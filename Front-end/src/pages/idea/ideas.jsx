@@ -7,7 +7,7 @@ const ideas =()=>{
         <div>
             <TargetIdea/>
             <div className={'text-right mr-3 '}
-            ><Link to="/createIdea"> Add</Link></div>
+            ><Link to="/createIdea"><h1>Add</h1></Link></div>
 
         </div>)
 }

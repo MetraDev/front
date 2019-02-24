@@ -71,14 +71,6 @@ class TargetIdea extends Component {
 
     render() {
 
-      /*  this.nomid= '';
-        const teams = this.props.team;
-      const idea = this.props.idea;
-      const resultado =  idea.map(idea => {
-          console.log('iiiii',idea.teamId)
-          idea.teamId= idea && teams.find(el => idea.teamId &&  idea.teamId === el._id )
-          return idea
-      })*/
 
 
         let todo =this.props.idea.map((idea) => {
@@ -87,7 +79,7 @@ class TargetIdea extends Component {
                     <div className={"carder card  mt-4"}>
                         <div className={""}>
                             <div className={" card-header bg-primary text-right"}>
-                                <button className={'text-danger'} onClick={()=> this.deleteI(idea._id)}>X</button>
+                                <span className={'text-danger bg-transparent'} onClick={()=> this.deleteI(idea._id)}>X</span>
                             </div>
                         </div>
                         <div className={"card-Body"}>
