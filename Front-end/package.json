@@ -87,7 +87,6 @@
     "not op_mini all"
   ],
   "jest": {
-
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ],

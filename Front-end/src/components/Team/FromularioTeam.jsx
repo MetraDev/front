@@ -143,8 +143,19 @@ class FormTeam extends Component {
 
     render() {
 
-
             const ideas = this.props.idea.filter(item =>{if (item.teamId === undefined) return item})
+        const names = this.props.team.map (team => team )
+        const users =  this.props.user.map (user => user)
+        const res = users.filter(user => {
+            let temp =  names.some(name => user.telephone === name.name)
+            if(!temp)
+                return user
+        })
+        console.log('hola teams',names)
+        console.log('hola teams',res)
+
+
+
         return (
             <div className={"card-header text-light"}>
                 <nav className={"navbar navbar-dark mt-3"}>
@@ -157,7 +168,7 @@ class FormTeam extends Component {
                     </div>
                     <div className={"form-gruop row text-left"}>
                         <h6 className={"col-sm-2 text-left "}>Selected idea</h6>
-                        <select className={'select from-control'} id={'select'}
+                        <select className={'select form-control col-sm-2'} id={'select'}
                                 name={'nom3'}
                                 onChange={this.introDatos} >
                             <option selected={'true' }  disabled>Select idea</option>
@@ -173,7 +184,7 @@ class FormTeam extends Component {
                     </div>
                     <div className={"form-gruop row text-left"}>
                         <h6 className={" col-sm-2 text-left"}>Selected city</h6>
-                        <select className={'select'} id={'select'}
+                        <select className={'select  form-control col-sm-2' } id={'select'}
                                 name={'nom2'}
                                 onChange={this.introDatos} >
                             <option selected={'true' }  disabled>Selecciona una ciudad</option>
@@ -196,35 +207,36 @@ class FormTeam extends Component {
 
                     </div>
                     <h5 className={"colores text-left"}>Selected members </h5>
+                    <div className={'form-group row'}>
                     <select
-                            className={'select'} id={'select'}
+                            className={'select   form-control col-sm-2'} id={'select'}
                             name={'nom1'}
                             onChange={this.introDatos}
                             required>
                         <option selected={'true' }  disabled>Selecciona un usuario</option>
-                        {this.props.user.map((usr) => {
+                        {res.map((usr) => {
                             return (
                                 <option name={'nom1'} value={JSON.stringify(usr)}>{usr.name} {':' + usr.roleId}</option>)})}
                     </select>
-                    <button className="col-sm-2 ml-4 btn btn-primary"
+                    <button className="col-sm-1 ml-4 btn btn-primary"
                             onClick={(e)=>{e.preventDefault()
                                 this.añadirUser(this.state.nom1)}}>
                         <h6>Add</h6>
                         {console.log('nom1' +this.state.nom1)}
                         {console.log('stado' +this.state.users )}
                         {console.log('el porque de las ocasas rendeeer' , this.state.cityId)}
-                    </button>
+                    </button></div>
                     <div>
                         {this.state.users.map(added =>{return(
                             <div>
                                 {added.name}{added.roleId}
 
-                                <button className={"col-sm-1 ml-4 btn  btn-primary text-light"} onClick={()=>this.remove(added.name)}>Remove</button>
+                                <button className={"col-sm-1 mt-2 ml-4 btn  btn-danger text-light"} onClick={()=>this.remove(added.name)}>Remove</button>
                             </div>)})}
                     </div>
                     <div className={"text-left"}>
                         <h4 className={"colores mt-3"}>Demium Team</h4>
-                        <p className={"text-light "}>Please select the team members and choose their roles </p>
+                        <p className={"text-light "}>Please select the team members  </p>
                     </div>
                     <div className={"form-group row"}>
                         <p > {this.state.usersDemium.map(usuario =>{return(
@@ -249,7 +261,8 @@ const mapStateToProps = (state) => {
         obj: state.teamShow,
         city: state.city,
         user: state.user.filter(item => { if( item.roleId === "DP" || item.roleId === "TM" ){console.log(item.roleId)} else return item}),
-        idea: state.viewAdd
+        idea: state.viewAdd,
+        team: state.team,
 
 
     }

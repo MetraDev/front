@@ -32,56 +32,57 @@ class Fila extends Component {
                     this.props.obj.push(index)
                 }
                 this.props.deleteUserS(id)
+            }
+            )
+            .catch(err => console.log('No ha funcionado delete', err));
 
-                let teams = this.props.team.find(item => item && item.name === team)
-                console.log('filaaaa133', teams)
-                let result = teams && teams.users.filter(item => item && item._id !== id)
-                console.log('filaaaa11', result)
 
-                if (teams) {
-                teams.users = result
+        let teams = this.props.team.find(item => item && item.name === team)
+        console.log('filaaaa133', teams)
+        let result = teams && teams.users.filter(item => item && item._id !== id)
+        console.log('filaaaa11', result)
 
-                    axios.put(`http://52.213.25.226:3030/team/${teams._id}`, teams, config)
+        if (teams) {
+            teams.users = result
+
+            axios.put(`http://52.213.25.226:3030/team/${teams._id}`, teams, config)
+                .then(res =>{
                     console.log('filaaaa2', teams.users)
                     this.props.addTeami(teams, teams._id)
-                        .catch(err => console.log('no lo has conseguido'  ,err))
-                }
+                })
 
-                let city = this.props.city.find(item => item && item.name === team)
-                let cityRes = city && city.users.filter(item => item && item._id !== id)
-                console.log('result', cityRes)
+                .catch(err => console.log('no lo has conseguido'  ,err))
+        }
 
-                if (city) {
-                    city.users = cityRes
-                    axios.put(`http://52.213.25.226:3030/city/${city._id}`, city, config)
+        let city = this.props.city.find(item => item && item.name === team)
+        let cityRes = city && city.users.filter(item => item && item._id !== id)
+        console.log('result', cityRes)
+
+        if (city) {
+            city.users = cityRes
+            axios.put(`http://52.213.25.226:3030/city/${city._id}`, city, config)
+                .then(res =>{
                     console.log('filacityaaa', city.users)
                     this.props.addCities(city, city._id)
-                        .catch(err => console.log('no lo has conseguido city'  ,err))
-                }
+                })
 
-                let teamsCity = this.props.team.find(item=> item &&  item.cityId.name === team )
-                if(teamsCity && teamsCity.cityId) {
+                .catch(err => console.log('no lo has conseguido city'  ,err))
+        }
 
-                    teamsCity.cityId.users  =  cityRes
-                    axios.put(`http://52.213.25.226:3030/team/${teamsCity._id}`, teamsCity, config)
+        let teamsCity = this.props.team.find(item=> item &&  item.cityId.name === team )
+        if(teamsCity && teamsCity.cityId) {
+
+            teamsCity.cityId.users  =  cityRes
+            axios.put(`http://52.213.25.226:3030/team/${teamsCity._id}`, teamsCity, config)
+                .then(res =>{
                     console.log('filac9090980', teamsCity)
                     this.props.addTeami(teamsCity, teamsCity._id)
-                        .catch(err => console.log('no lo has conseguido team final'  ,err))
-                    }
-                //team.cityId.users
-                //this.props.addTeami(teams,teams._id)
+                })
 
-            }
-
-
-
-
-            )
-
-
-
-
-            .catch(err => console.log('No ha funcionado delete', err));
+                .catch(err => console.log('no lo has conseguido team final'  ,err))
+        }
+        //team.cityId.users
+        //this.props.addTeami(teams,teams._id)
     }
 
 

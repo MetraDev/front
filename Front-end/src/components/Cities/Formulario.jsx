@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {addCities, addUser, editUser, formCity} from "../../actions/actions";
 import axios from "axios";
 import {token} from '../../index'
-
+import validator from 'validator';
 
 
 class Formulario extends Component {
@@ -57,6 +57,12 @@ class Formulario extends Component {
 
 
 
+    }
+    introDatosNumber = (event) =>
+    {
+        if (event.target.value.match (/^([0-9]{1,3})*$/)){
+            this.setState({ [event.target.name]: event.target.value });
+        }
     }
 
 
@@ -140,18 +146,15 @@ class Formulario extends Component {
 
     render() {
 
-
-
-        if (this.state.err === true){
-
-            return(<h1 className={'bg-danger text-dark'}>
-
-                ERROR DE CARGA , VUELVA A INTENTARLO MAS TARDE
-
-
-            </h1>)
-        }else
-
+        const names = this.props.city.map (city => city )
+        const users =  this.props.user.map (user => user)
+        const res = users.filter(user => {
+            let temp =  names.some(name => user.telephone === name.name)
+            if(!temp)
+                return user
+        })
+        console.log('hola teams',names)
+        console.log('hola teams',res)
 
 
         return (
@@ -184,19 +187,6 @@ class Formulario extends Component {
                                     <option>Oporto</option>
                                 </select>
                             </div>
-                            <div className="form-group row">
-                                <h6 className={"col-sm-2 text-left text-light ml-3"}>Country </h6>
-                                <select required                                        //PAIS
-                                    name="pais"
-                                    className="col-sm-3 form-control  "
-                                    value={this.state.pais}
-                                    onChange={this.introDatos}
-                                    >
-                                    <option>España</option>
-                                    <option>Rusia</option>
-                                    <option>Italia</option>
-                                </select>
-                            </div>
                             <div className="form-group text-left">
                                 <h3 className={"col-sm-2 text-left text-light"}>Address</h3>
                                 <input
@@ -214,7 +204,7 @@ class Formulario extends Component {
                                     className="texl-left col-sm-3 ml-5"
                                     value={this.state.telephone}
                                     name="telephone"
-                                    onChange={this.introDatos}
+                                    onChange={this.introDatosNumber}
                                     placeholder="Phone" required={true}/>
                             </div>
                         </div>
@@ -224,11 +214,11 @@ class Formulario extends Component {
                             </div>
                             <div className={"form-group row"}>
                                 <h5 className={"col-sm-2 text-left text-light ml-3"}>Team</h5>
-                                <select className={'select'} id={'select'}
+                                <select className={'select form-control col-sm-5'} id={'select'}
                                         name={'nom2'}
                                         onChange={this.introDatos} >
                                     <option selected={'true' } value={''} disabled>Selecciona un usuario</option>
-                                    {this.props.user.map((usr) => {
+                                    {res.map((usr) => {
                                     return (
                                     <option name={'nom2'} value={JSON.stringify(usr)}>{usr.name}{':'} {usr.roleId}</option>)})}
                                 </select>
@@ -239,15 +229,16 @@ class Formulario extends Component {
                                     {console.log('nom2' +this.state.nom2)}
                                     {console.log('stado' +this.state.users)}
                                 </button>
-                                <div>
-                                    {this.state.users.map(added =>{return(
-                                        <div>
-                                            {added.name}
-                                            <span onClick={() => this.remove(added.name)}>x</span>
 
-                                        </div>)})}
-                                </div>
 
+                            </div>
+                            <div>
+                                {this.state.users.map(added =>{return(
+                                    <div>
+                                        {added.name}
+                                        <span className={'text-danger'} onClick={() => this.remove(added.name)}> {' '}x</span>
+
+                                    </div>)})}
                             </div>
                         </div>
                     </div>
@@ -268,7 +259,8 @@ const mapStateToProps = (state ,props) => {
     return {
         user: state.user.filter(item =>{if (item.roleId === "TM" ||item.roleId === "DP" ) return item}),
         objs: state.movNom,
-        role: state.role
+        role: state.role,
+        city: state.city,
     }
 
 }

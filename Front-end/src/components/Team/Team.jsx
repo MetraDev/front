@@ -151,6 +151,13 @@ class Team extends Component {
     render() {
 
         const ideas = this.props.idea.filter(item =>{if (item.teamId === undefined) return item})
+        const names = this.props.team.map (team => team )
+        const users =  this.props.user.map (user => user)
+        const res = users.filter(user => {
+            let temp =  names.some(name => user.telephone === name.name)
+            if(!temp)
+                return user
+        })
         return (
             <div className={"card-header text-light"}>
                 <nav className={"navbar navbar-dark mt-3"}>
@@ -170,7 +177,7 @@ class Team extends Component {
                     </div>
                     <div className={"form-gruop row text-left"}>
                         <h6 className={"col-sm-2 text-left "}>Change idea</h6>
-                        <select className={'select from-control'} id={'select'}
+                        <select className={'select form-control col-sm-2'} id={'select'}
                                 name={'nom3'}
                                 onChange={this.introDatos} >
                             <option selected={'true' }  disabled>Selecciona una idea</option>
@@ -189,7 +196,7 @@ class Team extends Component {
                         <p className={"col-sm-2 text-light"}>{this.state.cityId && this.state.cityId.name}</p>
                     </div><div className={"form-group row text-left"}>
                         <h6 className={"col-sm-2"}>Change city</h6>
-                        <select className={'select'} id={'select'}
+                        <select className={'select form-control col-sm-2'} id={'select'}
                                 name={'nom2'}
                                 onChange={this.introDatos} >
                             <option selected={'true' }  disabled>Selecciona una ciudad</option>
@@ -214,11 +221,12 @@ class Team extends Component {
 
                     </div>
                     <h5 className={"colores text-left"}>Selected members </h5>
-                    <select className={'select'} id={'select'}
+                    <div className={'form-group row'}>
+                    <select className={'select form-control ml-3 col-sm-2'} id={'select'}
                             name={'nom1'}
                             onChange={this.introDatos} >
                         <option selected={'true' }  disabled>Selecciona un usuario</option>
-                        {this.props.user.map((usr) => {
+                        {res.map((usr) => {
                             return (
                                 <option name={'nom1'} value={JSON.stringify(usr)}>{usr.name} {':' + usr.roleId}</option>)})}
                     </select>
@@ -230,13 +238,14 @@ class Team extends Component {
                         {console.log('stado' +this.state.users )}
                         {console.log('el porque de las ocasas rendeeer' , this.state.cityId)}
                     </button>
+                    </div>
                     <div>
                         {console.log('los users' ,this.props.obj )}
                         {this.state.users && this.state.users.map(added =>{return(
                             <div>
                                 {added && added.name}{added && added.roleId}
 
-                                <button className={"col-sm-1 ml-4 btn  btn-primary text-light"} onClick={()=>this.remove(added)}>Remove</button>
+                                <button className={"col-sm-1 mt-2 ml-3 btn  btn-danger text-light"} onClick={()=>this.remove(added)}>Remove</button>
                             </div>)})}
                     </div>
                     <div className={"text-left"}>
@@ -267,7 +276,8 @@ const mapStateToProps = (state) => {
         obj: state.teamShow,
         city: state.city,
         user: state.user.filter(item => { if( item.roleId === "DP" || item.roleId === "TM" ){console.log(item.roleId)} else return item}),
-        idea: state.viewAdd
+        idea: state.viewAdd,
+        team: state.team
 
     }
 }

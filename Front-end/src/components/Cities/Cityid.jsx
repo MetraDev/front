@@ -81,8 +81,7 @@ class Cityid extends Component {
 
     }
 
-    introDatos = (event) =>
-    {
+    introDatos = (event) => {
         const {value, name} = event.target;
 
         this.setState({
@@ -91,6 +90,16 @@ class Cityid extends Component {
 
 
 
+    }
+
+
+
+
+    introDatosNumber = (event) =>
+    {
+        if (event.target.value.match (/^([0-9]{1,3})*$/)){
+            this.setState({ [event.target.name]: event.target.value });
+        }
     }
 
 
@@ -146,8 +155,14 @@ class Cityid extends Component {
     }
 
     render() {
-        const roles = this.props.user.filter(item =>{if (item.roleId === "TM" ||item.roleId === "DP" ) return item})
-        const soloLibres = roles.filter(item =>{if (item.city === undefined) return item})
+
+        const names = this.props.city.map (city => city )
+        const users =  this.props.user.map (user => user)
+        const res = users.filter(user => {
+            let temp =  names.some(name => user.telephone === name.name)
+            if(!temp)
+                return user
+        })
 
             return (
             <div className={"mb-3"}>
@@ -177,19 +192,6 @@ class Cityid extends Component {
                                     <option>Moscu</option>
                                 </select>
                             </div>
-                            <div className="form-group row">
-                                <h6 className={"col-sm-2 text-left text-light ml-3"}>Country </h6>
-                                <select                                         //PAIS
-                                    name="pais"
-                                    className="col-sm-3 form-control  "
-                                    value={this.state.pais}
-                                    onChange={this.introDatos}
-                                    required={true}>
-                                    <option>España</option>
-                                    <option>Rusia</option>
-                                    <option>Italia</option>
-                                </select>
-                            </div>
                             <div className="form-group text-left">
                                 <h3 className={"col-sm-2 text-left text-light"}>Address</h3>
                                 <input
@@ -207,7 +209,7 @@ class Cityid extends Component {
                                     className="texl-left col-sm-3 ml-5"
                                     value={this.state.telephone}
                                     name="telephone"
-                                    onChange={this.introDatos}
+                                    onChange={this.introDatosNumber}
                                     placeholder={this.state.telephone} required={true}/>
                             </div>
                         </div>
@@ -221,7 +223,7 @@ class Cityid extends Component {
                                         name={'nom2'}
                                         onChange={this.introDatos} >
                                     <option selected={'true' } value={''} disabled>Selecciona un usuario</option>
-                                    {roles.map((usr) => {
+                                    {res.map((usr) => {
                                         return (
                                             <option name={'nom2'} value={JSON.stringify(usr)}>{usr.name}</option>)})}
                                 </select>
@@ -232,15 +234,14 @@ class Cityid extends Component {
                                     {console.log('nom2' +this.state.nom2)}
                                     {console.log('stado' +this.state.users)}
                                 </button>
-                                <div>
-                                    {this.state.users.map(added =>{return(
-                                        <div>
-                                            {added && added.name}
-                                            <span onClick={() => this.remove(added)}>x</span>
+                            </div>
+                            <div>
+                                {this.state.users.map(added =>{return(
+                                    <div>
+                                        {added && added.name}
+                                        <span className={'text-danger'} onClick={() => this.remove(added.name)}> {' '}x</span>
 
-                                        </div>)})}
-                                </div>
-
+                                    </div>)})}
                             </div>
                         </div>
                     </div>
