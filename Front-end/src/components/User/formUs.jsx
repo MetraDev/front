@@ -103,7 +103,7 @@ class FormUs extends Component {
                             <div className={"row form-group text-left"}>
                                 <h4 className={"col-sm-1 text-light mt-2 ml-3"}>Email:</h4>
                                 <input                                             //TELEFONO
-                                    type="text"
+                                    type="email"
                                     className="texl-left col-sm-3 ml-5"
                                     value={this.state.email}
                                     name="email"
