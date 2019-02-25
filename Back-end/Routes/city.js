@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const mongoose = require('mongoose');
 const City = require('../Models/city');
+const authorization = require('../middlewares/authorization');
 
 /*router.get('/' ,(req,res) => res.json({code:200 , response :'get city'}));
 router.post('/' ,(req,res) => res.json({code:200 , response :'post city' }));
@@ -9,7 +10,7 @@ router.delete('/' ,(req,res) => res.json({code:200 , response :'delete city'}));
 
 
 
-router.get('/', (req, res) => {
+router.get('/', authorization,(req, res) => {
     City.find({}).then(data => {
         // req.user // tenemos acceso a la informacin de quien ha hecho la peticion
         res.send(data);

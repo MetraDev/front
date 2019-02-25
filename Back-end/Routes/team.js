@@ -2,8 +2,9 @@
 const router = require('express').Router();
 const mongoose = require('mongoose');
 const Team = require('../Models/team');
+const authorization = require('../middlewares/authorization');
 
-router.get('/', (req, res) => {
+router.get('/', authorization,(req, res) => {
     Team.find({}).then(data => {
         // req.user // tenemos acceso a la informacin de quien ha hecho la peticion
         res.send(data);
