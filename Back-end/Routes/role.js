@@ -2,7 +2,9 @@ const router = require('express').Router();
 const Role = require('../Models/Role');
 const mongoose = require('mongoose');
 
-router.get('/', (req, res) => {
+const authorization = require('../middlewares/authorization');
+
+router.get('/', authorization, (req, res) => {
     Role.find({}).then(data => {
         // req.user // tenemos acceso a la informacin de quien ha hecho la peticion
         res.send(data);
