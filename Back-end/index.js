@@ -16,6 +16,7 @@ app.use('/user', require ('./Routes/users.js'))
 app.use('/role', require ('./Routes/role.js'))
 app.use('/city', require ('./Routes/city.js'))
 app.use('/idea', require ('./Routes/idea.js'))
+app.use('/authorization', require ('./Routes/regUser.js'))
 app.use('/business', require ('./Routes/businessmodel.js'))
 
 

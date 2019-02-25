@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Role = require('../models/Role');
+const Role = require('../Models/Role');
 const mongoose = require('mongoose');
 
 router.get('/', (req, res) => {
