@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const {UserSchema} = require('./user');
 
 
 const TeamSchema = mongoose.Schema({
@@ -12,20 +11,18 @@ const TeamSchema = mongoose.Schema({
             unique:true,
             validate:{
                 isAsync:true,
-                validator:(name)=>!!name.match(/^[A-Za-z]+[ ]?[A-Za-z]+$/),
+                validator:(name)=>Boolean(name.match(/^[A-Za-z]+[ ]?[A-Za-z]+$/)),
                 message:'{VALUE}is not a avalid role , only character (A-Z, a-z)'
             }
         },
     cityId:{
-        required:true,
-        type:Boolean,
+        type:String,
     },
-    users:[
-        UserSchema]
+    users:[Object]
 
 
 });
 
-const team = mongoose.model('team', TeamSchema);
+const Team = mongoose.model('team', TeamSchema);
 
-module.exports = team;
+module.exports = Team;

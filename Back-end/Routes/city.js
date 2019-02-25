@@ -2,11 +2,10 @@ const router = require('express').Router();
 const mongoose = require('mongoose');
 const City = require('../Models/city');
 
-router.get('/' ,(req,res) => res.json({code:200 , response :'get city'}));
+/*router.get('/' ,(req,res) => res.json({code:200 , response :'get city'}));
 router.post('/' ,(req,res) => res.json({code:200 , response :'post city' }));
 router.put('/' ,(req,res) => res.json({code:200 , response :'put city'}));
-router.delete('/' ,(req,res) => res.json({code:200 , response :'delete city'}));
-
+router.delete('/' ,(req,res) => res.json({code:200 , response :'delete city'}));*/
 
 
 
@@ -26,17 +25,13 @@ router.post('/', (req,res)=>{
         res.send(data);
     })
 })
-router.get('/:id', (req,res)=>{
-    if(mongoose.Types.ObjectId.isValid(req.params.id))
-        return res.status(404).send(`No existe _id`)
-
-
-    City.findById(req.params,id).then(data=>{
+router.get('/:id', (req, res) => {
+    City.findById(req.params.id).then(data => {
         if(!data) return res.status(404).send(`No existe un rol con _id: ${req.params.id}`)
-        res.send(data)})
 
-
-})
+        res.send(data);
+    })
+});
 router.delete('/:id', (req,res)=>{
     if(!mongoose.Types.ObjectId.isValid(req.params.id))
         return res.status(404).send(`No existe _id`)
@@ -52,9 +47,11 @@ router.delete('/:id', (req,res)=>{
 
 router.put('/:id', (req,res)=>{
     if(req.body.name || req.body.isDemium ){
-        City.findByIdAndUpdate(req.params.id,{$set:{ ...req.body}}, {new:true, overwrite:true, runValidator:true} ).then(data=> res.send(data))}
+        City.findByIdAndUpdate(req.params.id,{$set:{ ...req.body}},
+            {new:true, overwrite:true, runValidator:true} ).then(data=> res.send(data))}
 
 })
 
 
-module.exports = router
+module.exports= router;
+

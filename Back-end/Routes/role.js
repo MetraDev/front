@@ -18,17 +18,13 @@ router.post('/', (req,res)=>{
         res.send(data);
     })
 })
-router.get('/:id', (req,res)=>{
-    if(mongoose.Types.ObjectId.isValid(req.params.id))
-        return res.status(404).send(`No existe _id`)
-
-
-    Role.findById(req.params,id).then(data=>{
+router.get('/:id', (req, res) => {
+    Role.findById(req.params.id).then(data => {
         if(!data) return res.status(404).send(`No existe un rol con _id: ${req.params.id}`)
-        res.send(data)})
 
-
-})
+        res.send(data);
+    })
+});
 router.delete('/:id', (req,res)=>{
     if(!mongoose.Types.ObjectId.isValid(req.params.id))
         return res.status(404).send(`No existe _id`)
@@ -44,7 +40,8 @@ router.delete('/:id', (req,res)=>{
 
 router.put('/:id', (req,res)=>{
     if(req.body.name || req.body.isDemium ){
-        Role.findByIdAndUpdate(req.params.id,{$set:{ ...req.body}}, {new:true, overwrite:true, runValidator:true} ).then(data=> res.send(data))}
+        Role.findByIdAndUpdate(req.params.id,{$set:{ ...req.body}},
+            {new:true, overwrite:true, runValidator:true} ).then(data=> res.send(data))}
 
 })
 

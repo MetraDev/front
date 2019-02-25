@@ -45,8 +45,8 @@ const citySchema = mongoose.Schema({
     },
 });
 
-const city = mongoose.model('city', citySchema);
+const City = mongoose.model('city', citySchema);
 
-module.exports = (city)
+module.exports = (City)
 
 
