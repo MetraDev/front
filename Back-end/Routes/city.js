@@ -17,7 +17,7 @@ router.get('/', authorization,(req, res) => {
     });
 });
 
-router.post('/', (req,res)=>{
+router.post('/',authorization, (req,res)=>{
 
     if(!req.body )
         return res.status(404).send(`El cuerpo esta vacio`)
@@ -26,14 +26,14 @@ router.post('/', (req,res)=>{
         res.send(data);
     })
 })
-router.get('/:id', (req, res) => {
+router.get('/:id', authorization,(req, res) => {
     City.findById(req.params.id).then(data => {
         if(!data) return res.status(404).send(`No existe un rol con _id: ${req.params.id}`)
 
         res.send(data);
     })
 });
-router.delete('/:id', (req,res)=>{
+router.delete('/:id', authorization,(req,res)=>{
     if(!mongoose.Types.ObjectId.isValid(req.params.id))
         return res.status(404).send(`No existe _id`)
 
@@ -46,7 +46,7 @@ router.delete('/:id', (req,res)=>{
 
 })
 
-router.put('/:id', (req,res)=>{
+router.put('/:id', authorization,(req,res)=>{
     if(req.body.name || req.body.isDemium ){
         City.findByIdAndUpdate(req.params.id,{$set:{ ...req.body}},
             {new:true, overwrite:true, runValidator:true} ).then(data=> res.send(data))}
