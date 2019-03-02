@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "frontend": "cd Front-end && npm start",
     "backend": "cd Back-end && npm start",
-    "start": "concurrently \"npm run frontend\" \"npm run backend\"",
+    "start": "node scripts/start.js",
     "mongo:start": "start mongodb",
     "mongo:status": "status mongodb"
   },
