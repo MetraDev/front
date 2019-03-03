@@ -23,8 +23,7 @@ export const store = () => {
             editUser:editUserReducer,
             role:roleReducer,
             business:businessmodelReducer
-        }),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+        })
     )
 
     return tempStore;
